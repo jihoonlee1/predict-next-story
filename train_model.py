@@ -1,48 +1,66 @@
 import database
-from transformers import AutoTokenizer, BertForNextSentencePrediction, logging
-import torch
+# from transformers import AutoTokenizer, BertForNextSentencePrediction, logging
+# import torch
 
 
-logging.set_verbosity_error()
-learning_rate = 1e-3
-batch_size = 8
-epochs = 3
-device = "cuda" if torch.cuda.is_available() else "cpu"
-tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
-model = BertForNextSentencePrediction.from_pretrained("bert-base-uncased").to(device)
-optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
+# logging.set_verbosity_error()
+# learning_rate = 1e-3
+# batch_size = 8
+# epochs = 3
+# device = "cuda" if torch.cuda.is_available() else "cpu"
+# tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+# model = BertForNextSentencePrediction.from_pretrained("bert-base-uncased").to(device)
+# optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
 
 
 with database.connect() as con:
 	cur = con.cursor()
 	cur.execute("""
 	SELECT
-		central_articles.company_id,
-		companies.name,
-		events.central_article_id,
 		central_articles.title,
 		central_articles.body,
 		events.id,
 		events.is_relevant
 	FROM events
 	JOIN central_articles ON central_articles.id = events.central_article_id
-	JOIN companies ON companies.id = central_articles.company_id
 	""")
 	events = cur.fetchall()
-	incidents_bag = []
-	for company_id, company_name, central_article_id, central_article_title, central_article_body, event_id, is_relevant in events:
-		print(company_name, event_id, is_relevant)
+	sentence1 = []
+	sentence2 = []
+	labels = []
+	for central_article_title, central_article_body, event_id, is_relevant in events:
 		central_article_content = central_article_title + " " + central_article_body[:500]
 		cur.execute("""
 		SELECT
-			chatgpt_generated_incidents.id,
 			chatgpt_generated_incidents.content,
 			event_incident.story_order
-		from event_incident
+		FROM event_incident
 		JOIN chatgpt_generated_incidents ON chatgpt_generated_incidents.id = event_incident.incident_id
 		WHERE event_incident.event_id = ?
 		""", (event_id, ))
 		rows = cur.fetchall()
-		for incident_id, incident_content, story_order in rows:
-			print(event_id, incident_id, story_order)
+		num_rows = len(rows)
+		for incident_content, story_order in rows:
+			sentence1.append(central_article_content)
+			sentence2.append(incident_content)
+			if story_order == 0 and is_relevant == 1:
+				labels.append(0)
+			else:
+				labels.append(1)
+		for i in range(num_rows):
+			target_content, target_order = rows[i]
+			for j in range(i+1, num_rows):
+				candidate_content, candidate_order = row[j]
+				sentence1.append(target_content)
+				sentence2.append(candidate_content)
+				if candidate_order - target_order == 1 and is_relevant == 1:
+					labels.append(0)
+				else:
+					labels.append(1)
 		break
+	print(len(sentence1))
+	print(len(sentence2))
+	print(len(sentence3))
+	print(sentence1[0])
+	print(sentence2[0])
+	print(labels[0])
