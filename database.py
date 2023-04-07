@@ -5,13 +5,13 @@ import sqlite3
 dbpath = "database.sqlite"
 statements = [
 """
-CREATE TABLE companies(
+CREATE TABLE IF NOT EXISTS companies(
 	id   INTEGER NOT NULL PRIMARY KEY,
 	name TEXT    NOT NULL
 );
 """,
 """
-CREATE TABLE central_articles(
+CREATE TABLE IF NOT EXISTS central_articles(
 	id             INTEGER  NOT NULL PRIMARY KEY,
 	company_id     INTEGER  NOT NULL REFERENCES companies(id) ON DELETE CASCADE ON UPDATE CASCADE,
 	title          TEXT     NOT NULL,
@@ -20,29 +20,29 @@ CREATE TABLE central_articles(
 );
 """,
 """
-CREATE TABLE chatgpt_generated_incidents(
+CREATE TABLE IF NOT EXISTS chatgpt_generated_incidents(
+	id         INTEGER NOT NULL PRIMARY KEY,
+	company_id INTEGER NOT NULL REFERENCES companies(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	content    TEXT    NOT NULL
+);
+""",
+"""
+CREATE TABLE IF NOT EXISTS events(
 	id                 INTEGER NOT NULL PRIMARY KEY,
-	company_id         INTEGER NOT NULL REFERENCES companies(id)        ON DELETE CASCADE ON UPDATE CASCADE,
 	central_article_id INTEGER NOT NULL REFERENCES central_articles(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	content            TEXT    NOT NULL
+	is_relevant        INTEGER NOT NULL
 );
 """,
 """
-CREATE TABLE events(
-	id             INTEGER NOT NULL,
-	incident_id    INTEGER NOT NULL REFERENCES chatgpt_generated_incidents(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	is_relevant    INTEGER NOT NULL,
-	incident_order INTEGER NOT NULL,
-	PRIMARY KEY(id, incident_id)
+CREATE TABLE IF NOT EXISTS event_incident(
+	event_id           INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	incident_id        INTEGER NOT NULL REFERENCES chatgpt_generated_incidents(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	story_order        INTEGER NOT NULL,
+	PRIMARY KEY(event_id, incident_id)
 );
 """,
 """
-CREATE TABLE where_am_i_company_id_sorted(
-	idx INTEGER NOT NULL
-);
-""",
-"""
-CREATE INDEX central_articles_index0 ON central_articles(company_id, id, title, body, unix_timestamp);
+CREATE INDEX IF NOT EXISTS central_articles_index0 ON central_articles(company_id, id, title, body, unix_timestamp);
 """
 ]
 
