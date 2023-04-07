@@ -63,11 +63,5 @@ def initialize():
 			cur.execute(st)
 
 
-def main():
-	with connect(database="incidents.sqlite") as con0:
-		cur0 = con0.cursor()
-		cur0.execute()
-
-
 if __name__ == "__main__":
 	initialize()

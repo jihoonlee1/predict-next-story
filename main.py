@@ -3,15 +3,7 @@ import chatgpt
 import re
 
 
-def main():
-	question = 'Come up with five potential follow up headlines and summaries to "Shell sued by regulators in Alabama"'
-	answer = chatgpt.ask(question).split("\n\n")
-	for a in answer:
-		title, body = title_body(a)
-		print(title)
-		print(body)
-		print("")
-
-
-
-main()
+def clean(content):
+	content = re.sub(r"[0-9](\.|\)+)", "", content)
+	content = re.sub(r"\n+", " ", content).strip()
+	return content
