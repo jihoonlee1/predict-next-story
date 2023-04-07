@@ -56,7 +56,7 @@ def connect(database=dbpath, mode="rw"):
 	return contextlib.closing(con)
 
 
-def initialize():
+def main():
 	with connect(mode="rwc") as con:
 		cur = con.cursor()
 		for st in statements:
@@ -64,4 +64,4 @@ def initialize():
 
 
 if __name__ == "__main__":
-	initialize()
+	main()
