@@ -43,24 +43,24 @@ with database.connect() as con:
 		for incident_content, story_order in rows:
 			sentence1.append(central_article_content)
 			sentence2.append(incident_content)
-			if story_order == 0 and is_relevant == 1:
+			if is_relevant == 1:
 				labels.append(0)
-			else:
+			elif is_relevant == 0:
 				labels.append(1)
 		for i in range(num_rows):
 			target_content, target_order = rows[i]
 			for j in range(i+1, num_rows):
-				candidate_content, candidate_order = row[j]
+				candidate_content, candidate_order = rows[j]
 				sentence1.append(target_content)
 				sentence2.append(candidate_content)
-				if candidate_order - target_order == 1 and is_relevant == 1:
+				if is_relevant == 1:
 					labels.append(0)
-				else:
+				elif is_relevant == 0:
 					labels.append(1)
 		break
 	print(len(sentence1))
 	print(len(sentence2))
-	print(len(sentence3))
-	print(sentence1[0])
-	print(sentence2[0])
-	print(labels[0])
+	print(len(labels))
+	print(sentence1[9])
+	print(sentence2[9])
+	print(labels[9])
