@@ -11,38 +11,26 @@ CREATE TABLE IF NOT EXISTS companies(
 );
 """,
 """
-CREATE TABLE IF NOT EXISTS central_articles(
-	id             INTEGER  NOT NULL PRIMARY KEY,
-	company_id     INTEGER  NOT NULL REFERENCES companies(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	title          TEXT     NOT NULL,
-	body           TEXT     NOT NULL,
-	unix_timestamp INTEGER  NOT NULL
-);
-""",
-"""
-CREATE TABLE IF NOT EXISTS chatgpt_generated_incidents(
+CREATE TABLE IF NOT EXISTS incidents(
 	id         INTEGER NOT NULL PRIMARY KEY,
-	company_id INTEGER NOT NULL REFERENCES companies(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	content    TEXT    NOT NULL
-);
+	content    TEXT    NOT NULL,
+	company_id INTEGER NOT NULL
+)
 """,
 """
 CREATE TABLE IF NOT EXISTS events(
-	id                 INTEGER NOT NULL PRIMARY KEY,
-	central_article_id INTEGER NOT NULL REFERENCES central_articles(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	is_relevant        INTEGER NOT NULL
+	id          INTEGER NOT NULL PRIMARY KEY,
+	company_id  INTEGER NOT NULL,
+	is_relevant INTEGER NOT NULL
 );
 """,
 """
 CREATE TABLE IF NOT EXISTS event_incident(
-	event_id           INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	incident_id        INTEGER NOT NULL REFERENCES chatgpt_generated_incidents(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	story_order        INTEGER NOT NULL,
+	event_id    INTEGER NOT NULL,
+	incident_id INTEGER NOT NULL,
+	story_order INTEGER NOT NULL,
 	PRIMARY KEY(event_id, incident_id)
 );
-""",
-"""
-CREATE INDEX IF NOT EXISTS central_articles_index0 ON central_articles(company_id, id, title, body, unix_timestamp);
 """
 ]
 
