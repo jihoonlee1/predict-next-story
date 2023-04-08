@@ -21,57 +21,76 @@ def get_training_data():
 		labels = []
 		incidents = []
 		cur = con.cursor()
-		cur.execute("""
-		SELECT
-			event_incident.event_id,
-			event_incident.incident_id,
-			event_incident.story_order,
-			events.is_relevant,
-			incidents.content
-		FROM event_incident
-		JOIN events ON events.id = event_incident.event_id
-		JOIN incidents ON incidents.id = event_incident.incident_id
-		""")
-		for event_id, incident_id, story_order, is_relevant, content in cur.fetchall():
-			incidents.append((event_id, is_relevant, incident_id, story_order, content))
+		cur.execute("SELECT id, is_relevant FROM events")
+		for event_id, is_relevant in cur.fetchall():
+			cur.execute("""
+			SELECT
+				event_incident.event_id,
+				event_incident.incident_id,
+				event_incident.incident_order,
+				incidents.content,
+				incidents.is_chatgpt
+			FROM event_incident
+			JOIN incidents ON incidents.id = event_incident.incident_id
+			WHERE event_incident.event_id = ?
+			ORDER BY event_incident.incident_order
+			""", (event_id, ))
+			for _, incident_id, incident_order, content, is_chatgpt in cur.fetchall():
+				if is_chatgpt == 0:
+					content = content[:500]
+				incidents.append((event_id, is_relevant, incident_id, incident_order, content, is_chatgpt))
 		num_incidents = len(incidents)
 		counter = 0
-		while counter < num_incidents:
+
+		while counter < 500:
 			start = random.randint(0, num_incidents-2)
 			start_incident = incidents[start]
+			next_incident = incidents[start+1]
 			cur.execute("SELECT count(*) FROM event_incident WHERE event_id = ?", (start_incident[0], ))
 			incidents_count, = cur.fetchone()
-			# if random.random() > 0.5:
-			while (start_incident[1] == 0 and (incidents_count - 1) == start_incident[3]):
-				start = random.randint(0, num_incidents-2)
-				start_incident = incidents[start]
-				cur.execute("SELECT count(*) FROM event_incident WHERE event_id = ?", (start_incident[0], ))
-				incidents_count, = cur.fetchone()
-			sentence1.append(start_incident[4])
-			next_incident = incidents[start+1]
-			sentence2.append(next_incident[4])
-			labels.append(0)
-			# else:
-
-			# 	random_num = random.randint(0, num_incidents-1)
-			# 	random_incident = incidents[random_num]
-			# 	while (start_incident[4] == random_incident[4] and
-			# 		((random_incident[0] == start_incident[0]) and
-			# 		(random_incident[3] - start_incident[3] == 1) and
-			# 		(start_incident[1] == 1 and random_incident[1] == 1))):
-			# 		random_num = random.randint(0, num_incidents-1)
-			# 		random_incident = incidents[random_num]
-			# 	sentence1.append(start_incident[4])
-			# 	sentence2.append(random_incident[4])
-			# 	labels.append(1)
+			if random.random() > 0.5:
+				while (start_incident[1] == 0 or (incidents_count - 1) == start_incident[3]):
+					start = random.randint(0, num_incidents-2)
+					start_incident = incidents[start]
+					next_incident = incidents[start+1]
+					cur.execute("SELECT count(*) FROM event_incident WHERE event_id = ?", (start_incident[0], ))
+					incidents_count, = cur.fetchone()
+				sentence1.append(start_incident[4])
+				sentence2.append(next_incident[4])
+				labels.append(0)
+			else:
+				if random.random() > 0.5:
+					while start_incident[1] == 1:
+						start = random.randint(0, num_incidents-2)
+						start_incident = incidents[start]
+						next_incident = incidents[start+1]
+					sentence1.append(start_incident[4])
+					sentence2.append(next_incident[4])
+					labels.append(1)
+				else:
+					random_num = random.randint(0, num_incidents-1)
+					random_incident = incidents[random_num]
+					bigger_story = None
+					smaller_story = None
+					if start_incident[3] > random_incident[3]:
+						bigger_story = start_incident[3]
+						smaller_story = random_incident[3]
+					elif start_incident[3] < random_incident[3]:
+						bigger_story = random_incident[3]
+						smaller_story = start_incident[3]
+					while start_incident[0] == random_incident[0] and start_incident[1] == 1 and bigger_story - smaller_story == 1:
+						random_num = random.randint(0, num_incidents-1)
+						random_incident = incidents[random_num]
+						if start_incident[3] > random_incident[3]:
+							bigger_story = start_incident[3]
+							smaller_story = random_incident[3]
+						elif start_incident[3] < random_incident[3]:
+							bigger_story = random_incident[3]
+							smaller_story = start_incident[3]
+					sentence1.append(start_incident[4])
+					sentence2.append(random_incident[4])
+					labels.append(1)
 			counter += 1
-
-		for i in range(5):
-			print(sentence1[i])
-			print("")
-			print(sentence2[i])
-			print(labels[i])
-			print("---------------")
 
 		return (sentence1, sentence2, labels)
 
