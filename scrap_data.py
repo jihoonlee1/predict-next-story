@@ -18,6 +18,7 @@ def main():
 		cur = con.cursor()
 		cur.execute("SELECT id, name FROM companies")
 		for company_id, company_name in cur.fetchall():
+			print(company_name)
 			initial_question = f'5 news articles about {company_name} on different topic. Start each article with "Article: ".'
 			different_events = separate_response(initial_question)
 			for event in different_events:
@@ -37,3 +38,6 @@ def main():
 					cur.execute("INSERT INTO event_incident VALUES(?,?,?)", (event_id, incident_id, story_order+1))
 					con.commit()
 
+
+if __name__ == "__main__":
+	main()
