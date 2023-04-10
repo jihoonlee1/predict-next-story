@@ -2,27 +2,31 @@ import contextlib
 import sqlite3
 
 
-dbpath = "database.sqlite"
 statements = [
 """
 CREATE TABLE companies(
-	id   INTEGER NOT NULL PRIMARY KEY,
-	name TEXT    NOT NULL
-)
+	id           INTEGER NOT NULL PRIMARY KEY,
+	name         TEXT    NOT NULL,
+	description  TEXT,
+	industry     TEXT,
+	country      TEXT,
+	revenue      INTEGER,
+	profits      INTEGER,
+	assets       INTEGER,
+	market_value INTEGER
+);
 """,
 """
 CREATE TABLE incidents(
 	id         INTEGER NOT NULL PRIMARY KEY,
 	content    TEXT    NOT NULL,
-	is_chatgpt INTEGER NOT NULL,
-	company_id INTEGER NOT NULL
+	company_id INTEGER NOT NULL REFERENCES companies(id)
 )
 """,
 """
 CREATE TABLE events(
-	id             INTEGER NOT NULL PRIMARY KEY,
-	company_id     INTEGER NOT NULL,
-	is_relevant    INTEGER NOT NULL
+	id          INTEGER NOT NULL PRIMARY KEY,
+	company_id  INTEGER NOT NULL REFERENCES companies(id)
 )
 """,
 """
@@ -36,13 +40,8 @@ CREATE TABLE event_incident(
 ]
 
 
-def connect(database=dbpath, mode="rw"):
-	con = sqlite3.connect(f"file:{database}?mode={mode}", uri=True)
-	cur = con.cursor()
-	cur.execute("BEGIN TRANSACTION")
-	cur.execute("PRAGMA foreign_keys = 1")
-	cur.execute("COMMIT TRANSACTION")
-	return contextlib.closing(con)
+def connect(database="database.sqlite", mode="rw"):
+	return contextlib.closing(sqlite3.connect(f"file:{database}?mode={mode}", uri=True))
 
 
 def main():
