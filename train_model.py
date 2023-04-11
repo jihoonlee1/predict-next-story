@@ -38,8 +38,9 @@ def positive_data(cur, sentence0, sentence1, labels):
 		WHERE event_incident.event_id = ?
 		ORDER BY event_incident.incident_order
 		""", (event_id, ))
-		incidents = cur.fetchall()
+		incidents = cur.fetchall() #  incidents that are in same event (incidents that build onto each other)
 		num_incidents = len(incidents)
+
 		for i in range(num_incidents-1):
 			start_incident, = incidents[i]
 			next_incident, = incidents[i+1]
@@ -54,13 +55,15 @@ def positive_data(cur, sentence0, sentence1, labels):
 def negative_data(cur, sentence0, sentence1, labels, incidents_all, num_incidents_all):
 	num_positives = len(sentence0)
 	iteration = 0
+
 	while iteration < num_positives:
 		print(iteration)
 		random_number = random.randint(0, num_incidents_all-1)
+
 		target_incident_id, target_content = incidents_all[random_number]
 		target_content = re.sub(r"\n+", " ", target_content)
 		cur.execute("SELECT event_id FROM event_incident WHERE incident_id = ?", (target_incident_id, ))
-		event_id, = cur.fetchone()
+		event_id, = cur.fetchone()  # grab event id of the random incident
 		cur.execute("""
 		SELECT
 			incidents.content
@@ -68,6 +71,8 @@ def negative_data(cur, sentence0, sentence1, labels, incidents_all, num_incident
 		JOIN incidents ON incidents.id = event_incident.incident_id
 		WHERE event_incident.event_id != ?
 		""", (event_id, ))
+
+
 		unrelated_incidents = cur.fetchall()
 		num_unrelated_incidents = len(unrelated_incidents)
 		random_number = random.randint(0, num_unrelated_incidents-1)
@@ -104,8 +109,11 @@ def main():
 		offset_end = 3
 		sentence0, sentence1, labels = [], [], []
 		sentence0, sentence1, labels = positive_data(cur, sentence0, sentence1, labels)
+
 		sentence0, sentence1, labels = negative_data(cur, sentence0, sentence1, labels, incidents_all, num_incidents_all)
+
 		inputs = tokenizer(sentence0, sentence1, return_tensors="pt", max_length=512, truncation=True, padding="max_length")
+
 		inputs["labels"] = torch.LongTensor([labels]).T
 		dataset = IncidentDataset(inputs)
 		dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)

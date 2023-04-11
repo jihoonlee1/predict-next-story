@@ -18,7 +18,7 @@ def predict(text1, text2):
 def main():
 	with database.connect() as con:
 		cur = con.cursor()
-		cur.execute("SELECT id FROM events")
+		cur.execute("SELECT id FROM events WHERE company_id = ?", (8, ))
 		for event_id, in cur.fetchall():
 			cur.execute("""
 			SELECT

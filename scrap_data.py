@@ -2,13 +2,19 @@ import database
 import chatgpt
 import time
 import re
+import openai
 
 
 def separate_response(question):
-	response = chatgpt.ask(question)
-	pattern = re.compile(r"Article *[0-9]*:", re.IGNORECASE)
-	answers = [item.strip() for item in pattern.split(response) if item != ""]
-	return answers
+	while True:
+		try:
+			response = chatgpt.ask(question)
+			pattern = re.compile(r"Article *[0-9]*:", re.IGNORECASE)
+			answers = [item.strip() for item in pattern.split(response) if item != ""]
+			return answers
+		except openai.error.RateLimitError:
+			time.sleep(5)
+			continue
 
 
 def main():
