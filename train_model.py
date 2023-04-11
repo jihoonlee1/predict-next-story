@@ -7,7 +7,7 @@ import torch
 
 logging.set_verbosity_error()
 device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
-learning_rate = 1e-3
+learning_rate = 5e-5
 epochs = 3
 batch_size = 8
 tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
@@ -54,6 +54,7 @@ def negative_data(cur, sentence0, sentence1, labels, incidents_all, num_incident
 	num_positives = len(sentence0)
 	iteration = 0
 	while iteration < num_positives:
+		print(iteration)
 		random_number = random.randint(0, num_incidents_all-1)
 		target_incident_id, target_content = incidents_all[random_number]
 		target_content = re.sub(r"\n+", " ", target_content)
@@ -80,13 +81,13 @@ def negative_data(cur, sentence0, sentence1, labels, incidents_all, num_incident
 
 def train_loop(dataloader, model, optimizer):
 	for batch in dataloader:
+		optimizer.zero_grad()
 		input_ids = batch["input_ids"].to(device)
 		token_type_ids = batch["token_type_ids"].to(device)
 		attention_mask = batch["attention_mask"].to(device)
 		labels = batch["labels"].to(device)
-		outputs = model(input_ids.to(device), token_type_ids=token_type_ids.to(device), attention_mask=attention_mask.to(device), labels=labels.to(device))
+		outputs = model(input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask, labels=labels)
 		loss = outputs.loss
-		optimizer.zero_grad()
 		loss.backward()
 		optimizer.step()
 		print(f"loss: {loss.item():>7f}")
