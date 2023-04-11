@@ -1,6 +1,22 @@
+from transformers import AutoTokenizer, BertForNextSentencePrediction
 import database
 import random
 import re
+import torch
+
+
+learning_rate = 0.003
+epochs = 3
+batch_size = 8
+tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+model = BertForNextSentencePrediction.from_pretrained("bert-base-uncased")
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+
+class IncidentDataset(torch.utils.data.Dataset):
+	def __init__(self, encodings):
+		self.encodings = encodings
+
 
 
 def positive_data(cur, sentence0, sentence1, labels):
@@ -31,7 +47,7 @@ def negative_data(cur, sentence0, sentence1, labels, incidents_all, num_incident
 	num_positives = len(sentence0)
 	iteration = 0
 	while iteration < num_positives:
-		random_number = random.randint(0, num_incidents_all)
+		random_number = random.randint(0, num_incidents_all-1)
 		target_incident_id, target_content = incidents_all[random_number]
 		cur.execute("SELECT event_id FROM event_incident WHERE incident_id = ?", (target_incident_id, ))
 		event_id, = cur.fetchone()
@@ -66,3 +82,4 @@ def main():
 
 if __name__ == "__main__":
 	main()
+

@@ -4,7 +4,7 @@ import sqlite3
 
 statements = [
 """
-CREATE TABLE companies(
+CREATE TABLE IF NOT EXISTS companies(
 	id           INTEGER NOT NULL PRIMARY KEY,
 	name         TEXT    NOT NULL,
 	description  TEXT,
@@ -17,22 +17,23 @@ CREATE TABLE companies(
 );
 """,
 """
-CREATE TABLE incidents(
+CREATE TABLE IF NOT EXISTS incidents(
 	id         INTEGER NOT NULL PRIMARY KEY,
 	content    TEXT    NOT NULL,
 	company_id INTEGER NOT NULL REFERENCES companies(id)
 )
 """,
 """
-CREATE TABLE events(
+CREATE TABLE IF NOT EXISTS events(
 	id          INTEGER NOT NULL PRIMARY KEY,
 	company_id  INTEGER NOT NULL REFERENCES companies(id)
 )
 """,
 """
-CREATE TABLE event_incident(
+CREATE TABLE IF NOT EXISTS event_incident(
 	event_id       INTEGER NOT NULL REFERENCES events(id),
 	incident_id    INTEGER NOT NULL REFERENCES incidents(id),
+	company_id     INTEGER NOT NULL REFERENCES companies(id),
 	incident_order INTEGER NOT NULL,
 	PRIMARY KEY(event_id, incident_id)
 )
