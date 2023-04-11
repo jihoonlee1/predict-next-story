@@ -16,25 +16,10 @@ def predict(text1, text2):
 
 
 def main():
-	with database.connect() as con:
-		cur = con.cursor()
-		cur.execute("SELECT id FROM events WHERE company_id = ?", (8, ))
-		for event_id, in cur.fetchall():
-			cur.execute("""
-			SELECT
-				incidents.content
-			FROM event_incident
-			JOIN incidents ON incidents.id = event_incident.incident_id
-			WHERE event_incident.event_id = ?
-			ORDER BY event_incident.incident_order
-			""")
-			rows = cur.fetchall()
-			text1, = rows[0]
-			text2, = rows[1]
-			print(text1)
-			print(text2)
-			yes, no = predict(text1, text2)
-			print(yes, no)
+	text1 = "Russia invades Ukraine."
+	text2 = "Ukraine wins."
+	yes, no = predict(text1, text2)
+	print(yes, no)
 
 
 if __name__ == "__main__":
