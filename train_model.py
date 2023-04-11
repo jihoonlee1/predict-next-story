@@ -53,9 +53,7 @@ def positive_data(cur, sentence0, sentence1, labels):
 
 def negative_data(cur, sentence0, sentence1, labels, incidents_all, num_incidents_all):
 	num_positives = len(sentence0)
-	half_iteration = round(num_positives / 2)
 	iteration = 0
-
 	while iteration < num_positives:
 		print(iteration)
 		random_number = random.randint(0, num_incidents_all-1)
@@ -118,9 +116,7 @@ def main():
 		sentence0, sentence1, labels = [], [], []
 		sentence0, sentence1, labels = positive_data(cur, sentence0, sentence1, labels)
 		sentence0, sentence1, labels = negative_data(cur, sentence0, sentence1, labels, incidents_all, num_incidents_all)
-		print(len(sentence0))
 		inputs = tokenizer(sentence0, sentence1, return_tensors="pt", max_length=512, truncation=True, padding="max_length")
-
 		inputs["labels"] = torch.LongTensor([labels]).T
 		dataset = IncidentDataset(inputs)
 		dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
