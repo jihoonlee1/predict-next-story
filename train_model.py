@@ -27,69 +27,73 @@ class IncidentDataset(torch.utils.data.Dataset):
 		return {key: tensor[idx] for key, tensor in self.encodings.items()}
 
 
-def positive_data(cur, sentence0, sentence1, labels):
-	cur.execute("SELECT id FROM events")
-	for event_id, in cur.fetchall():
+def merge_title_body(title, body):
+	content = title + " " + body
+	content = re.sub(r"\n+", " ", content).strip()
+	return content
+
+
+def positive_data(cur, sentence0, sentence1, labels, root_incident_ids):
+	for root_incident_id, in root_incident_ids:
+		cur.execute("SELECT title, body FROM incidents WHERE id = ?", (root_incident_id, ))
+		root_title, root_body = cur.fetchone()
+		root_content = merge_title_body(root_title, root_body)
 		cur.execute("""
 		SELECT
-			incidents.content
-		FROM event_incident
-		JOIN incidents ON incidents.id = event_incident.incident_id
-		WHERE event_incident.event_id = ?
-		ORDER BY event_incident.incident_order
-		""", (event_id, ))
-		incidents = cur.fetchall()
-		num_incidents = len(incidents)
-		for i in range(num_incidents-1):
-			start_incident, = incidents[i]
-			next_incident, = incidents[i+1]
-			start_incident = re.sub(r"\n+", " ", start_incident)
-			next_incident = re.sub(r"\n+", " ", next_incident)
-			sentence0.append(start_incident)
-			sentence1.append(next_incident)
+			incidents.title,
+			incidents.body
+		FROM incidents_relevant
+		JOIN incidents ON incidents.id = incidents_relevant.child_incident_id
+		WHERE incidents_relevant.root_incident_id = ?
+		ORDER BY incidents_relevant.incident_order
+		""", (root_incident_id, ))
+		buildup_incidents = cur.fetchall()
+		num_buildup_incidents = len(buildup_incidents)
+		first_title, first_body = buildup_incidents[0]
+		first_content = merge_title_body(first_title, first_body)
+		sentence0.append(root_content)
+		sentence1.append(first_content)
+		labels.append(0)
+		for i in range(num_buildup_incidents-1):
+			target_title, target_body = buildup_incidents[i]
+			next_title, next_body = buildup_incidents[i+1]
+			target_content = merge_title_body(target_title, target_body)
+			next_content = merge_title_body(next_title, next_body)
+			sentence0.append(target_content)
+			sentence1.append(next_content)
 			labels.append(0)
 	return (sentence0, sentence1, labels)
 
 
-def negative_data(cur, sentence0, sentence1, labels, incidents_all, num_incidents_all):
-	num_positives = len(sentence0)
-	iteration = 0
-	while iteration < num_positives:
-		print(iteration)
-		random_number = random.randint(0, num_incidents_all-1)
-		target_incident_id, target_content = incidents_all[random_number]
-		target_content = re.sub(r"\n+", " ", target_content)
-		cur.execute("SELECT event_id FROM event_incident WHERE incident_id = ?", (target_incident_id, ))
-		event_id, = cur.fetchone()  # grab event id of the random incident
+def negative_data(cur, sentence0, sentence1, labels, root_incident_ids):
+	for root_incident_id, in root_incident_ids:
+		cur.execute("SELECT title, body FROM incidents WHERE id = ?", (root_incident_id, ))
+		root_title, root_body = cur.fetchone()
+		root_content = merge_title_body(root_title, root_body)
 		cur.execute("""
 		SELECT
-			incidents.content
-		FROM event_incident
-		JOIN incidents ON incidents.id = event_incident.incident_id
-		WHERE event_incident.event_id != ?
-		""", (event_id, ))
-		unrelated_incidents = cur.fetchall()
-		num_unrelated_incidents = len(unrelated_incidents)
-		random_number = random.randint(0, num_unrelated_incidents-1)
-		unrelated_content, = unrelated_incidents[random_number]
-		unrelated_content = re.sub(r"\n+", " ", unrelated_content)
-		random_num = random.randint(0, num_incidents_all-1)
-		target_incident_id, target_company_id, target_content = incidents_all[random_num]
-		target_content = re.sub(r"\n+", " ", target_content)
-		cur.execute("SELECT event_id FROM event_incident WHERE incident_id = ?", (target_incident_id, ))
-		target_event_id, = cur.fetchone()
-		cur.execute("SELECT incident_id FROM event_incident WHERE company_id = ? AND event_id != ?", (target_company_id, target_event_id))
-		rows = cur.fetchall()
-		num_rows = len(rows)
-		random_num = random.randint(0, num_rows-1)
-		same_company_non_relevant_id, = rows[random_num]
-		cur.execute("SELECT content FROM incidents WHERE id = ?", (same_company_non_relevant_id, ))
-		next_content, = cur.fetchone()
-		next_content = re.sub(r"\n+", " ", next_content)
-		sentence0.append(target_content)
-		sentence1.append(next_content)
-		labels.append(1)
-		iteration += 1
+			incidents.title,
+			incidents.body
+		FROM incidents_irrelevant
+		JOIN incidents ON incidents.id = incidents_irrelevant.child_incident_id
+		WHERE incidents_irrelevant.root_incident_id = ?
+		""", (root_incident_id, ))
+		incidents_irrelevant = cur.fetchall()
+		num_incidents_irrelevant = len(incidents_irrelevant)
+		for title, body in incidents_irrelevant:
+			irrelevant_content = merge_title_body(title, body)
+			sentence0.append(root_content)
+			sentence1.append(irrelevant_content)
+			labels.append(1)
+		for i in range(0, num_incidents_irrelevant-1):
+			for j in range(i+1, num_incidents_irrelevant):
+				target_title, target_body = incidents_irrelevant[i]
+				next_title, next_body = incidents_irrelevant[j]
+				target_content = merge_title_body(target_title, target_body)
+				next_content = merge_title_body(next_title, next_body)
+				sentence0.append(target_ontent)
+				sentence1.append(next_content)
+				labels.append(1)
 	return (sentence0, sentence1, labels)
 
 
@@ -110,20 +114,22 @@ def train_loop(dataloader, model, optimizer, loss_fn):
 def main():
 	with database.connect() as con:
 		cur = con.cursor()
-		cur.execute("SELECT id, company_id, content FROM incidents")
-		incidents_all = cur.fetchall()
-		num_incidents_all = len(incidents_all)
+		cur.execute("SELECT id FROM root_incidents")
+		root_incident_ids = cur.fetchall()
 		sentence0, sentence1, labels = [], [], []
-		sentence0, sentence1, labels = positive_data(cur, sentence0, sentence1, labels)
-		sentence0, sentence1, labels = negative_data(cur, sentence0, sentence1, labels, incidents_all, num_incidents_all)
-		inputs = tokenizer(sentence0, sentence1, return_tensors="pt", max_length=512, truncation=True, padding="max_length")
-		inputs["labels"] = torch.LongTensor([labels]).T
-		dataset = IncidentDataset(inputs)
-		dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
-		for epoch in range(epochs):
-			print(f"Epoch {epoch + 1}")
-			train_loop(dataloader, model, optimizer, loss_fn)
-		torch.save(model, "model.pth")
+		sentence0, sentence1, labels = positive_data(cur, sentence0, sentence1, labels, root_incident_ids)
+		print(len(sentence0))
+		sentence0, sentence1, labels = negative_data(cur, sentence0, sentence1, labels, root_incident_ids)
+		print(len(sentence0))
+		# inputs = tokenizer(sentence0, sentence1, return_tensors="pt", max_length=512, truncation=True, padding="max_length")
+
+		# inputs["labels"] = torch.LongTensor([labels]).T
+		# dataset = IncidentDataset(inputs)
+		# dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
+		# for epoch in range(epochs):
+		# 	print(f"Epoch {epoch + 1}")
+		# 	train_loop(dataloader, model, optimizer, loss_fn)
+		# torch.save(model, "model.pth")
 
 
 if __name__ == "__main__":
