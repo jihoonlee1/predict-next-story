@@ -31,6 +31,8 @@ def main():
 			rows = cur.fetchall()
 			text1, = rows[0]
 			text2, = rows[1]
+			print(text1)
+			print(text2)
 			yes, no = predict(text1, text2)
 			print(yes, no)
 

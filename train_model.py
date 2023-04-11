@@ -8,11 +8,12 @@ import torch
 logging.set_verbosity_error()
 device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
 learning_rate = 5e-5
-epochs = 3
-batch_size = 8
+epochs = 2
+batch_size = 16
 tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 model = BertForNextSentencePrediction.from_pretrained("bert-base-uncased").to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+loss_fn = torch.nn.CrossEntropyLoss()
 
 
 class IncidentDataset(torch.utils.data.Dataset):
@@ -79,15 +80,15 @@ def negative_data(cur, sentence0, sentence1, labels, incidents_all, num_incident
 	return (sentence0, sentence1, labels)
 
 
-def train_loop(dataloader, model, optimizer):
+def train_loop(dataloader, model, optimizer, loss_fn):
 	for batch in dataloader:
-		optimizer.zero_grad()
 		input_ids = batch["input_ids"].to(device)
 		token_type_ids = batch["token_type_ids"].to(device)
 		attention_mask = batch["attention_mask"].to(device)
 		labels = batch["labels"].to(device)
-		outputs = model(input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask, labels=labels)
-		loss = outputs.loss
+		output = model(input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask, labels=labels)
+		loss = loss_fn(output.logits, labels.squeeze_())
+		optimizer.zero_grad()
 		loss.backward()
 		optimizer.step()
 		print(f"loss: {loss.item():>7f}")
@@ -110,7 +111,7 @@ def main():
 		dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
 		for epoch in range(epochs):
 			print(f"Epoch {epoch + 1}")
-			train_loop(dataloader, model, optimizer)
+			train_loop(dataloader, model, optimizer, loss_fn)
 		model.save(model, "model.pth")
 
 
