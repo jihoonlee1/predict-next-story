@@ -1,5 +1,6 @@
 import openai
 import os
+import re
 
 
 api_key = os.environ["CHATGPT_API_KEY"]

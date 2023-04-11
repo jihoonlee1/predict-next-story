@@ -17,34 +17,52 @@ def separate_response(question):
 			continue
 
 
+def title_body(content):
+	temp = [item.strip() for item in content.split("\n") if item != ""]
+	title = temp[0]
+	body = "\n".join(temp[1:])
+	return title, body
+
+
 def main():
 	with database.connect() as con:
 		cur = con.cursor()
-		cur.execute("SELECT company_id  FROM events GROUP BY company_id ORDER BY company_id DESC LIMIT 1")
-		last_company_id, = cur.fetchone()
-		cur.execute("SELECT id, name FROM companies WHERE id > ?", (last_company_id, ))
+		cur.execute("SELECT id, name FROM companies")
 		for company_id, company_name in cur.fetchall():
-			initial_question = f'5 news articles about {company_name} on different topic. Start each article with "Article: ".'
-			print(initial_question)
-			different_events = separate_response(initial_question)
-			print(f"Events: {len(different_events)}")
-			for event in different_events:
-				cur.execute("SELECT ifnull(max(id)+1, 0) FROM events")
-				event_id, = cur.fetchone()
-				cur.execute("INSERT INTO events VALUES(?,?)", (event_id, company_id))
+			# Find 20 off topic root incidents about the same company.
+			initial_question = f'20 news articles about {company_name} on different topic. Make sure each article is about {company_name}. Make sure each article is more than 100 words. Start each article with "Article: ".'
+			root_incidents = separate_response(initial_question)
+			print(f"Events: {len(root_incidents)} {company_name}")
+
+			for root_incident in root_incidents:
+				root_title, root_body = title_body(root_incident)
 				cur.execute("SELECT ifnull(max(id)+1, 0) FROM incidents")
-				parent_incident_id, = cur.fetchone()
-				cur.execute("INSERT INTO incidents VALUES(?,?,?)", (parent_incident_id, event, company_id))
-				cur.execute("INSERT INTO event_incident VALUES(?,?,?,?)", (event_id, parent_incident_id, company_id, 0))
-				last_question = f'5 follow-up news articles to {event} that build on each other. Start each article with "Article: ".'
-				stories = separate_response(last_question)
-				print(f"Stories: {len(stories)}")
-				for story_order, story in enumerate(stories):
+				root_incident_id, = cur.fetchone()
+				cur.execute("INSERT INTO incidents VALUES(?,?,?,?)", (root_incident_id, root_title, root_body, company_id))
+				cur.execute("INSERT INTO root_incidents VALUES(?,?)", (root_incident_id, company_id))
+
+				# Find 10 follow up news articles per root incident.
+				question_relevant = f'Write 10 follow up news articles to {root_title} that build on each other. Make sure each article is about {company_name}. Make sure each article is more than 100 words. Start each article with "Article: ".'
+				incidents_relevant = separate_response(question_relevant)
+				print(f"Relevant news articles: {len(incidents_relevant)}")
+				for incident_order, incident_relevant in enumerate(incidents_relevant):
+					incident_relevant_title, incident_relevant_body = title_body(incident_relevant)
 					cur.execute("SELECT ifnull(max(id)+1, 0) FROM incidents")
-					incident_id, = cur.fetchone()
-					cur.execute("INSERT INTO incidents VALUES(?,?,?)", (incident_id, story, company_id))
-					cur.execute("INSERT INTO event_incident VALUES(?,?,?,?)", (event_id, incident_id, company_id, story_order+1))
-				con.commit()
+					incident_relevant_id, = cur.fetchone()
+					cur.execute("INSERT INTO incidents VALUES(?,?,?,?)", (incident_relevant_id, incident_relevant_title, incident_relevant_body, company_id))
+					cur.execute("INSERT INTO incidents_relevant VALUES(?,?,?,?)", (root_incident_id, incident_relevant_id, incident_order, company_id))
+
+				# Find 10 irrelevant news articles per root incident.
+				question_irrelevant = f'Write 10 irrelevant news articles to {root_title}. Make sure each article is about {company_name}. Make sure the article is more than 100 words. Start each article with "Article: ".'
+				incidents_irrelevant = separate_response(question_irrelevant)
+				print(f"Irrelevant news articles: {len(incidents_irrelevant)}")
+				for incident_irrelevant in incidents_irrelevant:
+					incident_irrelevant_title, incident_irrelevant_body = title_body(incident_irrelevant)
+					cur.execute("SELECT ifnull(max(id)+1, 0) FROM incidents")
+					incident_irrelevant_id, = cur.fetchone()
+					cur.execute("INSERT INTO incidents VALUES(?,?,?,?)", (incident_irrelevant_id, incident_irrelevant_title, incident_irrelevant_body, company_id))
+					cur.execute("INSERT INTO incidents_irrelevant VALUES(?,?,?)", (root_incident_id, incident_irrelevant_id, company_id))
+			con.commit()
 
 
 if __name__ == "__main__":

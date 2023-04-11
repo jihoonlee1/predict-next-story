@@ -2,9 +2,10 @@ import contextlib
 import sqlite3
 
 
+dbname = "database.sqlite"
 statements = [
 """
-CREATE TABLE IF NOT EXISTS companies(
+CREATE TABLE companies(
 	id           INTEGER NOT NULL PRIMARY KEY,
 	name         TEXT    NOT NULL,
 	description  TEXT,
@@ -17,31 +18,40 @@ CREATE TABLE IF NOT EXISTS companies(
 );
 """,
 """
-CREATE TABLE IF NOT EXISTS incidents(
+CREATE TABLE incidents(
 	id         INTEGER NOT NULL PRIMARY KEY,
-	content    TEXT    NOT NULL,
+	title      TEXT    NOT NULL,
+	body       TEXT    NOT NULL,
+	company_id INTEGER NOT NULL
+)
+""",
+"""
+CREATE TABLE root_incidents(
+	id         INTEGER NOT NULL PRIMARY KEY,
 	company_id INTEGER NOT NULL REFERENCES companies(id)
 )
 """,
 """
-CREATE TABLE IF NOT EXISTS events(
-	id          INTEGER NOT NULL PRIMARY KEY,
-	company_id  INTEGER NOT NULL REFERENCES companies(id)
+CREATE TABLE incidents_relevant(
+	root_incident_id  INTEGER NOT NULL,
+	child_incident_id INTEGER NOT NULL,
+	incident_order    INTEGER NOT NULL,
+	company_id        INTEGER NOT NULL,
+	PRIMARY KEY(root_incident_id, child_incident_id)
 )
 """,
 """
-CREATE TABLE IF NOT EXISTS event_incident(
-	event_id       INTEGER NOT NULL REFERENCES events(id),
-	incident_id    INTEGER NOT NULL REFERENCES incidents(id),
-	company_id     INTEGER NOT NULL REFERENCES companies(id),
-	incident_order INTEGER NOT NULL,
-	PRIMARY KEY(event_id, incident_id)
+CREATE TABLE incidents_irrelevant(
+	root_incident_id  INTEGER NOT NULL,
+	child_incident_id INTEGER NOT NULL,
+	company_id        INTEGER NOT NULL,
+	PRIMARY KEY(root_incident_id, child_incident_id)
 )
 """
 ]
 
 
-def connect(database="database.sqlite", mode="rw"):
+def connect(database=dbname, mode="rw"):
 	return contextlib.closing(sqlite3.connect(f"file:{database}?mode={mode}", uri=True))
 
 
