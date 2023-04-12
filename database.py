@@ -32,10 +32,10 @@ CREATE TABLE root_incidents(
 """,
 """
 CREATE TABLE classifications(
-	root_incident_id  INTEGER NOT NULL,
-	child_incident_id INTEGER NOT NULL,
-	company_id        INTEGER NOT NULL,
-	is_followup       INTEGER NOT NULL
+	root_incident_id   INTEGER NOT NULL,
+	child_incident_id  INTEGER NOT NULL,
+	company_id         INTEGER NOT NULL,
+	is_direct_followup INTEGER NOT NULL
 )
 """
 ]

@@ -30,13 +30,13 @@ def main():
 				cur.execute("INSERT INTO incidents VALUES(?,?,?)", (root_incident_id, root_incident, company_id))
 				cur.execute("INSERT INTO root_incidents VALUES(?,?)", (root_incident_id, company_id))
 				good_question = f'''
-				Write 10 news articles that build on each other to follow "{root_incident}".
+				Write 10 news articles that could potentially be direct follow-up to "{root_incident}".
 				Make sure each article is about {company_name}.
 				Make sure each article is more than 100 words.
 				Separate each article with "Article: ".
 				'''
 				bad_question = f'''
-				Write 10 news articles that do not build on each other to not follow "{root_incident}".
+				Write 10 news articles that could potentially be follow-up, but is not direct follow-up to "{root_incident}".
 				Make sure each article is about {company_name}.
 				Make sure each article is more than 100 words.
 				Separate each article with "Article: ".
@@ -48,17 +48,17 @@ def main():
 				print(f"{len(good_incidents)} good incidents")
 				print(f"{len(bad_incidents)} bad incidents")
 
-				for incident_order, good_incident in enumerate(good_incidents):
+				for good_incident in good_incidents:
 					cur.execute("SELECT ifnull(max(id)+1, 0) FROM incidents")
 					good_incident_id, = cur.fetchone()
 					cur.execute("INSERT INTO incidents VALUES(?,?,?)", (good_incident_id, good_incident, company_id))
-					cur.execute("INSERT INTO incidents_relevant VALUES(?,?,?,?)", (root_incident_id, good_incident_id, incident_order, company_id))
+					cur.execute("INSERT INTO classifications VALUES(?,?,?,?)", (root_incident_id, good_incident_id, company_id, 1))
 
 				for bad_incident in bad_incidents:
 					cur.execute("SELECT ifnull(max(id)+1, 0) FROM incidents")
 					bad_incident_id, = cur.fetchone()
 					cur.execute("INSERT INTO incidents VALUES(?,?,?)", (bad_incident_id, bad_incident, company_id))
-					cur.execute("INSERT INTO incidents_irrelevant VALUES(?,?,?)", (root_incident_id, bad_incident_id, company_id))
+					cur.execute("INSERT INTO classifications VALUES(?,?,?,?)", (root_incident_id, bad_incident_id, company_id, 0))
 				con.commit()
 			print("------------------------")
 
