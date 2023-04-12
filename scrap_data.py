@@ -11,11 +11,11 @@ article_pattern = re.compile(r"Article *[0-9]*:", re.IGNORECASE)
 def main():
 	with database.connect() as con:
 		cur = con.cursor()
-		cur.execute("SELECT id, name FROM companies WHERE id > 10")
+		cur.execute("SELECT id, name FROM companies")
 		for company_id, company_name in cur.fetchall():
 			# Find 20 off topic root incidents about the same company.
 			initial_question = f'''
-			Write 20 news articles about {company_name}	on different topic.
+			Write 10 news articles about {company_name}	on different topic.
 			Make sure each article is about {company_name}.
 			Make sure each article is more than 100 words.
 			Separate each article with "Article: ".
@@ -30,13 +30,13 @@ def main():
 				cur.execute("INSERT INTO incidents VALUES(?,?,?)", (root_incident_id, root_incident, company_id))
 				cur.execute("INSERT INTO root_incidents VALUES(?,?)", (root_incident_id, company_id))
 				good_question = f'''
-				Write 10 news articles that could potentially be direct follow-up to "{root_incident}".
+				Write 20 news articles that could potentially be direct follow-up to "{root_incident}".
 				Make sure each article is about {company_name}.
 				Make sure each article is more than 100 words.
 				Separate each article with "Article: ".
 				'''
 				bad_question = f'''
-				Write 10 news articles that could potentially be follow-up, but is not direct follow-up to "{root_incident}".
+				Write 20 news articles that could potentially be follow-up, but is not direct follow-up to "{root_incident}".
 				Make sure each article is about {company_name}.
 				Make sure each article is more than 100 words.
 				Separate each article with "Article: ".
