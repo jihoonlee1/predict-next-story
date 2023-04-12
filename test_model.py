@@ -13,15 +13,27 @@ labels = torch.LongTensor([0]).to(device)
 def predict(text1, text2):
 	inputs = tokenizer(text1, text2, return_tensors="pt", truncation=True, max_length=512, padding="max_length")
 	prediction = model(**inputs.to(device), labels=labels).logits[0]
-	prob = torch.sigmoid(prediction)
-	return prob.tolist()
+	return prediction
 
 
 def main():
-	text1 = "Toyota creates new line of gourmet food products"
-	text2 = "Toyota's Gourmet Foods Launch Party. Toyota will host a launch party to celebrate the release of its new line of gourmet foods. The event will feature samples of the new foods, as well as presentations from the chefs and food experts who developed them.0"
-	yes, no = predict(text1, text2)
-	print(yes, no)
+	with database.connect(database="database1.sqlite") as con:
+		cur = con.cursor()
+		cur.execute("SELECT root_incidents.id, incidents.title, incidents.body FROM root_incidents JOIN incidents ON incidents.id = root_incidents.id")
+		for root_incident_id, root_title, root_body in cur.fetchall():
+			root_content = root_title + " " + root_body
+			print(f"Root: {root_content}")
+			print("")
+			cur.execute("SELECT title, body FROM incidents WHERE id != ?", (root_incident_id, ))
+			for child_title, child_body in cur.fetchall():
+				child_content = child_title + " " + child_body
+				pred = predict(root_content, child_content)
+				print(f"Child: {child_content}")
+				print(pred)
+				print("")
+				time.sleep(2)
+			break
+
 
 
 if __name__ == "__main__":

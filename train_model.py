@@ -9,7 +9,7 @@ logging.set_verbosity_error()
 device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
 learning_rate = 5e-5
 epochs = 3
-batch_size = 32
+batch_size = 16
 tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 model = BertForNextSentencePrediction.from_pretrained("bert-base-uncased").to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
@@ -35,56 +35,47 @@ def merge_title_body(title, body):
 
 def positive_data(cur, sentence0, sentence1, labels, root_incident_ids):
 	for root_incident_id, in root_incident_ids:
-		cur.execute("SELECT title, body FROM incidents WHERE id = ?", (root_incident_id, ))
-		root_title, root_body = cur.fetchone()
-		root_content = merge_title_body(root_title, root_body)
 		cur.execute("""
-		SELECT
-			incidents.title,
-			incidents.body
+		SELECT incidents.content
 		FROM incidents_relevant
 		JOIN incidents ON incidents.id = incidents_relevant.child_incident_id
 		WHERE incidents_relevant.root_incident_id = ?
-		ORDER BY incidents_relevant.incident_order
-		""", (root_incident_id, ))
+		ORDER BY incidents_relevant.incident_order""", (root_incident_id, ))
 		buildup_incidents = cur.fetchall()
 		num_buildup_incidents = len(buildup_incidents)
-		first_title, first_body = buildup_incidents[0]
-		first_content = merge_title_body(first_title, first_body)
-		sentence0.append(root_content)
-		sentence1.append(first_content)
-		labels.append(0)
 		for i in range(num_buildup_incidents-1):
-			target_title, target_body = buildup_incidents[i]
-			next_title, next_body = buildup_incidents[i+1]
-			target_content = merge_title_body(target_title, target_body)
-			next_content = merge_title_body(next_title, next_body)
-			sentence0.append(target_content)
-			sentence1.append(next_content)
-			labels.append(0)
+			target, = buildup_incidents[i]
+			child, = buildup_incidents[i+1]
+			sentence0.append(target)
+			sentence1.append(child)
+			labels.append(1)
 	return (sentence0, sentence1, labels)
 
 
 def negative_data(cur, sentence0, sentence1, labels, root_incident_ids):
 	for root_incident_id, in root_incident_ids:
-		cur.execute("SELECT title, body FROM incidents WHERE id = ?", (root_incident_id, ))
-		root_title, root_body = cur.fetchone()
-		root_content = merge_title_body(root_title, root_body)
+		cur.execute("SELECT content, company_id FROM incidents WHERE id = ?", (root_incident_id, ))
+		root_content, company_id = cur.fetchone()
 		cur.execute("""
-		SELECT
-			incidents.title,
-			incidents.body
+		SELECT incidents.content
 		FROM incidents_irrelevant
-		JOIN incidents ON incidents.id = incidents_irrelevant.child_incident_id
-		WHERE incidents_irrelevant.root_incident_id = ?
-		""", (root_incident_id, ))
-		incidents_irrelevant = cur.fetchall()
-		num_incidents_irrelevant = len(incidents_irrelevant)
-		for title, body in incidents_irrelevant:
-			irrelevant_content = merge_title_body(title, body)
+		JOIN incidents ON incidents.id = incidents_irrelevant.child
+		WHERE incidents_irrelevant.root_incident_id = ?""", (root_incident_id, ))
+		irrelevant_incidents = cur.fetchall()
+		for child, in irrelevant_incidents:
 			sentence0.append(root_content)
-			sentence1.append(irrelevant_content)
-			labels.append(1)
+			sentence1.append(child)
+			labels.append(0)
+		cur.execute("""
+		SELECT incidents.content
+		FROM root_incidents
+		JOIN incidents ON incidents.id = root_incidents.id
+		WHERE root_incidents.company_id = ? AND root_incidents.id != ?
+		""", (company_id, root_incident_id))
+		for child, in cur.fetchall():
+			sentence0.append(root_content)
+			sentence1.append(child)
+			labels.append(0)
 	return (sentence0, sentence1, labels)
 
 
@@ -110,7 +101,7 @@ def main():
 		sentence0, sentence1, labels = [], [], []
 		sentence0, sentence1, labels = positive_data(cur, sentence0, sentence1, labels, root_incident_ids)
 		sentence0, sentence1, labels = negative_data(cur, sentence0, sentence1, labels, root_incident_ids)
-		inputs = tokenizer(sentence0, sentence1, return_tensors="pt", max_length=256, truncation=True, padding="max_length")
+		inputs = tokenizer(sentence0, sentence1, return_tensors="pt", max_length=512, truncation=True, padding="max_length")
 		inputs["labels"] = torch.LongTensor([labels]).T
 		dataset = IncidentDataset(inputs)
 		dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
