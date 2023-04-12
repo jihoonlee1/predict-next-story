@@ -35,7 +35,8 @@ CREATE TABLE classifications(
 	root_incident_id   INTEGER NOT NULL,
 	child_incident_id  INTEGER NOT NULL,
 	company_id         INTEGER NOT NULL,
-	soft_hard_pos_neg  INTEGER NOT NULL
+	soft_hard_pos_neg  INTEGER NOT NULL,
+	PRIMARY KEY(root_incident_id, child_incident_id)
 )
 """
 ]
