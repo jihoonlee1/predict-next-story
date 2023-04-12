@@ -20,8 +20,7 @@ CREATE TABLE companies(
 """
 CREATE TABLE incidents(
 	id         INTEGER NOT NULL PRIMARY KEY,
-	title      TEXT    NOT NULL,
-	body       TEXT    NOT NULL,
+	content    TEXT    NOT NULL,
 	company_id INTEGER NOT NULL
 )
 """,
