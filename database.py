@@ -2,7 +2,7 @@ import contextlib
 import sqlite3
 
 
-dbname = "database.sqlite"
+dbname = "classification.sqlite"
 statements = [
 """
 CREATE TABLE companies(
@@ -31,20 +31,11 @@ CREATE TABLE root_incidents(
 )
 """,
 """
-CREATE TABLE incidents_relevant(
-	root_incident_id  INTEGER NOT NULL,
-	child_incident_id INTEGER NOT NULL,
-	incident_order    INTEGER NOT NULL,
-	company_id        INTEGER NOT NULL,
-	PRIMARY KEY(root_incident_id, child_incident_id)
-)
-""",
-"""
-CREATE TABLE incidents_irrelevant(
+CREATE TABLE classifications(
 	root_incident_id  INTEGER NOT NULL,
 	child_incident_id INTEGER NOT NULL,
 	company_id        INTEGER NOT NULL,
-	PRIMARY KEY(root_incident_id, child_incident_id)
+	is_followup       INTEGER NOT NULL
 )
 """
 ]
