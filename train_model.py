@@ -59,7 +59,7 @@ def negative_data(cur, sentence0, sentence1, labels, root_incident_ids):
 		cur.execute("""
 		SELECT incidents.content
 		FROM incidents_irrelevant
-		JOIN incidents ON incidents.id = incidents_irrelevant.child
+		JOIN incidents ON incidents.id = incidents_irrelevant.child_incident_id
 		WHERE incidents_irrelevant.root_incident_id = ?""", (root_incident_id, ))
 		irrelevant_incidents = cur.fetchall()
 		for child, in irrelevant_incidents:
