@@ -17,5 +17,12 @@ def predict(text1, text2):
 	return prob.tolist()
 
 
+def main():
+	text1 = "Toyota creates new line of gourmet food products"
+	text2 = "Toyota's Gourmet Foods Launch Party. Toyota will host a launch party to celebrate the release of its new line of gourmet foods. The event will feature samples of the new foods, as well as presentations from the chefs and food experts who developed them.0"
+	yes, no = predict(text1, text2)
+	print(yes, no)
+
+
 if __name__ == "__main__":
 	main()

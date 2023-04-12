@@ -9,7 +9,7 @@ logging.set_verbosity_error()
 device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
 learning_rate = 5e-5
 epochs = 3
-batch_size = 16
+batch_size = 32
 tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 model = BertForNextSentencePrediction.from_pretrained("bert-base-uncased").to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
@@ -85,15 +85,6 @@ def negative_data(cur, sentence0, sentence1, labels, root_incident_ids):
 			sentence0.append(root_content)
 			sentence1.append(irrelevant_content)
 			labels.append(1)
-		for i in range(0, num_incidents_irrelevant-1):
-			for j in range(i+1, num_incidents_irrelevant):
-				target_title, target_body = incidents_irrelevant[i]
-				next_title, next_body = incidents_irrelevant[j]
-				target_content = merge_title_body(target_title, target_body)
-				next_content = merge_title_body(next_title, next_body)
-				sentence0.append(target_ontent)
-				sentence1.append(next_content)
-				labels.append(1)
 	return (sentence0, sentence1, labels)
 
 
@@ -118,18 +109,15 @@ def main():
 		root_incident_ids = cur.fetchall()
 		sentence0, sentence1, labels = [], [], []
 		sentence0, sentence1, labels = positive_data(cur, sentence0, sentence1, labels, root_incident_ids)
-		print(len(sentence0))
 		sentence0, sentence1, labels = negative_data(cur, sentence0, sentence1, labels, root_incident_ids)
-		print(len(sentence0))
-		# inputs = tokenizer(sentence0, sentence1, return_tensors="pt", max_length=512, truncation=True, padding="max_length")
-
-		# inputs["labels"] = torch.LongTensor([labels]).T
-		# dataset = IncidentDataset(inputs)
-		# dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
-		# for epoch in range(epochs):
-		# 	print(f"Epoch {epoch + 1}")
-		# 	train_loop(dataloader, model, optimizer, loss_fn)
-		# torch.save(model, "model.pth")
+		inputs = tokenizer(sentence0, sentence1, return_tensors="pt", max_length=256, truncation=True, padding="max_length")
+		inputs["labels"] = torch.LongTensor([labels]).T
+		dataset = IncidentDataset(inputs)
+		dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
+		for epoch in range(epochs):
+			print(f"Epoch {epoch + 1}")
+			train_loop(dataloader, model, optimizer, loss_fn)
+		torch.save(model, "model.pth")
 
 
 if __name__ == "__main__":
