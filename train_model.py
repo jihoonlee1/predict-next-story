@@ -73,6 +73,21 @@ def negative_data(cur, sentence0, sentence1, labels, root_incident_ids):
 			sentence0.append(target)
 			sentence1.append(child)
 			labels.append(1)
+		cur.execute("""
+		SELECT
+			incidents.content
+		FROM root_incidents
+		JOIN incidents ON incidents.id = root_incidents.id
+		WHERE root_incidents.company_id = ?
+		""", (company_id,))
+		rows = cur.fetchall()
+		num_rows = len(rows)
+		for i in range(num_rows-1):
+			target, = rows[i]
+			next_sent, = rows[i+1]
+			sentence0.append(target)
+			sentence1.append(next_sent)
+			labels.append(1)
 	return (sentence0, sentence1, labels)
 
 
@@ -90,6 +105,24 @@ def train_loop(dataloader, model, optimizer, loss_fn):
 		print(f"loss: {loss.item():>7f}")
 
 
+def test_loop(dataloder, model, loss_fn):
+	size = len(dataloader.dataset)
+	num_batches = len(dataloader)
+	test_loss, correct = 0
+	with torch.no_grad():
+		for batch in dataloader:
+			input_ids = batch["input_ids"].to(device)
+			token_type_ids = batch["token_type_ids"].to(device)
+			attention_mask = batch["attention_mask"].to(device)
+			labels = batch["labels"].to(device)
+			output = model(inputs, token_type_ids=token_type_ids, attention_mask=attention_mask, labels=labels)
+			print(output)
+	test_loss /= num_batches
+	correct /= size
+	print(correct)
+	print(test_loss)
+
+
 def main():
 	with database.connect() as con:
 		cur = con.cursor()
@@ -97,7 +130,9 @@ def main():
 		root_incident_ids = cur.fetchall()
 		sentence0, sentence1, labels = [], [], []
 		sentence0, sentence1, labels = positive_data(cur, sentence0, sentence1, labels, root_incident_ids)
+		print(len(sentence0))
 		sentence0, sentence1, labels = negative_data(cur, sentence0, sentence1, labels, root_incident_ids)
+		print(len(sentence0))
 		inputs = tokenizer(sentence0, sentence1, return_tensors="pt", max_length=512, truncation=True, padding="max_length")
 		inputs["labels"] = torch.LongTensor([labels]).T
 		dataset = IncidentDataset(inputs)
