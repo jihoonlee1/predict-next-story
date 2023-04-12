@@ -43,7 +43,6 @@ def main():
 				hard_neg_question0= f'''
 				Write 20 news articles that are similar to "{root_incident}".
 				Make sure each article is not about {company_name}.
-				Make sure each article have diferent company.
 				Make sure each article is more than 100 words.
 				Separate each article with "Article: ".
 				'''
