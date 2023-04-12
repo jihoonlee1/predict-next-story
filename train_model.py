@@ -8,8 +8,8 @@ import torch
 logging.set_verbosity_error()
 device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
 learning_rate = 5e-5
-epochs = 3
-batch_size = 16
+epochs = 4
+batch_size = 8
 tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 model = BertForNextSentencePrediction.from_pretrained("bert-base-uncased").to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
@@ -48,7 +48,7 @@ def positive_data(cur, sentence0, sentence1, labels, root_incident_ids):
 			child, = buildup_incidents[i+1]
 			sentence0.append(target)
 			sentence1.append(child)
-			labels.append(1)
+			labels.append(0)
 	return (sentence0, sentence1, labels)
 
 
@@ -65,14 +65,14 @@ def negative_data(cur, sentence0, sentence1, labels, root_incident_ids):
 		first_irrelevant, = irrelevant_incidents[0]
 		sentence0.append(root_content)
 		sentence1.append(first_irrelevant)
-		labels.append(0)
+		labels.append(1)
 		num_irrelevant_incidents = len(irrelevant_incidents)
 		for i in range(num_irrelevant_incidents-1):
 			target, = irrelevant_incidents[i]
 			child, = irrelevant_incidents[i+1]
 			sentence0.append(target)
 			sentence1.append(child)
-			labels.append(0)
+			labels.append(1)
 	return (sentence0, sentence1, labels)
 
 
