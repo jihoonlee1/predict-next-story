@@ -2,18 +2,15 @@ import database
 import chatgpt
 import time
 import re
-import openai
-
-
-article_pattern = re.compile(r"Article *[0-9]*:", re.IGNORECASE)
 
 
 def main():
+	article_pattern = re.compile(r"Article *[0-9]*:", re.IGNORECASE)
+
 	with database.connect() as con:
 		cur = con.cursor()
 		cur.execute("SELECT id, name FROM companies")
 		for company_id, company_name in cur.fetchall():
-			# Find 20 off topic root incidents about the same company.
 			initial_question = f'''
 			Write 10 news articles about {company_name}	on different topic.
 			Make sure each article is about {company_name}.
@@ -23,42 +20,67 @@ def main():
 			response0 = chatgpt.ask(initial_question)
 			root_incidents = [item.strip() for item in article_pattern.split(response0) if item != ""]
 			print(company_name, len(root_incidents))
+
 			for counter, root_incident in enumerate(root_incidents):
-				print(counter)
+				print(f"Root: {counter}")
 				cur.execute("SELECT ifnull(max(id)+1, 0) FROM incidents")
 				root_incident_id, = cur.fetchone()
 				cur.execute("INSERT INTO incidents VALUES(?,?,?)", (root_incident_id, root_incident, company_id))
 				cur.execute("INSERT INTO root_incidents VALUES(?,?)", (root_incident_id, company_id))
-				good_question = f'''
-				Write 20 news articles that could potentially be direct follow-up to "{root_incident}".
+
+				soft_pos_question = f'''
+				Write 20 news articles that are direct follow-up to "{root_incident}".
 				Make sure each article is about {company_name}.
 				Make sure each article is more than 100 words.
 				Separate each article with "Article: ".
 				'''
-				bad_question = f'''
-				Write 20 news articles that could potentially be follow-up, but is not direct follow-up to "{root_incident}".
+				soft_neg_question = f'''
+				Write 20 news articles that are not follow-up to "{root_incident}".
 				Make sure each article is about {company_name}.
 				Make sure each article is more than 100 words.
 				Separate each article with "Article: ".
 				'''
-				good_incidents = chatgpt.ask(good_question)
-				good_incidents = [item.strip() for item in article_pattern.split(good_incidents) if item != ""]
-				bad_incidents = chatgpt.ask(bad_question)
-				bad_incidents = [item.strip() for item in article_pattern.split(bad_incidents) if item != ""]
-				print(f"{len(good_incidents)} good incidents")
-				print(f"{len(bad_incidents)} bad incidents")
+				hard_neg_question0= f'''
+				Write 20 news articles that are similar to "{root_incident}".
+				Make sure each article is not about {company_name}.
+				Make sure each article is more than 100 words.
+				Separate each article with "Article: ".
+				'''
+				soft_pos_incidents = chatgpt.ask(soft_pos_question)
+				soft_pos_incidents = [item.strip() for item in article_pattern.split(soft_pos_incidents) if item != ""]
 
-				for good_incident in good_incidents:
-					cur.execute("SELECT ifnull(max(id)+1, 0) FROM incidents")
-					good_incident_id, = cur.fetchone()
-					cur.execute("INSERT INTO incidents VALUES(?,?,?)", (good_incident_id, good_incident, company_id))
-					cur.execute("INSERT INTO classifications VALUES(?,?,?,?)", (root_incident_id, good_incident_id, company_id, 1))
+				soft_neg_incidents = chatgpt.ask(soft_neg_question)
+				soft_neg_incidents = [item.strip() for item in article_pattern.split(soft_neg_incidents) if item != ""]
 
-				for bad_incident in bad_incidents:
+				hard_neg_incidents0 = chatgpt.ask(hard_neg_question0)
+				hard_neg_incidents0 = [item.strip() for item in article_pattern.split(hard_neg_incidents0) if item != ""]
+
+				print(f"Soft positive: {len(soft_pos_incidents)}")
+				print(f"Soft negative: {len(soft_neg_incidents)}")
+				print(f"Hard negative 0: {len(hard_neg_incidents0)}")
+
+				# Soft pos - 0
+				# Hard pos - 1
+				# Soft neg - 2
+				# Hard neg - 3
+
+				for soft_pos_inc in soft_pos_incidents:
 					cur.execute("SELECT ifnull(max(id)+1, 0) FROM incidents")
-					bad_incident_id, = cur.fetchone()
-					cur.execute("INSERT INTO incidents VALUES(?,?,?)", (bad_incident_id, bad_incident, company_id))
-					cur.execute("INSERT INTO classifications VALUES(?,?,?,?)", (root_incident_id, bad_incident_id, company_id, 0))
+					soft_pos_inc_id, = cur.fetchone()
+					cur.execute("INSERT INTO incidents VALUES(?,?,?)", (soft_pos_inc_id, soft_pos_inc, company_id))
+					cur.execute("INSERT INTO classifications VALUES(?,?,?,?)", (root_incident_id, soft_pos_inc_id, company_id, 0))
+
+				for soft_neg_inc in soft_neg_incidents:
+					cur.execute("SELECT ifnull(max(id)+1, 0) FROM incidents")
+					soft_neg_inc_id, = cur.fetchone()
+					cur.execute("INSERT INTO incidents VALUES(?,?,?)", (soft_neg_inc_id, soft_neg_inc, company_id))
+					cur.execute("INSERT INTO classifications VALUES(?,?,?,?)", (root_incident_id, soft_neg_inc_id, company_id, 2))
+
+				for hard_neg_inc in hard_neg_incidents0:
+					cur.execute("SELECT ifnull(max(id)+1, 0) FROM incidents")
+					hard_neg_inc_id, = cur.fetchone()
+					cur.execute("INSERT INTO incidents VALUES(?,?,?)", (hard_neg_inc_id, hard_neg_inc, company_id))
+					cur.execute("INSERT INTO classifications VALUES(?,?,?,?)", (root_incident_id, hard_neg_inc_id, company_id, 3))
 				con.commit()
 			print("------------------------")
 
