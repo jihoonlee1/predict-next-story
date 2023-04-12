@@ -18,10 +18,10 @@ def predict(text1, text2):
 
 
 def main():
-	text1 = "Ukraine invades Korea."
-	text2 = "Russia wins."
+	text1 = "Russia invades Ukraine"
+	text2 = "Ukraine wins."
 	no, yes = predict(text1, text2)
-	print(no, yesl)
+	print(f"no: {no}, yes: {yes}")
 
 
 

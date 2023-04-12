@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 
 
 
-with open("okay.txt") as f:
+with open("loss.txt") as f:
 	lines = f.readlines()
 	x = []
 	y = []
@@ -10,6 +10,6 @@ with open("okay.txt") as f:
 		line = float(line.replace("loss: ", ""))
 		x.append(idx)
 		y.append(line)
-	plt.ylim(0, 1)
+	plt.ylim(0, 3)
 	plt.plot(x, y)
 	plt.show()

@@ -62,18 +62,15 @@ def negative_data(cur, sentence0, sentence1, labels, root_incident_ids):
 		JOIN incidents ON incidents.id = incidents_irrelevant.child_incident_id
 		WHERE incidents_irrelevant.root_incident_id = ?""", (root_incident_id, ))
 		irrelevant_incidents = cur.fetchall()
-		for child, in irrelevant_incidents:
-			sentence0.append(root_content)
-			sentence1.append(child)
-			labels.append(0)
-		cur.execute("""
-		SELECT incidents.content
-		FROM root_incidents
-		JOIN incidents ON incidents.id = root_incidents.id
-		WHERE root_incidents.company_id = ? AND root_incidents.id != ?
-		""", (company_id, root_incident_id))
-		for child, in cur.fetchall():
-			sentence0.append(root_content)
+		first_irrelevant, = irrelevant_incidents[0]
+		sentence0.append(root_content)
+		sentence1.append(first_irrelevant)
+		labels.append(0)
+		num_irrelevant_incidents = len(irrelevant_incidents)
+		for i in range(num_irrelevant_incidents-1):
+			target, = irrelevant_incidents[i]
+			child, = irrelevant_incidents[i+1]
+			sentence0.append(target)
 			sentence1.append(child)
 			labels.append(0)
 	return (sentence0, sentence1, labels)
