@@ -4,12 +4,22 @@ import time
 import re
 
 
-def main():
+def answers(question):
 	article_pattern = re.compile(r"Article *[0-9]*:", re.IGNORECASE)
+	while True:
+		try:
+			response = chatgpt.ask(question)
+			answers = [item.strip() for item in article_pattern.split(response0) if item != ""]
+			return answers
+		except:
+			time.sleep(10)
+			continue
 
+
+def main():
 	with database.connect() as con:
 		cur = con.cursor()
-		cur.execute("SELECT id, name FROM companies WHERE id > 11")
+		cur.execute("SELECT id, name FROM companies WHERE id in (24,25,26,27,28,29,30,34,35,36,37,38,39,40,60)")
 		for company_id, company_name in cur.fetchall():
 			initial_question = f'''
 			Write 10 news articles about {company_name}	on different topic.
@@ -17,8 +27,7 @@ def main():
 			Make sure each article is more than 100 words.
 			Separate each article with "Article: ".
 			'''
-			response0 = chatgpt.ask(initial_question)
-			root_incidents = [item.strip() for item in article_pattern.split(response0) if item != ""]
+			root_incidents = answers(initial_question)
 			print(company_name, len(root_incidents))
 
 			for counter, root_incident in enumerate(root_incidents):
@@ -40,20 +49,16 @@ def main():
 				Make sure each article is more than 100 words.
 				Separate each article with "Article: ".
 				'''
-				hard_neg_question0= f'''
+				hard_neg_question0 = f'''
 				Write 20 news articles that are similar to "{root_incident}".
 				Make sure each article is not about {company_name}.
 				Make sure each article is more than 100 words.
 				Separate each article with "Article: ".
 				'''
-				soft_pos_incidents = chatgpt.ask(soft_pos_question)
-				soft_pos_incidents = [item.strip() for item in article_pattern.split(soft_pos_incidents) if item != ""]
 
-				soft_neg_incidents = chatgpt.ask(soft_neg_question)
-				soft_neg_incidents = [item.strip() for item in article_pattern.split(soft_neg_incidents) if item != ""]
-
-				hard_neg_incidents0 = chatgpt.ask(hard_neg_question0)
-				hard_neg_incidents0 = [item.strip() for item in article_pattern.split(hard_neg_incidents0) if item != ""]
+				soft_pos_incidents = answers(soft_pos_question)
+				soft_neg_incidents = answers(soft_neg_question)
+				hard_neg_incidents0 = answers(hard_neg_question0)
 
 				print(f"Soft positive: {len(soft_pos_incidents)}")
 				print(f"Soft negative: {len(soft_neg_incidents)}")
