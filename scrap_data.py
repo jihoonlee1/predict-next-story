@@ -9,7 +9,7 @@ def main():
 
 	with database.connect() as con:
 		cur = con.cursor()
-		cur.execute("SELECT id, name FROM companies")
+		cur.execute("SELECT id, name FROM companies WHERE id > 11")
 		for company_id, company_name in cur.fetchall():
 			initial_question = f'''
 			Write 10 news articles about {company_name}	on different topic.
