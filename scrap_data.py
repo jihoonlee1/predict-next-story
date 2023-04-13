@@ -19,7 +19,7 @@ def answers(question):
 def main():
 	with database.connect() as con:
 		cur = con.cursor()
-		cur.execute("SELECT id, name FROM companies WHERE id > 11")
+		cur.execute("SELECT id, name FROM companies WHERE id in (24,25,26,27,28,29,30,34,35,36,37,38,39,40,60)")
 		for company_id, company_name in cur.fetchall():
 			initial_question = f'''
 			Write 10 news articles about {company_name}	on different topic.

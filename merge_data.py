@@ -4,7 +4,7 @@ import database
 def main():
 	with database.connect("classification.sqlite") as con0:
 		cur0 = con0.cursor()
-		with database.connect("temp.sqlite") as con1:
+		with database.connect("temp3.sqlite") as con1:
 			cur1 = con1.cursor()
 			cur1.execute("SELECT id, content, company_id FROM incidents")
 			incidents = cur1.fetchall()
