@@ -1,4 +1,5 @@
 import contextlib
+import json
 import sqlite3
 
 
@@ -46,11 +47,35 @@ def connect(database=dbname, mode="rw"):
 	return contextlib.closing(sqlite3.connect(f"file:{database}?mode={mode}", uri=True))
 
 
+def add_companies(cur):
+	with open("forbes.txt") as f:
+		data = json.load(f)["tabledata"]
+		for company in data:
+			cur.execute("SELECT ifnull(max(id)+1, 0) FROM companies")
+			company_id, = cur.fetchone()
+			company_name = company["organizationName"]
+			try:
+				description = company["description"]
+			except:
+				description = None
+			industry = company["industry"]
+			country = company["country"]
+			revenue = company["revenue"]
+			profits = company["profits"]
+			assets = company["assets"]
+			market_value = company["marketValue"]
+			cur.execute("BEGIN TRANSACTION")
+			cur.execute("INSERT INTO companies VALUES(?,?,?,?,?,?,?,?,?)",
+				(company_id, company_name, description, industry, country, revenue, profits, assets, market_value))
+			cur.execute("COMMIT TRANSACTION")
+
+
 def main():
 	with connect(mode="rwc") as con:
 		cur = con.cursor()
 		for st in statements:
 			cur.execute(st)
+		add_companies(cur)
 
 
 if __name__ == "__main__":
