@@ -12,11 +12,11 @@ def answers(question):
 			answers = [item.strip() for item in article_pattern.split(response0) if item != ""]
 			return answers
 		except:
+			time.sleep(10)
 			continue
 
 
 def main():
-
 	with database.connect() as con:
 		cur = con.cursor()
 		cur.execute("SELECT id, name FROM companies WHERE id > 11")
