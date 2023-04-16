@@ -16,7 +16,7 @@ class IncidentDataset(torch.utils.data.Dataset):
 
 
 def get_all_root_incidents(cur):
-	cur.execute("SELECT id FROM root_incidents LIMIT 10")
+	cur.execute("SELECT id FROM root_incidents")
 	rows = cur.fetchall()
 	root_incident_ids = []
 	for root_id, in rows:
