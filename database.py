@@ -3,7 +3,7 @@ import json
 import sqlite3
 
 
-dbname = "classification2.sqlite"
+dbname = "classification3.sqlite"
 statements = [
 """
 CREATE TABLE companies(
@@ -71,7 +71,7 @@ def add_companies(cur):
 
 
 def main():
-	for i in range(200):
+	for i in range(100):
 		with connect(database=f"temp{i}.sqlite", mode="rwc") as con:
 			cur = con.cursor()
 			for st in statements:

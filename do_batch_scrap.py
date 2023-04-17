@@ -5,12 +5,12 @@ import threading
 def main():
 	threads = []
 	leftend = 0
-	rightend = 10
+	rightend = 5
 
-	for i in range(200):
+	for i in range(100):
 		t = threading.Thread(target=scrap, args=(f"temp{i}.sqlite", leftend, rightend))
 		leftend = rightend + 1
-		rightend = rightend + 10
+		rightend = rightend + 5
 		threads.append(t)
 		t.start()
 

@@ -24,7 +24,7 @@ def scrap(dbname, leftend, rightend):
 		cur.execute("SELECT id, name FROM companies WHERE id >= ? AND id <= ?", (leftend, rightend))
 		for company_id, company_name in cur.fetchall():
 			initial_question = f'''
-			Write 5 controversial articles about {company_name} on different topic.
+			Write 5 news articles about {company_name} on different topic.
 			Make sure each article is about {company_name}.
 			Make sure each article is more than 50 words.
 			Separate each article with "Article: ".
@@ -40,31 +40,32 @@ def scrap(dbname, leftend, rightend):
 				cur.execute("INSERT INTO root_incidents VALUES(?,?)", (root_incident_id, company_id))
 
 				soft_pos_question = f'''
-				Write 10 related articles that are follow "{root_incident}".
+				Write 5 news articles that are follow-ups to "{root_incident}".
+				Make sure the keywords from the parent article are in each of the follow-up article.
 				Make sure each article is about {company_name}.
 				Make sure each article is more than 50 words.
 				Separate each article with "Article: ".
 				'''
-				# soft_neg_question = f'''
-				# Write 5 articles that are irrelevant to "{root_incident}".
-				# Make sure each article is about {company_name}.
-				# Make sure each article is more than 50 words.
-				# Separate each article with "Article: ".
-				# '''
-				# hard_neg_question = f'''
-				# Write 5 articles that are similar to "{root_incident}".
-				# Make sure each article is not about {company_name}.
-				# Make sure each article is more than 50 words.
-				# Separate each article with "Article: ".
-				# '''
+				soft_neg_question = f'''
+				Write 5 news articles that are not follow-ups to "{root_incident}".
+				Make sure each article is about {company_name}.
+				Make sure each article is more than 50 words.
+				Separate each article with "Article: ".
+				'''
+				hard_neg_question = f'''
+				Write 5 articles that are similar to "{root_incident}".
+				Make sure each article is not about {company_name}.
+				Make sure each article is more than 50 words.
+				Separate each article with "Article: ".
+				'''
 
 				soft_pos_incidents = answers(soft_pos_question)
-				# soft_neg_incidents = answers(soft_neg_question)
-				# hard_neg_incidents = answers(hard_neg_question)
+				soft_neg_incidents = answers(soft_neg_question)
+				hard_neg_incidents = answers(hard_neg_question)
 
-				# print(f"Soft positive: {len(soft_pos_incidents)}")
-				# print(f"Soft negative: {len(soft_neg_incidents)}")
-				# print(f"Hard negative: {len(hard_neg_incidents)}")
+				print(f"Soft positive: {len(soft_pos_incidents)}")
+				print(f"Soft negative: {len(soft_neg_incidents)}")
+				print(f"Hard negative: {len(hard_neg_incidents)}")
 				# Soft pos - 0
 				# Hard pos - 1
 				# Soft neg - 2
@@ -77,17 +78,17 @@ def scrap(dbname, leftend, rightend):
 					cur.execute("INSERT INTO incidents VALUES(?,?,?)", (soft_pos_inc_id, soft_pos_inc, company_id))
 					cur.execute("INSERT INTO classifications VALUES(?,?,?,?)", (root_incident_id, soft_pos_inc_id, company_id, 0))
 
-				# for soft_neg_inc in soft_neg_incidents:
-				# 	cur.execute("SELECT ifnull(max(id)+1, 0) FROM incidents")
-				# 	soft_neg_inc_id, = cur.fetchone()
-				# 	cur.execute("INSERT INTO incidents VALUES(?,?,?)", (soft_neg_inc_id, soft_neg_inc, company_id))
-				# 	cur.execute("INSERT INTO classifications VALUES(?,?,?,?)", (root_incident_id, soft_neg_inc_id, company_id, 2))
+				for soft_neg_inc in soft_neg_incidents:
+					cur.execute("SELECT ifnull(max(id)+1, 0) FROM incidents")
+					soft_neg_inc_id, = cur.fetchone()
+					cur.execute("INSERT INTO incidents VALUES(?,?,?)", (soft_neg_inc_id, soft_neg_inc, company_id))
+					cur.execute("INSERT INTO classifications VALUES(?,?,?,?)", (root_incident_id, soft_neg_inc_id, company_id, 2))
 
-				# for hard_neg_inc in hard_neg_incidents:
-				# 	cur.execute("SELECT ifnull(max(id)+1, 0) FROM incidents")
-				# 	hard_neg_inc_id, = cur.fetchone()
-				# 	cur.execute("INSERT INTO incidents VALUES(?,?,?)", (hard_neg_inc_id, hard_neg_inc, company_id))
-				# 	cur.execute("INSERT INTO classifications VALUES(?,?,?,?)", (root_incident_id, hard_neg_inc_id, company_id, 3))
+				for hard_neg_inc in hard_neg_incidents:
+					cur.execute("SELECT ifnull(max(id)+1, 0) FROM incidents")
+					hard_neg_inc_id, = cur.fetchone()
+					cur.execute("INSERT INTO incidents VALUES(?,?,?)", (hard_neg_inc_id, hard_neg_inc, company_id))
+					cur.execute("INSERT INTO classifications VALUES(?,?,?,?)", (root_incident_id, hard_neg_inc_id, company_id, 3))
 
 				con.commit()
 			print("------------------------")
