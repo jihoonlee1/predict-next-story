@@ -11,13 +11,13 @@ def predict(sent0, sent1, model, tokenizer, labels, device):
 
 def main():
 	device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
-	ckp = torch.load("model-epoch-1.pth")
+	ckp = torch.load("model0-epoch1.pth")
 	tokenizer = transformers.AutoTokenizer.from_pretrained("bert-base-uncased")
 	labels = torch.LongTensor([0]).to(device)
 	model = transformers.BertForNextSentencePrediction.from_pretrained("bert-base-uncased").to(device)
 	model.load_state_dict(ckp["model_state_dict"])
 	sent0 = "Russia invades Ukraine."
-	sent1 = "Ukraine wins war against Russia."
+	sent1 = "Korea wins war against China."
 	yes, no = predict(sent0, sent1, model, tokenizer, labels, device)
 	print(yes, no)
 
