@@ -1,0 +1,7 @@
+model0-epoch-1.pth, Avg loss: 0.1692683607654424, Accuracy: 0.9300764997986848
+model0-epoch-2.pth, Avg loss: 0.18615548870120333, Accuracy: 0.9288686082405047
+model0-epoch-3.pth, Avg loss: 0.636638799695257, Accuracy: 0.6664877197691585
+model0-epoch-4.pth, Avg loss: 0.6433453779193706, Accuracy: 0.6664877197691585
+model0-epoch-5.pth, Avg loss: 0.6368738770708882, Accuracy: 0.6664877197691585
+model0-epoch-6.pth, Avg loss: 0.636998536474143, Accuracy: 0.6664877197691585
+model0-epoch-7.pth, Avg loss: 0.6366230723874516, Accuracy: 0.6664877197691585
