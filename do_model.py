@@ -39,6 +39,7 @@ def prepare_data(cur, root_ids):
 		cur.execute("SELECT alias FROM company_alias WHERE company_id = ?", (company_id, ))
 		for company_alias, in cur.fetchall():
 			alias.append(company_alias)
+		alias.sort(key=len, reverse=True)
 		alias_pattern = "|".join(alias)
 		cur.execute("SELECT id, name FROM companies WHERE id != ?", (company_id, ))
 		other_companies = cur.fetchall()
