@@ -35,6 +35,11 @@ def prepare_data(cur, root_ids):
 		company_id, = cur.fetchone()
 		cur.execute("SELECT name FROM companies WHERE id = ?", (company_id, ))
 		company_name, = cur.fetchone()
+		alias = [company_name]
+		cur.execute("SELECT alias FROM company_alias WHERE company_id = ?", (company_id, ))
+		for company_alias, in cur.fetchall():
+			alias.append(company_alias)
+		alias_pattern = "|".join(alias)
 		cur.execute("SELECT id, name FROM companies WHERE id != ?", (company_id, ))
 		other_companies = cur.fetchall()
 		num_other_companies = len(other_companies)
@@ -56,7 +61,7 @@ def prepare_data(cur, root_ids):
 		for child_id, in follow_up_ids:
 			cur.execute("SELECT content FROM events WHERE id = ?", (child_id, ))
 			content, = cur.fetchone()
-			diff_comp_content = content.replace(company_name, other_company_name)
+			diff_comp_content = re.sub(rf"({alias_pattern})", other_company_name, content, flags=re.IGNORECASE)
 			sent0.append(root_content)
 			sent0.append(root_content)
 			sent1.append(content)
