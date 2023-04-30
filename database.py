@@ -18,6 +18,13 @@ CREATE TABLE IF NOT EXISTS companies(
 );
 """,
 """
+CREATE TABLE IF NOT EXISTS company_alias(
+	company_id INTEGER NOT NULL REFERENCES companies(id),
+	alias      TEXT    NOT NULL,
+	PRIMARY KEY(company_id, alias)
+)
+""",
+"""
 CREATE TABLE IF NOT EXISTS events(
 	id         INTEGER NOT NULL PRIMARY KEY,
 	company_id INTEGER NOT NULL REFERENCES companies(id),
@@ -34,8 +41,8 @@ CREATE TABLE IF NOT EXISTS root_events(
 CREATE TABLE IF NOT EXISTS root_event_children(
 	root_event_id   INTEGER NOT NULL REFERENCES root_events(id),
 	child_event_id  INTEGER NOT NULL REFERENCES events(id),
-	company_id         INTEGER NOT NULL REFERENCES companies(id),
-	is_follow_up       INTEGER NOT NULL,
+	company_id      INTEGER NOT NULL REFERENCES companies(id),
+	is_follow_up    INTEGER NOT NULL,
 	PRIMARY KEY(root_event_id, child_event_id)
 );
 """
@@ -68,12 +75,24 @@ def _add_companies(con, cur):
 		con.commit()
 
 
+def _add_alias(con, cur):
+	with open("company_alias.json", "r") as f:
+		companies = json.load(f)
+		for company in companies:
+			company_id = company["company_id"]
+			alias = company["alias"]
+			for item in alias:
+				cur.execute("INSERT INTO OR IGNORE INTO company_alias VALUES(?,?)", (company_id, item))
+		con.commit()
+
+
 def main():
 	with connect(mode="rwc") as con:
 		cur = con.cursor()
 		for st in statements:
 			cur.execute(st)
 		_add_companies(con, cur)
+		_add_alias(con, cur)
 
 
 if __name__ == "__main__":
