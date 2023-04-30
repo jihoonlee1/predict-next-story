@@ -62,6 +62,9 @@ def prepare_data(cur, root_ids):
 		for child_id, in follow_up_ids:
 			cur.execute("SELECT content FROM events WHERE id = ?", (child_id, ))
 			content, = cur.fetchone()
+			found = re.findall(rf"({alias_pattern})", content)
+			if not found:
+				continue
 			diff_comp_content = re.sub(rf"({alias_pattern})", other_company_name, content, flags=re.IGNORECASE)
 			sent0.append(root_content)
 			sent0.append(root_content)
