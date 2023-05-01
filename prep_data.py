@@ -205,56 +205,65 @@ def _prep_negative3(con, cur):
 			entity_name = entities[0].text
 			entity_label = entities[0].label_
 			if entity_label == "PERSON":
-				replacements.append([entity_name, PERSON[randint_person]])
+				replacements.append([entity_name, PERSON[randint_person], "PERSON"])
 			elif entity_label == "NORP":
-				replacements.append([entity_name, NORP[randint_norp]])
+				replacements.append([entity_name, NORP[randint_norp], "NORP"])
 			elif entity_label == "FAC":
-				replacements.append([entity_name, FAC[randint_fac]])
+				replacements.append([entity_name, FAC[randint_fac], "FAC"])
 			elif entity_label == "ORG":
-				replacements.append([entity_name, ORG[randint_org]])
+				replacements.append([entity_name, ORG[randint_org], "ORG"])
 			elif entity_label == "GPE":
-				replacements.append([entity_name, GPE[randint_gpe]])
+				replacements.append([entity_name, GPE[randint_gpe], "GPE"])
 			elif entity_label == "LOC":
-				replacements.append([entity_name, LOC[randint_loc]])
+				replacements.append([entity_name, LOC[randint_loc], "LOC"])
 			elif entity_label == "PRODUCT":
-				replacements.append([entity_name, PRODUCT[randint_product]])
+				replacements.append([entity_name, PRODUCT[randint_product], "PRODUCT"])
 			elif entity_label == "EVENT":
-				replacements.append([entity_name, EVENT[randint_event]])
+				replacements.append([entity_name, EVENT[randint_event], "EVENT"])
 			elif entity_label == "WORK_OF_ART":
-				replacements.append([entity_name, WORK_OF_ART[randint_work_of_art]])
+				replacements.append([entity_name, WORK_OF_ART[randint_work_of_art], "WORK_OF_ART"])
 			elif entity_label == "LAW":
-				replacements.append([entity_name, LAW[randint_law]])
+				replacements.append([entity_name, LAW[randint_law], "LAW"])
 			elif entity_label == "LANGUAGE":
-				replacements.append([entity_name, LANGUAGE[randint_language]])
+				replacements.append([entity_name, LANGUAGE[randint_language], "LANGUAGE"])
 			elif entity_label == "DATE":
-				replacements.append([entity_name, DATE[randint_date]])
+				replacements.append([entity_name, DATE[randint_date], "DATE"])
 			elif entity_label == "TIME":
-				replacements.append([entity_name, TIME[randint_time]])
+				replacements.append([entity_name, TIME[randint_time], "TIME"])
 			elif entity_label == "PERCENT":
-				replacements.append([entity_name, PERCENT[randint_percent]])
+				replacements.append([entity_name, PERCENT[randint_percent], "PERCENT"])
 			elif entity_label == "MONEY":
-				replacements.append([entity_name, MONEY[randint_money]])
+				replacements.append([entity_name, MONEY[randint_money], "MONEY"])
 			elif entity_label == "QUANTITY":
-				replacements.append([entity_name, QUANTITY[randint_quantity]])
+				replacements.append([entity_name, QUANTITY[randint_quantity], "QUANTITY"])
 			elif entity_label == "ORDINAL":
-				replacements.append([entity_name, ORDINAL[randint_ordinal]])
+				replacements.append([entity_name, ORDINAL[randint_ordinal], "ORDINAL"])
 			elif entity_label == "CARDINAL":
-				replacements.append([entity_name, CARDINAL[randint_cardinal]])
+				replacements.append([entity_name, CARDINAL[randint_cardinal], "CARDINAL"])
 		len_replacements = len(replacements)
 		for i in range(len_replacements):
 			is_isolated = True
 			for j in range(i+1, len_replacements):
 				if replacements[i][0] in replacements[j][0]:
 					replacements[i][1] = replacements[j][1]
+					replacements[i][2] = replacements[j][2]
+		replacements = sorted(replacements, key=lambda x: len(x[0]), reverse=True)
 		for child_event_id, in child_event_ids:
+			can_insert = False
 			cur.execute("SELECT content FROM events WHERE id = ?", (child_event_id, ))
 			child_content, = cur.fetchone()
-			for target, replacement in replacements:
-				child_content = child_content.replace(target, replacement)
-			cur.execute("SELECT ifnull(max(id)+1, 0) FROM events_negative3")
-			new_event_id, = cur.fetchone()
-			cur.execute("INSERT INTO events_negative3 VALUES(?,?,?)", (new_event_id, company_id, child_content))
-			cur.execute("INSERT INTO root_event_negative3 VALUES(?,?,?)", (root_event_id, new_event_id, company_id))
+			for target, replacement, target_label in replacements:
+				if target in child_content and target_label in ["PERSON", "ORG", "PRODUCT", "EVENT", "FAC", "GPE", "LANGUAGE", "LAW", "LOC"]:
+					can_insert = True
+			if can_insert:
+				new_child_content = child_content
+				for target, replacement, _ in replacements:
+					new_child_content = new_child_content.replace(target, replacement)
+				assert new_child_content != child_content
+				cur.execute("SELECT ifnull(max(id)+1, 0) FROM events_negative3")
+				new_event_id, = cur.fetchone()
+				cur.execute("INSERT INTO events_negative3 VALUES(?,?,?)", (new_event_id, company_id, new_child_content))
+				cur.execute("INSERT INTO root_event_negative3 VALUES(?,?,?)", (root_event_id, new_event_id, company_id))
 		con.commit()
 
 
