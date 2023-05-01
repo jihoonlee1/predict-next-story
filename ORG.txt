@@ -1,0 +1,100 @@
+United Nations (UN)
+World Health Organization (WHO)
+International Monetary Fund (IMF)
+World Bank Group
+International Criminal Court (ICC)
+International Atomic Energy Agency (IAEA)
+Food and Agriculture Organization of the United Nations (FAO)
+United Nations Educational, Scientific and Cultural Organization (UNESCO)
+United Nations Development Programme (UNDP)
+World Trade Organization (WTO)
+International Labour Organization (ILO)
+United Nations Children's Fund (UNICEF)
+United Nations High Commissioner for Refugees (UNHCR)
+International Red Cross and Red Crescent Movement
+Amnesty International
+Doctors Without Borders/Médecins Sans Frontières (MSF)
+The Salvation Army
+YMCA
+European Union (EU)
+North Atlantic Treaty Organization (NATO)
+Organization for Economic Cooperation and Development (OECD)
+International Energy Agency (IEA)
+United States Agency for International Development (USAID)
+Centers for Disease Control and Prevention (CDC)
+National Institutes of Health (NIH)
+National Aeronautics and Space Administration (NASA)
+Federal Aviation Administration (FAA)
+Environmental Protection Agency (EPA)
+Federal Emergency Management Agency (FEMA)
+Central Intelligence Agency (CIA)
+National Security Agency (NSA)
+Federal Bureau of Investigation (FBI)
+Drug Enforcement Administration (DEA)
+Department of Defense (DOD)
+Department of Homeland Security (DHS)
+United States Department of State
+Federal Reserve System (the Fed)
+Securities and Exchange Commission (SEC)
+Internal Revenue Service (IRS)
+Consumer Financial Protection Bureau (CFPB)
+National Oceanic and Atmospheric Administration (NOAA)
+United States Geological Survey (USGS)
+United States Department of Agriculture (USDA)
+United States Forest Service (USFS)
+National Park Service (NPS)
+Environmental Defense Fund (EDF)
+Sierra Club
+World Wildlife Fund (WWF)
+Greenpeace International
+The Nature Conservancy
+The Jane Goodall Institute
+The Ocean Conservancy
+The Wildlife Conservation Society
+The Natural Resources Defense Council
+The Smithsonian Institution
+The Getty Foundation
+The Guggenheim Museum
+The Metropolitan Museum of Art
+The American Museum of Natural History
+The National Museum of African American History and Culture
+The National Museum of the American Indian
+The National Museum of Natural History
+The National Portrait Gallery
+The Smithsonian American Art Museum
+The Smithsonian Environmental Research Center
+The Smithsonian Tropical Research Institute
+The Getty Research Institute
+The New York Public Library
+The Library of Congress
+The British Library
+The Bibliothèque Nationale de France
+The National Archives and Records Administration
+The Vatican Library
+The Wellcome Trust
+The Bill and Melinda Gates Foundation
+The Ford Foundation
+The Rockefeller Foundation
+The Andrew W. Mellon Foundation
+The MacArthur Foundation
+The Pew Charitable Trusts
+The Open Society Foundations
+The Clinton Foundation
+The Carter Center
+The United Nations Foundation
+The World Wildlife Fund (WWF)
+The Nature Conservancy
+The Jane Goodall Institute
+The Rainforest Alliance
+The World Resources Institute
+The Brookings Institution
+The RAND Corporation
+The Heritage Foundation
+The American Enterprise Institute
+The Cato Institute
+The Aspen Institute
+The Council on Foreign Relations
+The Trilateral Commission
+The International Crisis Group
+The World Economic Forum
+The United Nations Conference on Trade and Development (UNCTAD)

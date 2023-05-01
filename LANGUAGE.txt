@@ -1,0 +1,100 @@
+English
+Spanish
+French
+Mandarin Chinese
+Arabic
+Hindi
+Bengali
+Portuguese
+Russian
+Japanese
+German
+Javanese
+Wu Chinese
+Telugu
+Vietnamese
+Marathi
+Korean
+Tamil
+Urdu
+Turkish
+Italian
+Yue Chinese
+Thai
+Gujarati
+Jin Chinese
+Persian
+Polish
+Pashto
+Kannada
+Xiang Chinese
+Malayalam
+Sundanese
+Hausa
+Odia
+Burmese
+Hakka Chinese
+Ukrainian
+Bhojpuri
+Tagalog
+Yoruba
+Maithili
+Uzbek
+Sindhi
+Amharic
+Fula
+Romanian
+Oromo
+Igbo
+Azerbaijani
+Awadhi
+Gan Chinese
+Cebuano
+Dutch
+Kurdish
+Serbo-Croatian
+Malagasy
+Saraiki
+Nepali
+Sinhalese
+Chittagonian
+Zhuang
+Khmer
+Turkmen
+Assamese
+Madurese
+Somali
+Magahi
+Haryanvi
+Hungarian
+Chhattisgarhi
+Greek
+Chewa
+Deccan
+Akan
+Kazakh
+Northern Min
+Sylheti
+Zulu
+Czech
+Kinyarwanda
+Dhundhari
+Haitian Creole
+Eastern Min
+Ilocano
+Quechua
+Kirundi
+Swedish
+Hmong
+Shona
+Uyghur
+Hiligaynon
+Mossi
+Xhosa
+Belarusian
+Balochi
+Konkani
+Latvian
+Tigrinya
+Greek Cypriot
+Northern Sotho

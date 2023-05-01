@@ -1,0 +1,100 @@
+Sahara Desert
+Amazon Rainforest
+Himalayas
+Andes
+Rocky Mountains
+Alps
+Great Barrier Reef
+Grand Canyon
+Yellowstone National Park
+Mount Everest
+Mount Kilimanjaro
+Mount Fuji
+Mount Olympus
+Lake Baikal
+Lake Victoria
+Lake Superior
+Great Lakes
+Caribbean Sea
+Pacific Ocean
+Indian Ocean
+Atlantic Ocean
+Mediterranean Sea
+Red Sea
+Black Sea
+Gulf of Mexico
+Persian Gulf
+Caspian Sea
+Dead Sea
+Aral Sea
+Danube River
+Nile River
+Amazon River
+Yangtze River
+Mekong River
+Ganges River
+Indus River
+Mississippi River
+Colorado River
+Rio Grande
+Volga River
+Rhine River
+Seine River
+Thames River
+Amazon Basin
+Atacama Desert
+Mojave Desert
+Sahara Desert
+Kalahari Desert
+Arabian Desert
+Australian Outback
+Siberian Taiga
+Great Plains
+Rocky Mountains
+Appalachian Mountains
+Ural Mountains
+Alps
+Pyrenees
+Himalayan Range
+Atlas Mountains
+Drakensberg Range
+Great Dividing Range
+Lake Titicaca
+Lake Tahoe
+Lake Tanganyika
+Lake Malawi
+Lake Chad
+Bay of Bengal
+Gulf of Guinea
+Gulf of Aden
+Bering Sea
+Sea of Okhotsk
+Tasman Sea
+Java Sea
+Bay of Fundy
+Hudson Bay
+English Channel
+Baltic Sea
+Gulf of Finland
+Persian Gulf
+Hudson River
+Colorado River
+Mississippi River
+Congo River
+Danube River
+Thames River
+Yangtze River
+Euphrates River
+Tigris River
+Colorado Plateau
+Ozark Plateau
+Great Basin
+Northern Great Plains
+Southern Great Plains
+Black Hills
+Rocky Mountain Foothills
+Appalachian Plateau
+Piedmont Plateau
+Tibetan Plateau
+Arabian Peninsula
+Korean Peninsula
