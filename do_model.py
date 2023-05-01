@@ -71,7 +71,7 @@ def prepare_data(cur, root_ids):
 			child_content, = cur.fetchone()
 			sent0.append(root_content)
 			sent1.append(child_content)
-			labels.append([0. 1])
+			labels.append([0, 1])
 
 	return sent0, sent1, labels
 
@@ -153,7 +153,7 @@ def main():
 		train_ids, test_ids = train_test_root_ids(cur)
 		sent0_train, sent1_train, labels_train = prepare_data(cur, train_ids)
 		sent0_test, sent1_test, labels_test = prepare_data(cur, test_ids)
-		
+		print(len(sent0_train))
 		encodings_train = tokenizer(sent0_train, sent1_train, return_tensors="pt", max_length=512, truncation=True, padding="max_length")
 		encodings_train["labels"] = torch.tensor(labels_train, dtype=torch.float64)
 		dataset_train = EventDataset(encodings_train)
