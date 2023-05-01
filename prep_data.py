@@ -7,6 +7,53 @@ import spacy
 nlp = spacy.load("en_core_web_lg")
 
 
+def _entity_labels(entity_label):
+	items = []
+	with open(f"{entity_label}.txt", "r") as f:
+		for line in f:
+			line = line.strip()
+			items.append(line)
+	return items
+
+
+PERSON = _entity_labels("PERSON")
+NORP = _entity_labels("NORP")
+FAC = _entity_labels("FAC")
+ORG = _entity_labels("ORG")
+GPE = _entity_labels("GPE")
+LOC = _entity_labels("LOC")
+PRODUCT = _entity_labels("PRODUCT")
+EVENT = _entity_labels("EVENT")
+WORK_OF_ART = _entity_labels("WORK_OF_ART")
+LAW = _entity_labels("LAW")
+LANGUAGE = _entity_labels("LANGUAGE")
+DATE = _entity_labels("DATE")
+TIME = _entity_labels("TIME")
+PERCENT = _entity_labels("PERCENT")
+MONEY = _entity_labels("MONEY")
+QUANTITY = _entity_labels("QUANTITY")
+ORDINAL = _entity_labels("ORDINAL")
+CARDINAL = _entity_labels("CARDINAL")
+LEN_PERSON = len(PERSON)
+LEN_NORP = len(NORP)
+LEN_FAC = len(FAC)
+LEN_ORG = len(ORG)
+LEN_GPE = len(GPE)
+LEN_LOC = len(LOC)
+LEN_PRODUCT = len(PRODUCT)
+LEN_EVENT = len(EVENT)
+LEN_WORK_OF_ART = len(WORK_OF_ART)
+LEN_LAW = len(LAW)
+LEN_LANGUAGE = len(LANGUAGE)
+LEN_DATE = len(DATE)
+LEN_TIME = len(TIME)
+LEN_PERCENT = len(PERCENT)
+LEN_MONEY = len(MONEY)
+LEN_QUANTITY = len(QUANTITY)
+LEN_ORDINAL = len(ORDINAL)
+LEN_CARDINAL = len(CARDINAL)
+
+
 def _delete_useless(con, cur):
 	cur.execute("SELECT id, content, length(content) FROM events ORDER BY length(content) LIMIT 100")
 	for event_id, content, length in cur.fetchall():
@@ -107,6 +154,7 @@ def _prep_negative2(con, cur):
 def _prep_negative3(con, cur):
 	cur.execute("SELECT DISTINCT root_event_id FROM root_event_positive0")
 	for root_event_id, in cur.fetchall():
+		print(root_event_id)
 		cur.execute("SELECT company_id FROM events WHERE id = ?", (root_event_id, ))
 		company_id, = cur.fetchone()
 		cur.execute("SELECT name FROM companies WHERE id = ?", (company_id, ))
@@ -118,26 +166,96 @@ def _prep_negative3(con, cur):
 		alias.sort(key=len, reverse=True)
 		alias_str = "|".join(alias)
 
+		replacements = []
+		temp = set()
 		cur.execute("SELECT child_event_id FROM root_event_positive0 WHERE root_event_id = ?", (root_event_id, ))
-		for child_event_id, in cur.fetchall():
+		child_event_ids = cur.fetchall()
+		for child_event_id, in child_event_ids:
 			cur.execute("SELECT content FROM events WHERE id = ?", (child_event_id, ))
 			child_content, = cur.fetchone()
 			child_doc = nlp(child_content)
-			replacements = set()
 			for entity in child_doc.ents:
 				entity_text = re.sub(rf"({alias_str})", "", entity.text).strip()
 				if entity_text != "":
-					replacements.add(entity_text)
-			replacements = sorted(replacements, key=len, reverse=True)
-			for item in replacements:
-				item_doc = nlp(item)
-				entities = item_doc.ents
-				entity_text = entities[0].text
-				entity_label = entities[0].label_
-				print(entity_text, entity_label)
-			print("----------")
-
-		break
+					temp.add(entity_text)
+		temp = sorted(temp, key=len)
+		for item in temp:
+			randint_person = random.randint(0, LEN_PERSON-1)
+			randint_norp = random.randint(0, LEN_NORP-1)
+			randint_fac = random.randint(0, LEN_FAC-1)
+			randint_org = random.randint(0, LEN_ORG-1)
+			randint_gpe = random.randint(0, LEN_GPE-1)
+			randint_loc = random.randint(0, LEN_LOC-1)
+			randint_product = random.randint(0, LEN_PRODUCT-1)
+			randint_event = random.randint(0, LEN_EVENT-1)
+			randint_work_of_art = random.randint(0, LEN_WORK_OF_ART-1)
+			randint_law = random.randint(0, LEN_LAW-1)
+			randint_language = random.randint(0, LEN_LANGUAGE-1)
+			randint_date = random.randint(0, LEN_DATE-1)
+			randint_time = random.randint(0, LEN_TIME-1)
+			randint_percent = random.randint(0, LEN_PERCENT-1)
+			randint_money = random.randint(0, LEN_MONEY-1)
+			randint_quantity = random.randint(0, LEN_QUANTITY-1)
+			randint_ordinal = random.randint(0, LEN_ORDINAL-1)
+			randint_cardinal = random.randint(0, LEN_CARDINAL-1)
+			ent_doc = nlp(item)
+			entities = ent_doc.ents
+			if not entities:
+				continue
+			entity_name = entities[0].text
+			entity_label = entities[0].label_
+			if entity_label == "PERSON":
+				replacements.append([entity_name, PERSON[randint_person]])
+			elif entity_label == "NORP":
+				replacements.append([entity_name, NORP[randint_norp]])
+			elif entity_label == "FAC":
+				replacements.append([entity_name, FAC[randint_fac]])
+			elif entity_label == "ORG":
+				replacements.append([entity_name, ORG[randint_org]])
+			elif entity_label == "GPE":
+				replacements.append([entity_name, GPE[randint_gpe]])
+			elif entity_label == "LOC":
+				replacements.append([entity_name, LOC[randint_loc]])
+			elif entity_label == "PRODUCT":
+				replacements.append([entity_name, PRODUCT[randint_product]])
+			elif entity_label == "EVENT":
+				replacements.append([entity_name, EVENT[randint_event]])
+			elif entity_label == "WORK_OF_ART":
+				replacements.append([entity_name, WORK_OF_ART[randint_work_of_art]])
+			elif entity_label == "LAW":
+				replacements.append([entity_name, LAW[randint_law]])
+			elif entity_label == "LANGUAGE":
+				replacements.append([entity_name, LANGUAGE[randint_language]])
+			elif entity_label == "DATE":
+				replacements.append([entity_name, DATE[randint_date]])
+			elif entity_label == "TIME":
+				replacements.append([entity_name, TIME[randint_time]])
+			elif entity_label == "PERCENT":
+				replacements.append([entity_name, PERCENT[randint_percent]])
+			elif entity_label == "MONEY":
+				replacements.append([entity_name, MONEY[randint_money]])
+			elif entity_label == "QUANTITY":
+				replacements.append([entity_name, QUANTITY[randint_quantity]])
+			elif entity_label == "ORDINAL":
+				replacements.append([entity_name, ORDINAL[randint_ordinal]])
+			elif entity_label == "CARDINAL":
+				replacements.append([entity_name, CARDINAL[randint_cardinal]])
+		len_replacements = len(replacements)
+		for i in range(len_replacements):
+			is_isolated = True
+			for j in range(i+1, len_replacements):
+				if replacements[i][0] in replacements[j][0]:
+					replacements[i][1] = replacements[j][1]
+		for child_event_id, in child_event_ids:
+			cur.execute("SELECT content FROM events WHERE id = ?", (child_event_id, ))
+			child_content, = cur.fetchone()
+			for target, replacement in replacements:
+				child_content = child_content.replace(target, replacement)
+			cur.execute("SELECT ifnull(max(id)+1, 0) FROM events_negative3")
+			new_event_id, = cur.fetchone()
+			cur.execute("INSERT INTO events_negative3 VALUES(?,?,?)", (new_event_id, company_id, child_content))
+			cur.execute("INSERT INTO root_event_negative3 VALUES(?,?,?)", (root_event_id, new_event_id, company_id))
+		con.commit()
 
 
 def main():

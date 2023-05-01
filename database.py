@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS events_negative1(
 )
 """,
 """
-CREATE TABLE IF NOT EXISTS events_negative2(
+CREATE TABLE IF NOT EXISTS events_negative3(
 	id         INTEGER NOT NULL PRIMARY KEY,
 	company_id INTEGER NOT NULL REFERENCES companies(id),
 	content    TEXT    NOT NULL
@@ -77,6 +77,14 @@ CREATE TABLE IF NOT EXISTS root_event_negative1(
 """,
 """
 CREATE TABLE IF NOT EXISTS root_event_negative2(
+	root_event_id  INTEGER NOT NULL REFERENCES root_events(id),
+	child_event_id INTEGER NOT NULL REFERENCES events(id),
+	company_id     INTEGER NOT NULL REFERENCES companies(id),
+	PRIMARY KEY(root_event_id, child_event_id)
+);
+""",
+"""
+CREATE TABLE IF NOT EXISTS root_event_negative3(
 	root_event_id  INTEGER NOT NULL REFERENCES root_events(id),
 	child_event_id INTEGER NOT NULL REFERENCES events(id),
 	company_id     INTEGER NOT NULL REFERENCES companies(id),
