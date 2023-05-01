@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS company_alias(
 	company_id INTEGER NOT NULL REFERENCES companies(id),
 	alias      TEXT    NOT NULL,
 	PRIMARY KEY(company_id, alias)
-)
+);
 """,
 """
 CREATE TABLE IF NOT EXISTS events(
@@ -32,17 +32,54 @@ CREATE TABLE IF NOT EXISTS events(
 );
 """,
 """
+CREATE TABLE IF NOT EXISTS events_negative1(
+	id         INTEGER NOT NULL PRIMARY KEY,
+	company_id INTEGER NOT NULL REFERENCES companies(id),
+	content    TEXT    NOT NULL
+)
+""",
+"""
+CREATE TABLE IF NOT EXISTS events_negative2(
+	id         INTEGER NOT NULL PRIMARY KEY,
+	company_id INTEGER NOT NULL REFERENCES companies(id),
+	content    TEXT    NOT NULL
+)
+""",
+"""
 CREATE TABLE IF NOT EXISTS root_events(
 	id         INTEGER NOT NULL PRIMARY KEY REFERENCES events(id),
 	company_id INTEGER NOT NULL             REFERENCES companies(id)
 );
 """,
 """
-CREATE TABLE IF NOT EXISTS root_event_children(
-	root_event_id   INTEGER NOT NULL REFERENCES root_events(id),
-	child_event_id  INTEGER NOT NULL REFERENCES events(id),
-	company_id      INTEGER NOT NULL REFERENCES companies(id),
-	is_follow_up    INTEGER NOT NULL,
+CREATE TABLE IF NOT EXISTS root_event_positive0(
+	root_event_id  INTEGER NOT NULL REFERENCES root_events(id),
+	child_event_id INTEGER NOT NULL REFERENCES events(id),
+	company_id     INTEGER NOT NULL REFERENCES companies(id),
+	PRIMARY KEY(root_event_id, child_event_id)
+);
+""",
+"""
+CREATE TABLE IF NOT EXISTS root_event_negative0(
+	root_event_id  INTEGER NOT NULL REFERENCES root_events(id),
+	child_event_id INTEGER NOT NULL REFERENCES events(id),
+	company_id     INTEGER NOT NULL REFERENCES companies(id),
+	PRIMARY KEY(root_event_id, child_event_id)
+);
+""",
+"""
+CREATE TABLE IF NOT EXISTS root_event_negative1(
+	root_event_id  INTEGER NOT NULL REFERENCES root_events(id),
+	child_event_id INTEGER NOT NULL REFERENCES events(id),
+	company_id     INTEGER NOT NULL REFERENCES companies(id),
+	PRIMARY KEY(root_event_id, child_event_id)
+);
+""",
+"""
+CREATE TABLE IF NOT EXISTS root_event_negative2(
+	root_event_id  INTEGER NOT NULL REFERENCES root_events(id),
+	child_event_id INTEGER NOT NULL REFERENCES events(id),
+	company_id     INTEGER NOT NULL REFERENCES companies(id),
 	PRIMARY KEY(root_event_id, child_event_id)
 );
 """
@@ -82,7 +119,7 @@ def _add_alias(con, cur):
 			company_id = company["company_id"]
 			alias = company["alias"]
 			for item in alias:
-				cur.execute("INSERT INTO OR IGNORE INTO company_alias VALUES(?,?)", (company_id, item))
+				cur.execute("INSERT OR IGNORE INTO company_alias VALUES(?,?)", (company_id, item))
 		con.commit()
 
 
@@ -91,8 +128,6 @@ def main():
 		cur = con.cursor()
 		for st in statements:
 			cur.execute(st)
-		_add_companies(con, cur)
-		_add_alias(con, cur)
 
 
 if __name__ == "__main__":

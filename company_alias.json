@@ -1,0 +1,418 @@
+[
+	{
+		"company_id": 2,
+		"alias": ["Saudi Aramco", "Saudi Arabian Oil Co\\."]
+	},
+	{
+		"company_id": 3,
+		"alias": ["J\\.P\\. Morgan"]
+	},
+	{
+		"company_id": 13,
+		"alias": ["Samsung", "Samsung Electronics", "Samsung SDI"]
+	},
+	{
+		"company_id": 21,
+		"alias": ["UnitedHealthcare", "UnitedHealthcare Community Plan of Indiana"]
+	},
+	{
+		"company_id": 27,
+		"alias": ["Tencent"]
+	},
+	{
+		"company_id": 29,
+		"alias": ["Postal Savings Bank of China \\(PSBC\\)", "PSBC", "Postal Savings Bank of China"]
+	},
+	{
+		"company_id": 30,
+		"alias": ["CMLink"]
+	},
+	{
+		"company_id": 36,
+		"alias": ["Goldman Sachs"]
+	},
+	{
+		"company_id": 43,
+		"alias": ["SoftBank", "SoftBank Group Corp"]
+	},
+	{
+		"company_id": 52,
+		"alias": ["NTT Ltd\\.", "NTT", "NTT Corporation"]
+	},
+	{
+		"company_id": 53,
+		"alias": ["Reliance-bp"]
+	},
+	{
+		"company_id": 59,
+		"alias": ["Ford"]
+	},
+	{
+		"company_id": 72,
+		"alias": ["AIA"]
+	},
+	{
+		"company_id": 86,
+		"alias": ["Merck"]
+	},
+	{
+		"company_id": 88,
+		"alias": ["Scotiabank", "Scotia"]
+	},
+	{
+		"company_id": 89,
+		"alias": ["AIG"]
+	},
+	{
+		"company_id": 91,
+		"alias": ["Cisco"]
+	},
+	{
+		"company_id": 93,
+		"alias": ["Disney"]
+	},
+	{
+		"company_id": 99,
+		"alias": ["UPS"]
+	},
+	{
+		"company_id": 104,
+		"alias": ["CSCEC"]
+	},
+	{
+		"company_id": 107,
+		"alias": ["SPDB"]
+	},
+	{
+		"company_id": 116,
+		"alias": ["BMO"]
+	},
+	{
+		"company_id": 120,
+		"alias": ["Crédit Agricole"]
+	},
+	{
+		"company_id": 121,
+		"alias": ["Airbus"]
+	},
+	{
+		"company_id": 131,
+		"alias": ["U\\.S\\. Bancorp"]
+	},
+	{
+		"company_id": 137,
+		"alias": ["Itaú Unibanco"]
+	},
+	{
+		"company_id": 150,
+		"alias": ["BBVA"]
+	},
+	{
+		"company_id": 151,
+		"alias": ["Tesla"]
+	},
+	{
+		"company_id": 160,
+		"alias": ["Maersk"]
+	},
+	{
+		"company_id": 164,
+		"alias": ["PNC", "PNC Canada"]
+	},
+	{
+		"company_id": 166,
+		"alias": ["LUKOIL"]
+	},
+	{
+		"company_id": 169,
+		"alias": ["SK hynix"]
+	},
+	{
+		"company_id": 188,
+		"alias": ["CIBC"]
+	},
+	{
+		"company_id": 192,
+		"alias": ["Fubon", "Fubon Life of Taiwan"]
+	},
+	{
+		"company_id": 198,
+		"alias": ["NAB"]
+	},
+	{
+		"company_id": 217,
+		"alias": ["OCBC"]
+	},
+	{
+		"company_id": 223,
+		"alias": ["GE"]
+	},
+	{
+		"company_id": 224,
+		"alias": ["Societe Generale", "Societe Generale Group"]
+	},
+	{
+		"company_id": 228,
+		"alias": ["ONGC"]
+	},
+	{
+		"company_id": 231,
+		"alias": ["NV Gotion", "Gotion Hi-tech Co\\."]
+	},
+	{
+		"company_id": 233,
+		"alias": ["CNRL"]
+	},
+	{
+		"company_id": 236,
+		"alias": ["Archer-Daniels-Midland Company \\(ADM\\)", "Archer-Daniels-Midland Company", "ADM"]
+	},
+	{
+		"company_id": 245,
+		"alias": ["CCCC"]
+	},
+	{
+		"company_id": 250,
+		"alias": ["Power Corporation of Canada \\(TSX: POW\\)", "Power Corporation of Canada", "POW", "Power Corporation"]
+	},
+	{
+		"company_id": 251,
+		"alias": ["QNB", "QNB Group"]
+	},
+	{
+		"company_id": 260,
+		"alias": ["Seven & i Holdings"]
+	},
+	{
+		"company_id": 265,
+		"alias": ["BNY Mellon", "BNY", "Mellon"]
+	},
+	{
+		"company_id": 291,
+		"alias": ["Baosteel"]
+	},
+	{
+		"company_id": 297,
+		"alias": ["CATL"]
+	},
+	{
+		"company_id": 304,
+		"alias": ["Intercontinental Exchange \\(ICE\\)", "ICE", "Intercontinental Exchange"]
+	},
+	{
+		"company_id": 305,
+		"alias": ["The TJX Companies, Inc\\. \\(TJX\\)", "TJX"]
+	},
+	{
+		"company_id": 316,
+		"alias": ["ADP"]
+	},
+	{
+		"company_id": 326,
+		"alias": ["Saudi National Bank"]
+	},
+	{
+		"company_id": 329,
+		"alias": ["Saudi Arabia"]
+	},
+	{
+		"company_id": 334,
+		"alias": ["Couche-Tard"]
+	},
+	{
+		"company_id": 339,
+		"alias": ["Marsh McLennan", "Marsh McLennan \\(NYSE: MMC\\)", "MMC"]
+	},
+	{
+		"company_id": 348,
+		"alias": ["SLB"]
+	},
+	{
+		"company_id": 350,
+		"alias": ["BRI", "Bank Rakyat Indonesia", "Bank Rakyat Indonesia \\(Persero\\) Tbk"]
+	},
+	{
+		"company_id": 356,
+		"alias": ["DuPont"]
+	},
+	{
+		"company_id": 358,
+		"alias": ["India's oil"]
+	},
+	{
+		"company_id": 360,
+		"alias": ["Kraft Heinz Co\\.", "Kraft Heinz", "Heinz"]
+	},
+	{
+		"company_id": 366,
+		"alias": ["UOB"]
+	},
+	{
+		"company_id": 395,
+		"alias": ["CMSK"]
+	},
+	{
+		"company_id": 399,
+		"alias": ["Johnson Controls"]
+	},
+	{
+		"company_id": 401,
+		"alias": ["stc"]
+	},
+	{
+		"company_id": 415,
+		"alias": ["Greenland Holdings Corp\\.", "Greenland Group Canada"]
+	},
+	{
+		"company_id": 463,
+		"alias": ["Evergrande", "Evergrande Group"]
+	},
+	{
+		"company_id": 492,
+		"alias": ["Con Edison"]
+	},
+	{
+		"company_id": 494,
+		"alias": ["Evergreen Marine Corp\\. \\(Taiwan\\) Ltd\\."]
+	},
+	{
+		"company_id": 496,
+		"alias": ["SCCIG"]
+	},
+	{
+		"company_id": 503,
+		"alias": ["Fujifilm", "FUJIFILM", "Fuji"]
+	},
+	{
+		"company_id": 518,
+		"alias": ["Volvo"]
+	},
+	{
+		"company_id": 520,
+		"alias": ["Ørsted"]
+	},
+	{
+		"company_id": 550,
+		"alias": ["Air Products and Chemicals, Inc\\.", "Air Products and Chemicals", "Air Products"]
+	},
+	{
+		"company_id": 563,
+		"alias": ["AMD"]
+	},
+	{
+		"company_id": 576,
+		"alias": ["Regions Bank"]
+	},
+	{
+		"company_id": 578,
+		"alias": ["Raymond James Ltd\\."]
+	},
+	{
+		"company_id": 592,
+		"alias": ["Parker Hannifin Corporation", "Parker Hannifin", "Parker"]
+	},
+	{
+		"company_id": 593,
+		"alias": ["Vedanta Ltd", "Vedanta Ltd\\.", "Vedanta"]
+	},
+	{
+		"company_id": 598,
+		"alias": ["Rogers"]
+	},
+	{
+		"company_id": 603,
+		"alias": ["SMTB"]
+	},
+	{
+		"company_id": 606,
+		"alias": ["EnBW"]
+	},
+	{
+		"company_id": 616,
+		"alias": ["Haliburton"]
+	},
+	{
+		"company_id": 617,
+		"alias": ["Metallurgical Corporation of China", "MCC"]
+	},
+	{
+		"company_id": 619,
+		"alias": ["Heidelberg", "Heidelberg Materials"]
+	},
+	{
+		"company_id": 633,
+		"alias": ["China Tower"]
+	},
+	{
+		"company_id": 637,
+		"alias": ["Shimao Group", "Shimao"]
+	},
+	{
+		"company_id": 646,
+		"alias": ["IHC"]
+	},
+	{
+		"company_id": 663,
+		"alias": ["Fidelity National Information Services Inc\\. \\(NYSE: FIS\\)", "FIS", "Fidelity National Information Services", "Fidelity National Information Services Inc\\."]
+	},
+	{
+		"company_id": 672,
+		"alias": ["Porsche SE", "Porsche"]
+	},
+	{
+		"company_id": 673,
+		"alias": ["H&M"]
+	},
+	{
+		"company_id": 677,
+		"alias": ["Ross Dress for Less", "Ross"]
+	},
+	{
+		"company_id": 687,
+		"alias": ["HKEX"]
+	},
+	{
+		"company_id": 703,
+		"alias": ["Veolia"]
+	},
+	{
+		"company_id": 704,
+		"alias": ["O'Reilly", "O'Reilly Auto Parts"]
+	},
+	{
+		"company_id": 718,
+		"alias": ["KEPCO"]
+	},
+	{
+		"company_id": 720,
+		"alias": ["MHI", "Mitsubishi", "Mitsui"]
+	},
+	{
+		"company_id": 726,
+		"alias": ["AISIN CORPORATION"]
+	},
+	{
+		"company_id": 747,
+		"alias": ["Hydro"]
+	},
+	{
+		"company_id": 761,
+		"alias": ["JR East", "JR"]
+	},
+	{
+		"company_id": 762,
+		"alias": ["ADCB"]
+	},
+	{
+		"company_id": 815,
+		"alias": ["CRCB"]
+	},
+	{
+		"company_id": 855,
+		"alias": ["CITS"]
+	},
+	{
+		"company_id": 862,
+		"alias": ["Shanghai Port International"]
+	}
+]
