@@ -31,57 +31,47 @@ def prepare_data(cur, root_ids):
 	sent1 = []
 	labels = []
 	for root_id, in root_ids:
-		cur.execute("SELECT company_id FROM root_events WHERE id = ?", (root_id, ))
-		company_id, = cur.fetchone()
-		cur.execute("SELECT name FROM companies WHERE id = ?", (company_id, ))
-		company_name, = cur.fetchone()
-		alias = [company_name]
-		cur.execute("SELECT alias FROM company_alias WHERE company_id = ?", (company_id, ))
-		for company_alias, in cur.fetchall():
-			alias.append(company_alias)
-		alias.sort(key=len, reverse=True)
-		alias_pattern = "|".join(alias)
-		cur.execute("SELECT id, name FROM companies WHERE id != ?", (company_id, ))
-		other_companies = cur.fetchall()
-		num_other_companies = len(other_companies)
-		other_company_id, other_company_name = other_companies[random.randint(0, num_other_companies-1)]
-		
 		cur.execute("SELECT content FROM events WHERE id = ?", (root_id, ))
 		root_content, = cur.fetchone()
-		cur.execute("SELECT child_event_id FROM root_event_children WHERE root_event_id = ? AND is_follow_up = 0", (root_id, ))
-		non_follow_up_ids = cur.fetchall()
-		for child_id, in non_follow_up_ids:
+		cur.execute("SELECT child_event_id FROM root_event_positive0 WHERE root_event_id = ?", (root_id, ))
+		for child_id, in cur.fetchall():
 			cur.execute("SELECT content FROM events WHERE id = ?", (child_id, ))
-			content, = cur.fetchone()
+			child_content, = cur.fetchone()
 			sent0.append(root_content)
-			sent1.append(content)
-			labels.append([0, 1])
-
-		cur.execute("SELECT child_event_id FROM root_event_children WHERE root_event_id = ? AND is_follow_up = 1", (root_id, ))
-		follow_up_ids = cur.fetchall()
-		for child_id, in follow_up_ids:
-			cur.execute("SELECT content FROM events WHERE id = ?", (child_id, ))
-			content, = cur.fetchone()
-			found = re.findall(rf"({alias_pattern})", content)
-			if not found:
-				continue
-			diff_comp_content = re.sub(rf"({alias_pattern})", other_company_name, content, flags=re.IGNORECASE)
-			sent0.append(root_content)
-			sent0.append(root_content)
-			sent1.append(content)
-			sent1.append(diff_comp_content)
+			sent1.append(child_content)
 			labels.append([1, 0])
+
+		cur.execute("SELECT child_event_id FROM root_event_negative0 WHERE root_event_id = ?", (root_id, ))
+		for child_id, in cur.fetchall():
+			cur.execute("SELECT content FROM events WHERE id = ?", (child_id, ))
+			child_content, = cur.fetchone()
+			sent0.append(root_content)
+			sent1.append(child_content)
 			labels.append([0, 1])
 
-		cur.execute("SELECT content FROM events WHERE company_id != ?", (company_id, ))
-		diff_comp_events = cur.fetchall()
-		num_diff_comp_events = len(diff_comp_events)
-		randints = random.sample(range(0, num_diff_comp_events-1), 5)
-		for randint in randints:
-			diff_comp_event, = diff_comp_events[randint]
+		cur.execute("SELECT child_event_id FROM root_event_negative1 WHERE root_event_id = ?", (root_id, ))
+		for child_id, in cur.fetchall():
+			cur.execute("SELECT content FROM events_negative1 WHERE id = ?", (child_id, ))
+			child_content, = cur.fetchone()
 			sent0.append(root_content)
-			sent1.append(diff_comp_event)
+			sent1.append(child_content)
 			labels.append([0, 1])
+
+		cur.execute("SELECT child_event_id FROM root_event_negative2 WHERE root_event_id = ?", (root_id, ))
+		for child_id, in cur.fetchall():
+			cur.execute("SELECT content FROM events WHERE id = ?", (child_id, ))
+			child_content, = cur.fetchone()
+			sent0.append(root_content)
+			sent1.append(child_content)
+			labels.append([0, 1])
+
+		cur.execute("SELECT child_event_id FROM root_event_negative3 WHERE root_event_id = ?", (root_id, ))
+		for child_id, in cur.fetchall():
+			cur.execute("SELECT content FROM events_negative3 WHERE id = ?", (child_id, ))
+			child_content, = cur.fetchone()
+			sent0.append(root_content)
+			sent1.append(child_content)
+			labels.append([0. 1])
 
 	return sent0, sent1, labels
 
