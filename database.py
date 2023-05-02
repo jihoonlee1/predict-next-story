@@ -116,7 +116,6 @@ def main():
 		cur = con.cursor()
 		for st in statements:
 			cur.execute(st)
-		_add_companies(con, cur)
 		_add_alias(con, cur)
 
 

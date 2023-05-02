@@ -4,9 +4,7 @@ import re
 
 
 def _delete_useless(con, cur):
-	cur.execute("SELECT id, content FROM root_children_negative0 ORDER BY length(content) LIMIT 100")
-	for root_id, content in cur.fetchall():
-		print(content)
+	cur.execute("SELECT id, content, length(content) FROM root_children_positive0 ORDER BY length(content) LIMIT 1000")
 
 
 def _check_alias(con, cur):
@@ -22,11 +20,11 @@ def _check_alias(con, cur):
 		alias_str = "|".join(alias)
 		cur.execute("SELECT id, content FROM root_children_positive0 WHERE root_id = ? AND company_id = ?", (root_id, company_id))
 		for child_id, child_content in cur.fetchall():
-			found = re.findall(rf"({alias_str})", child_content.lower(), flags=re.IGNORECASE)
+			found = re.findall(rf"({alias_str})", child_content)
 			if not found:
 				print(child_content)
-				print(company_name, company_id, child_id)
 				print(alias_str)
+				print(company_name, company_id, child_id)
 				print("----------------")
 
 
@@ -62,6 +60,7 @@ def _prep_negative1(con, cur):
 def _prep_negative2(con, cur):
 	cur.execute("SELECT id, company_id FROM roots")
 	for root_id, company_id in cur.fetchall():
+		print(root_id)
 		cur.execute("SELECT name FROM companies WHERE id = ?", (company_id, ))
 		company_name, = cur.fetchone()
 		alias = [company_name]
@@ -76,7 +75,7 @@ def _prep_negative2(con, cur):
 
 		cur.execute("SELECT content FROM root_children_positive0 WHERE root_id = ? AND company_id = ?", (root_id, company_id))
 		for child_content, in cur.fetchall():
-			new_child_content = re.sub(rf"({alias_str})", other_company_name, child_content, flags=re.IGNORECASE)
+			new_child_content = re.sub(rf"({alias_str})", other_company_name, child_content)
 			assert new_child_content != child_content
 			cur.execute("SELECT ifnull(max(id)+1, 0) FROM root_children_negative2")
 			new_event_id, = cur.fetchone()

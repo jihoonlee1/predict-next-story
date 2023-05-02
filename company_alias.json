@@ -414,5 +414,505 @@
 	{
 		"company_id": 862,
 		"alias": ["Shanghai Port International"]
+	},
+	{
+		"company_id": 770,
+		"alias": ["Fortis \\(Canada\\)", "Fortis"]
+	},
+	{
+		"company_id": 773,
+		"alias": ["BTG Pactual", "BTG"]
+	},
+	{
+		"company_id": 801,
+		"alias": ["U\\. S\\. Steel", "Steel"]
+	},
+	{
+		"company_id": 808,
+		"alias": ["HCLTech", "HCL"]
+	},
+	{
+		"company_id": 821,
+		"alias": ["POWERGRID"]
+	},
+	{
+		"company_id": 823,
+		"alias": ["NLMK", "NLMK Group"]
+	},
+	{
+		"company_id": 829,
+		"alias": ["ZSHL"]
+	},
+	{
+		"company_id": 836,
+		"alias": ["TNB"]
+	},
+	{
+		"company_id": 841,
+		"alias": ["TEPCO"]
+	},
+	{
+		"company_id": 843,
+		"alias": ["Hershey"]
+	},
+	{
+		"company_id": 845,
+		"alias": ["PGNiG"]
+	},
+	{
+		"company_id": 846,
+		"alias": ["MTN Zambia", "MTN"]
+	},
+	{
+		"company_id": 851,
+		"alias": ["BSHSR"]
+	},
+	{
+		"company_id": 852,
+		"alias": ["Chalco"]
+	},
+	{
+		"company_id": 853,
+		"alias": ["KEPCO"]
+	},
+	{
+		"company_id": 858,
+		"alias": ["T\\. Rowe Price"]
+	},
+	{
+		"company_id": 867,
+		"alias": ["Mitsui O\\.S\\.K\\. Lines", "Mitsui O\\.S\\.K\\. Lines, Ltd\\. \\(MOL\\)", "\\(MOL\\)", "MOL"]
+	},
+	{
+		"company_id": 868,
+		"alias": ["SAB"]
+	},
+	{
+		"company_id": 871,
+		"alias": ["August Home"]
+	},
+	{
+		"company_id": 881,
+		"alias": ["PSEG"]
+	},
+	{
+		"company_id": 882,
+		"alias": ["En\\+ Group"]
+	},
+	{
+		"company_id": 898,
+		"alias": ["CMS"]
+	},
+	{
+		"company_id": 913,
+		"alias": ["ASUS Global", "ASUS"]
+	},
+	{
+		"company_id": 917,
+		"alias": ["CMOC Group Limited", "CMOC Group", "CMOC"]
+	},
+	{
+		"company_id": 924,
+		"alias": ["Grainger Canada", "Grainger"]
+	},
+	{
+		"company_id": 934,
+		"alias": ["Zhongnan Construction Group", "Zhongnan"]
+	},
+	{
+		"company_id": 937,
+		"alias": ["SMIC"]
+	},
+	{
+		"company_id": 946,
+		"alias": ["Julius Baer International", "Julius Baer"]
+	},
+	{
+		"company_id": 951,
+		"alias": ["SRCB"]
+	},
+	{
+		"company_id": 963,
+		"alias": ["QIB Group", "QIB"]
+	},
+	{
+		"company_id": 973,
+		"alias": ["Molson Coors", "Molson Coors Beverage Company"]
+	},
+	{
+		"company_id": 977,
+		"alias": ["CIM"]
+	},
+	{
+		"company_id": 1002,
+		"alias": ["Eletrobras"]
+	},
+	{
+		"company_id": 1003,
+		"alias": ["Mengniu Dairy", "Mengniu"]
+	},
+	{
+		"company_id": 1007,
+		"alias": ["SMIC"]
+	},
+	{
+		"company_id": 1010,
+		"alias": ["TCFHC"]
+	},
+	{
+		"company_id": 1021,
+		"alias": ["iA Financial Group", "iA Financial", "iA Group"]
+	},
+	{
+		"company_id": 1025,
+		"alias": ["Baloise Group", "Baloise"]
+	},
+	{
+		"company_id": 1027,
+		"alias": ["JLL Canada", "JLL"]
+	},
+	{
+		"company_id": 1029,
+		"alias": ["Daiwa"]
+	},
+	{
+		"company_id": 1030,
+		"alias": ["Lufthansa"]
+	},
+	{
+		"company_id": 1035,
+		"alias": ["Mizrahi-Tefahot Bank"]
+	},
+	{
+		"company_id": 1051,
+		"alias": ["Teva Canada", "Teva"]
+	},
+	{
+		"company_id": 1062,
+		"alias": ["Mahindra"]
+	},
+	{
+		"company_id": 1066,
+		"alias": ["AkzoNobel"]
+	},
+	{
+		"company_id": 1069,
+		"alias": ["Randstad"]
+	},
+	{
+		"company_id": 1070,
+		"alias": ["Sibanye-Stillwater", "Sibanye", "Stillwater"]
+	},
+	{
+		"company_id": 1074,
+		"alias": ["FWONA"]
+	},
+	{
+		"company_id": 1078,
+		"alias": ["Shougang"]
+	},
+	{
+		"company_id": 1082,
+		"alias": ["Mindray"]
+	},
+	{
+		"company_id": 1093,
+		"alias": ["TIM"]
+	},
+	{
+		"company_id": 1097,
+		"alias": ["Dassault Systèmes", "Dassault"]
+	},
+	{
+		"company_id": 1102,
+		"alias": ["Longyuan Power"]
+	},
+	{
+		"company_id": 1135,
+		"alias": ["Sainsbury"]
+	},
+	{
+		"company_id": 1138,
+		"alias": ["AUO"]
+	},
+	{
+		"company_id": 1147,
+		"alias": ["Impala"]
+	},
+	{
+		"company_id": 1150,
+		"alias": ["Rolls-Royce"]
+	},
+	{
+		"company_id": 1166,
+		"alias": ["CLI"]
+	},
+	{
+		"company_id": 1167,
+		"alias": ["Fastighets AB Balder", "Balder"]
+	},
+	{
+		"company_id": 1172,
+		"alias": ["New World \\(video game\\)", "New World"]
+	},
+	{
+		"company_id": 1177,
+		"alias": ["ChemChina"]
+	},
+	{
+		"company_id": 1183,
+		"alias": ["Zoom"]
+	},
+	{
+		"company_id": 1184,
+		"alias": ["MMK"]
+	},
+	{
+		"company_id": 1191,
+		"alias": ["CR Pharmaceutical", "CR"]
+	},
+	{
+		"company_id": 1213,
+		"alias": ["EQT Growth", "EQT"]
+	},
+	{
+		"company_id": 1214,
+		"alias": ["GAIL \\(India\\) Limited", "GAIL \\(India\\)", "GAIL", "Gail"]
+	},
+	{
+		"company_id": 1215,
+		"alias": ["Baotou Steel", "Baotou"]
+	},
+	{
+		"company_id": 1219,
+		"alias": ["Carnival Venezia", "Carnival"]
+	},
+	{
+		"company_id": 1226,
+		"alias": ["ORI"]
+	},
+	{
+		"company_id": 1252,
+		"alias": ["SXFWF"]
+	},
+	{
+		"company_id": 1267,
+		"alias": ["Changan Automobile", "Changan"]
+	},
+	{
+		"company_id": 1276,
+		"alias": ["Grupo Financiero Inbursa"]
+	},
+	{
+		"company_id": 1277,
+		"alias": ["DRC Bank", "DRC"]
+	},
+	{
+		"company_id": 1280,
+		"alias": ["Banco Sabadell"]
+	},
+	{
+		"company_id": 1289,
+		"alias": ["SBB", "Samhällsbyggnadsbolaget i Norden AB \\(publ\\) \\(SBB\\)"]
+	},
+	{
+		"company_id": 1300,
+		"alias": ["CFLD"]
+	},
+	{
+		"company_id": 1304,
+		"alias": ["CR Power", "CR"]
+	},
+	{
+		"company_id": 1309,
+		"alias": ["anb"]
+	},
+	{
+		"company_id": 1313,
+		"alias": ["China Three Gorges Renewables \\(Group\\) Co., Ltd. \\(CTGR\\)", "China Three Gorges Renewables \\(Group\\)", "\\(CTGR\\)", "CTGR", "China Three Gorges Renewables"]
+	},
+	{
+		"company_id": 1314,
+		"alias": ["EA"]
+	},
+	{
+		"company_id": 1341,
+		"alias": ["StoneX"]
+	},
+	{
+		"company_id": 1345,
+		"alias": ["ENN NG"]
+	},
+	{
+		"company_id": 1346,
+		"alias": ["Phonix Holdings Pty Ltd", "Phonix Holdings", "Phonix"]
+	},
+	{
+		"company_id": 1351,
+		"alias": ["Daqo New Energy", "Daqo"]
+	},
+	{
+		"company_id": 1356,
+		"alias": ["COGOGL"]
+	},
+	{
+		"company_id": 1360,
+		"alias": ["LEG Immobilien SE", "LEG"]
+	},
+	{
+		"company_id": 1361,
+		"alias": ["Sun Pharma", "Sun Pharmaceutical Industries Ltd."]
+	},
+	{
+		"company_id": 1368,
+		"alias": ["XCMG"]
+	},
+	{
+		"company_id": 1374,
+		"alias": ["Galp"]
+	},
+	{
+		"company_id": 1383,
+		"alias": ["Taigang Stainless Steel", "Taigang Stainless", "Taigang"]
+	},
+	{
+		"company_id": 1401,
+		"alias": ["Packaging Corporation of America \\(PCA\\)", "Packaging Corporation of America", "PCA"]
+	},
+	{
+		"company_id": 1412,
+		"alias": ["BCD"]
+	},
+	{
+		"company_id": 1419,
+		"alias": ["CGAS"]
+	},
+	{
+		"company_id": 1423,
+		"alias": ["Wabtec", "WAB", "\\(NYSE: WAB\\)"]
+	},
+	{
+		"company_id": 1424,
+		"alias": ["K Line"]
+	},
+	{
+		"company_id": 264,
+		"alias": ["DENSO"]
+	},
+	{
+		"company_id": 282,
+		"alias": ["Kia"]
+	},
+	{
+		"company_id": 285,
+		"alias": ["POSCO Chemical", "POSCO"]
+	},
+	{
+		"company_id": 344,
+		"alias": ["ORIX Group", "ORIX"]
+	},
+	{
+		"company_id": 345,
+		"alias": ["CITIC Securities", "CITIC"]
+	},
+	{
+		"company_id": 490,
+		"alias": ["FEMSA"]
+	},
+	{
+		"company_id": 491,
+		"alias": ["PACCAR"]
+	},
+	{
+		"company_id": 554,
+		"alias": ["Telus"]
+	},
+	{
+		"company_id": 610,
+		"alias": ["ONEOK", "ONEOK, Inc\\. \\(NYSE: OKE\\)"]
+	},
+	{
+		"company_id": 723,
+		"alias": ["LONGi Green Energy Technology", "LONGi"]
+	},
+	{
+		"company_id": 807,
+		"alias": ["MAPFRE"]
+	},
+	{
+		"company_id": 827,
+		"alias": ["SEGRO"]
+	},
+	{
+		"company_id": 873,
+		"alias": ["ASR Nederland N\\.V\\. \\(a\\.s\\.r\\.\\)", "ASR", "ASR Nederland N\\.V\\.", "a\\.s\\.r\\.", "A\\.S\\.R\\."]
+	},
+	{
+		"company_id": 895,
+		"alias": ["KONE"]
+	},
+	{
+		"company_id": 902,
+		"alias": ["Sabancı Holding", "Sabancı"]
+	},
+	{
+		"company_id": 1005,
+		"alias": ["E\\.SUN Financial", "E\\.SUN Financial Holding Co\\.\\, Ltd\\. \\(E\\.SUN FHC\\)", "E\\.SUN", "E\\.SUN FHC"]
+	},
+	{
+		"company_id": 1013,
+		"alias": ["FANUC GLOBAL", "FANUC", "FANUC America"]
+	},
+	{
+		"company_id": 1053,
+		"alias": ["VERBUND"]
+	},
+	{
+		"company_id": 1055,
+		"alias": ["Bank of Chengdu", "BoCD", "Bank of Chengdu \\(BoCD\\)"]
+	},
+	{
+		"company_id": 1180,
+		"alias": ["SECOM"]
+	},
+	{
+		"company_id": 1236,
+		"alias": ["PCG", "PETRONAS Chemicals Group Bhd\\. \\(PCG\\)", "PETRONAS", "PETRONAS Chemicals"]
+	},
+	{
+		"company_id": 1246,
+		"alias": ["HD Hyundai", "Hyundai"]
+	},
+	{
+		"company_id": 1273,
+		"alias": ["DICK'S Sporting Goods", "DICK'S", "Dick's"]
+	},
+	{
+		"company_id": 1282,
+		"alias": ["WuXi AppTec", "WuXi"]
+	},
+	{
+		"company_id": 1295,
+		"alias": ["AMETEK\\, Inc\\. \\(NYSE: AME\\)", "AMETEK", "AME"]
+	},
+	{
+		"company_id": 1330,
+		"alias": ["CJ CheilJedang", "CJ", "CheilJedang"]
+	},
+	{
+		"company_id": 1418,
+		"alias": ["Airbnb"]
+	},
+	{
+		"company_id": 1428,
+		"alias": ["Attijariwafa bank", "Attijariwafa"]
+	},
+	{
+		"company_id": 1436,
+		"alias": ["THOR Industries", "THOR"]
+	},
+	{
+		"company_id": 1432,
+		"alias": ["Suntory Kyushu Kumamoto Plant", "Suntory", "Suntory Kyushu", "Suntory Kyushu Kumamoto"]
 	}
 ]
