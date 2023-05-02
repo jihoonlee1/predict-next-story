@@ -1,92 +1,17 @@
 import database
 import random
 import re
-import spacy
-
-
-nlp = spacy.load("en_core_web_lg")
-
-
-def _entity_labels(entity_label):
-	items = []
-	with open(f"{entity_label}.txt", "r") as f:
-		for line in f:
-			line = line.strip()
-			items.append(line)
-	return items
-
-
-PERSON = _entity_labels("PERSON")
-NORP = _entity_labels("NORP")
-FAC = _entity_labels("FAC")
-ORG = _entity_labels("ORG")
-GPE = _entity_labels("GPE")
-LOC = _entity_labels("LOC")
-PRODUCT = _entity_labels("PRODUCT")
-EVENT = _entity_labels("EVENT")
-WORK_OF_ART = _entity_labels("WORK_OF_ART")
-LAW = _entity_labels("LAW")
-LANGUAGE = _entity_labels("LANGUAGE")
-DATE = _entity_labels("DATE")
-TIME = _entity_labels("TIME")
-PERCENT = _entity_labels("PERCENT")
-MONEY = _entity_labels("MONEY")
-QUANTITY = _entity_labels("QUANTITY")
-ORDINAL = _entity_labels("ORDINAL")
-CARDINAL = _entity_labels("CARDINAL")
-LEN_PERSON = len(PERSON)
-LEN_NORP = len(NORP)
-LEN_FAC = len(FAC)
-LEN_ORG = len(ORG)
-LEN_GPE = len(GPE)
-LEN_LOC = len(LOC)
-LEN_PRODUCT = len(PRODUCT)
-LEN_EVENT = len(EVENT)
-LEN_WORK_OF_ART = len(WORK_OF_ART)
-LEN_LAW = len(LAW)
-LEN_LANGUAGE = len(LANGUAGE)
-LEN_DATE = len(DATE)
-LEN_TIME = len(TIME)
-LEN_PERCENT = len(PERCENT)
-LEN_MONEY = len(MONEY)
-LEN_QUANTITY = len(QUANTITY)
-LEN_ORDINAL = len(ORDINAL)
-LEN_CARDINAL = len(CARDINAL)
 
 
 def _delete_useless(con, cur):
-	cur.execute("SELECT id, content, length(content) FROM events ORDER BY length(content) LIMIT 100")
-	for event_id, content, length in cur.fetchall():
-		cur.execute("SELECT 1 FROM root_events WHERE id = ?", (event_id, ))
-		if cur.fetchone() is not None:
-			cur.execute("SELECT child_event_id FROM root_event_children WHERE root_event_id = ?", (event_id, ))
-			for child_id, in cur.fetchall():
-				cur.execute("DELETE FROM root_event_children WHERE child_event_id = ?", (child_id, ))
-				cur.execute("DELETE FROM events WHERE id = ?", (child_id, ))
-			cur.execute("DELETE FROM root_events WHERE id = ?", (event_id, ))
-			cur.execute("DELETE FROM events WHERE id = ?", (event_id, ))
-		cur.execute("SELECT 1 FROM root_event_children WHERE child_event_id = ?", (event_id, ))
-		if cur.fetchone() is not None:
-			cur.execute("DELETE FROM root_event_children WHERE child_event_id = ?", (event_id, ))
-			cur.execute("DELETE FROM events WHERE id = ?", (event_id, ))
-	con.commit()
-
-
-def _separate_pos_neg(con, cur):
-	cur.execute("SELECT * FROM root_event_children WHERE is_follow_up = 1")
-	for root_id, child_id, company_id, _ in cur.fetchall():
-		cur.execute("INSERT INTO root_event_positive0 VALUES(?,?,?)", (root_id, child_id, company_id))
-	cur.execute("SELECT * FROM root_event_children WHERE is_follow_up = 0")
-	for root_id, child_id, company_id, _ in cur.fetchall():
-		cur.execute("INSERT INTO root_event_negative0 VALUES(?,?,?)", (root_id, child_id, company_id))
-	con.commit()
+	cur.execute("SELECT id, content FROM root_children_negative0 ORDER BY length(content) LIMIT 100")
+	for root_id, content in cur.fetchall():
+		print(content)
 
 
 def _check_alias(con, cur):
-	cur.execute("SELECT company_id, id FROM root_events ORDER BY company_id")
-	for company_id, root_event_id in cur.fetchall():
-		cur.execute("SELECT content FROM events WHERE id = ?", (root_event_id, ))
-		root_content, = cur.fetchone()
+	cur.execute("SELECT id, company_id, content FROM roots ORDER BY company_id")
+	for root_id, company_id, root_content in cur.fetchall():
 		cur.execute("SELECT name FROM companies WHERE id = ?", (company_id, ))
 		company_name, = cur.fetchone()
 		alias = [company_name]
@@ -95,16 +20,15 @@ def _check_alias(con, cur):
 			alias.append(item)
 		alias.sort(key=len, reverse=True)
 		alias_str = "|".join(alias)
-		cur.execute("SELECT child_event_id FROM root_event_positive0 WHERE root_event_id = ?", (root_event_id, ))
-		for child_event_id, in cur.fetchall():
-			cur.execute("SELECT content FROM events WHERE id = ?", (child_event_id, ))
-			child_content, = cur.fetchone()
+		cur.execute("SELECT id, content FROM root_children_positive0 WHERE root_event_id = ? AND company_id = ?", (root_id, company_id))
+		for child_id, child_content in cur.fetchall():
 			found = re.findall(rf"({alias_str})", child_content.lower(), flags=re.IGNORECASE)
 			if not found:
 				print(child_content)
-				print(company_name, company_id, child_event_id)
+				print(company_name, company_id, child_id)
 				print(alias_str)
 				print("----------------")
+
 
 
 def _prep_negative1(con, cur):
@@ -253,7 +177,7 @@ def _prep_negative3(con, cur):
 			cur.execute("SELECT content FROM events WHERE id = ?", (child_event_id, ))
 			child_content, = cur.fetchone()
 			for target, replacement, target_label in replacements:
-				if target in child_content and target_label in ["PERSON", "ORG", "PRODUCT", "EVENT", "FAC", "GPE", "LANGUAGE", "LAW", "LOC"]:
+				if target in child_content and target_label == "ORG":
 					can_insert = True
 			if can_insert:
 				new_child_content = child_content
@@ -270,7 +194,7 @@ def _prep_negative3(con, cur):
 def main():
 	with database.connect() as con:
 		cur = con.cursor()
-		_prep_negative3(con, cur)
+		_check_alias(con, cur)
 
 
 if __name__ == "__main__":

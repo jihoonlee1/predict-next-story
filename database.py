@@ -33,48 +33,48 @@ CREATE TABLE IF NOT EXISTS roots(
 """,
 """
 CREATE TABLE IF NOT EXISTS root_children_positive0(
-	id            INTEGER NOT NULL PRIMARY KEY,
-	root_event_id INTEGER NOT NULL REFERENCES root_events(id),
-	company_id    INTEGER NOT NULL REFERENCES companies(id),
-	content       TEXT    NOT NULL
+	id         INTEGER NOT NULL PRIMARY KEY,
+	root_id    INTEGER NOT NULL REFERENCES root_events(id),
+	company_id INTEGER NOT NULL REFERENCES companies(id),
+	content    TEXT    NOT NULL
 );
 """,
 """
 CREATE TABLE IF NOT EXISTS root_children_negative0(
-	id            INTEGER NOT NULL PRIMARY KEY,
-	root_event_id INTEGER NOT NULL REFERENCES root_events(id),
-	company_id    INTEGER NOT NULL REFERENCES companies(id),
-	content       TEXT    NOT NULL
+	id         INTEGER NOT NULL PRIMARY KEY,
+	root_id    INTEGER NOT NULL REFERENCES root_events(id),
+	company_id INTEGER NOT NULL REFERENCES companies(id),
+	content    TEXT    NOT NULL
 );
 """,
 """
 CREATE TABLE IF NOT EXISTS root_children_negative1(
-	id            INTEGER NOT NULL PRIMARY KEY,
-	root_event_id INTEGER NOT NULL REFERENCES root_events(id),
-	company_id    INTEGER NOT NULL REFERENCES companies(id),
-	content       TEXT    NOT NULL
+	id         INTEGER NOT NULL PRIMARY KEY,
+	root_id    INTEGER NOT NULL REFERENCES root_events(id),
+	company_id INTEGER NOT NULL REFERENCES companies(id),
+	content    TEXT    NOT NULL
 );
 """,
 """
 CREATE TABLE IF NOT EXISTS root_children_negative2(
-	id            INTEGER NOT NULL PRIMARY KEY,
-	root_event_id INTEGER NOT NULL REFERENCES root_events(id),
-	company_id    INTEGER NOT NULL REFERENCES companies(id),
-	content       TEXT    NOT NULL
+	id         INTEGER NOT NULL PRIMARY KEY,
+	root_id    INTEGER NOT NULL REFERENCES root_events(id),
+	company_id INTEGER NOT NULL REFERENCES companies(id),
+	content    TEXT    NOT NULL
 );
 """,
 """
 CREATE TABLE IF NOT EXISTS root_children_negative3(
-	id            INTEGER NOT NULL PRIMARY KEY,
-	root_event_id INTEGER NOT NULL REFERENCES root_events(id),
-	company_id    INTEGER NOT NULL REFERENCES companies(id),
-	content       TEXT    NOT NULL
+	id         INTEGER NOT NULL PRIMARY KEY,
+	root_id    INTEGER NOT NULL REFERENCES root_events(id),
+	company_id INTEGER NOT NULL REFERENCES companies(id),
+	content    TEXT    NOT NULL
 );
 """
 ]
 
 
-def connect(database="database.sqlite", mode="rw"):
+def connect(database="database2.sqlite", mode="rw"):
 	return contextlib.closing(sqlite3.connect(f"file:{database}?mode={mode}", uri=True))
 
 
@@ -83,12 +83,12 @@ def _add_companies(con, cur):
 		companies = json.load(f)
 		for c in companies:
 			try:
-				desc = c["description"]
+				desc = c["description"].strip()
 			except:
 				desc = None
-			name = c["organizationName"]
-			industry = c["industry"]
-			country = c["country"]
+			name = c["organizationName"].strip()
+			industry = c["industry"].strip()
+			country = c["country"].strip()
 			revenue = c["revenue"]
 			profits = c["profits"]
 			assets = c["assets"]
