@@ -12,7 +12,7 @@ model = BertForNextSentencePrediction.from_pretrained("bert-base-uncased").to(de
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate)
 loss_fn = torch.nn.BCEWithLogitsLoss()
-batch_size = 4 
+batch_size = 8 
 epochs = 20
 
 
