@@ -25,70 +25,50 @@ CREATE TABLE IF NOT EXISTS company_alias(
 );
 """,
 """
-CREATE TABLE IF NOT EXISTS events(
+CREATE TABLE IF NOT EXISTS roots(
 	id         INTEGER NOT NULL PRIMARY KEY,
 	company_id INTEGER NOT NULL REFERENCES companies(id),
 	content    TEXT    NOT NULL
 );
 """,
 """
-CREATE TABLE IF NOT EXISTS events_negative1(
-	id         INTEGER NOT NULL PRIMARY KEY,
-	company_id INTEGER NOT NULL REFERENCES companies(id),
-	content    TEXT    NOT NULL
-)
-""",
-"""
-CREATE TABLE IF NOT EXISTS events_negative3(
-	id         INTEGER NOT NULL PRIMARY KEY,
-	company_id INTEGER NOT NULL REFERENCES companies(id),
-	content    TEXT    NOT NULL
-)
-""",
-"""
-CREATE TABLE IF NOT EXISTS root_events(
-	id         INTEGER NOT NULL PRIMARY KEY REFERENCES events(id),
-	company_id INTEGER NOT NULL             REFERENCES companies(id)
+CREATE TABLE IF NOT EXISTS root_children_positive0(
+	id            INTEGER NOT NULL PRIMARY KEY,
+	root_event_id INTEGER NOT NULL REFERENCES root_events(id),
+	company_id    INTEGER NOT NULL REFERENCES companies(id),
+	content       TEXT    NOT NULL
 );
 """,
 """
-CREATE TABLE IF NOT EXISTS root_event_positive0(
-	root_event_id  INTEGER NOT NULL REFERENCES root_events(id),
-	child_event_id INTEGER NOT NULL REFERENCES events(id),
-	company_id     INTEGER NOT NULL REFERENCES companies(id),
-	PRIMARY KEY(root_event_id, child_event_id)
+CREATE TABLE IF NOT EXISTS root_children_negative0(
+	id            INTEGER NOT NULL PRIMARY KEY,
+	root_event_id INTEGER NOT NULL REFERENCES root_events(id),
+	company_id    INTEGER NOT NULL REFERENCES companies(id),
+	content       TEXT    NOT NULL
 );
 """,
 """
-CREATE TABLE IF NOT EXISTS root_event_negative0(
-	root_event_id  INTEGER NOT NULL REFERENCES root_events(id),
-	child_event_id INTEGER NOT NULL REFERENCES events(id),
-	company_id     INTEGER NOT NULL REFERENCES companies(id),
-	PRIMARY KEY(root_event_id, child_event_id)
+CREATE TABLE IF NOT EXISTS root_children_negative1(
+	id            INTEGER NOT NULL PRIMARY KEY,
+	root_event_id INTEGER NOT NULL REFERENCES root_events(id),
+	company_id    INTEGER NOT NULL REFERENCES companies(id),
+	content       TEXT    NOT NULL
 );
 """,
 """
-CREATE TABLE IF NOT EXISTS root_event_negative1(
-	root_event_id  INTEGER NOT NULL REFERENCES root_events(id),
-	child_event_id INTEGER NOT NULL REFERENCES events(id),
-	company_id     INTEGER NOT NULL REFERENCES companies(id),
-	PRIMARY KEY(root_event_id, child_event_id)
+CREATE TABLE IF NOT EXISTS root_children_negative2(
+	id            INTEGER NOT NULL PRIMARY KEY,
+	root_event_id INTEGER NOT NULL REFERENCES root_events(id),
+	company_id    INTEGER NOT NULL REFERENCES companies(id),
+	content       TEXT    NOT NULL
 );
 """,
 """
-CREATE TABLE IF NOT EXISTS root_event_negative2(
-	root_event_id  INTEGER NOT NULL REFERENCES root_events(id),
-	child_event_id INTEGER NOT NULL REFERENCES events(id),
-	company_id     INTEGER NOT NULL REFERENCES companies(id),
-	PRIMARY KEY(root_event_id, child_event_id)
-);
-""",
-"""
-CREATE TABLE IF NOT EXISTS root_event_negative3(
-	root_event_id  INTEGER NOT NULL REFERENCES root_events(id),
-	child_event_id INTEGER NOT NULL REFERENCES events(id),
-	company_id     INTEGER NOT NULL REFERENCES companies(id),
-	PRIMARY KEY(root_event_id, child_event_id)
+CREATE TABLE IF NOT EXISTS root_children_negative3(
+	id            INTEGER NOT NULL PRIMARY KEY,
+	root_event_id INTEGER NOT NULL REFERENCES root_events(id),
+	company_id    INTEGER NOT NULL REFERENCES companies(id),
+	content       TEXT    NOT NULL
 );
 """
 ]
@@ -136,6 +116,8 @@ def main():
 		cur = con.cursor()
 		for st in statements:
 			cur.execute(st)
+		_add_companies(con, cur)
+		_add_alias(con, cur)
 
 
 if __name__ == "__main__":
