@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS root_children_negative3(
 ]
 
 
-def connect(database="database2.sqlite", mode="rw"):
+def connect(database="database.sqlite", mode="rw"):
 	return contextlib.closing(sqlite3.connect(f"file:{database}?mode={mode}", uri=True))
 
 

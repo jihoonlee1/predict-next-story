@@ -20,7 +20,7 @@ def _check_alias(con, cur):
 			alias.append(item)
 		alias.sort(key=len, reverse=True)
 		alias_str = "|".join(alias)
-		cur.execute("SELECT id, content FROM root_children_positive0 WHERE root_event_id = ? AND company_id = ?", (root_id, company_id))
+		cur.execute("SELECT id, content FROM root_children_positive0 WHERE root_id = ? AND company_id = ?", (root_id, company_id))
 		for child_id, child_content in cur.fetchall():
 			found = re.findall(rf"({alias_str})", child_content.lower(), flags=re.IGNORECASE)
 			if not found:
@@ -30,49 +30,59 @@ def _check_alias(con, cur):
 				print("----------------")
 
 
-
 def _prep_negative1(con, cur):
-	cur.execute("SELECT DISTINCT root_event_id FROM root_event_positive0")
-	for root_event_id, in cur.fetchall():
-		cur.execute("SELECT company_id FROM root_events WHERE id = ?", (root_event_id, ))
-		company_id, = cur.fetchone()
+	cur.execute("SELECT id, company_id FROM roots")
+	for root_id, company_id in cur.fetchall():
+		cur.execute("SELECT id FROM companies WHERE id != ?", (company_id, ))
+		other_company_ids = cur.fetchall()
+		other_all = []
+		while not other_all:
+			other_company_id, = other_company_ids[random.randint(0, len(other_company_ids)-1)]
+			cur.execute("SELECT content FROM roots WHERE company_id = ?", (other_company_id, ))
+			other_roots = cur.fetchall()
+			cur.execute("SELECT content FROM root_children_positive0 WHERE company_id = ?", (other_company_id, ))
+			other_pos = cur.fetchall()
+			cur.execute("SELECT content FROM root_children_negative0 WHERE company_id = ?", (other_company_id,))
+			other_neg = cur.fetchall()
+			for content, in other_roots:
+				other_all.append(content)
+			for content, in other_pos:
+				other_all.append(content)
+			for content, in other_neg:
+				other_all.append(content)
+			random.shuffle(other_all)
+		print(len(other_all))
+		for content in other_all[:5]:
+			cur.execute("SELECT ifnull(max(id)+1, 0) FROM root_children_negative1")
+			new_event_id, = cur.fetchone()
+			cur.execute("INSERT INTO root_children_negative1 VALUES(?,?,?,?)", (new_event_id, root_id, company_id, content))
+	con.commit()
+
+
+def _prep_negative2(con, cur):
+	cur.execute("SELECT id, company_id FROM roots")
+	for root_id, company_id in cur.fetchall():
 		cur.execute("SELECT name FROM companies WHERE id = ?", (company_id, ))
 		company_name, = cur.fetchone()
+		alias = [company_name]
 		cur.execute("SELECT name FROM companies WHERE id != ?", (company_id, ))
 		other_company_names = cur.fetchall()
-		other_company_name, = other_company_names[random.randint(0, len(other_company_names)-1)]
-		alias = [company_name]
 		cur.execute("SELECT alias FROM company_alias WHERE company_id = ?", (company_id, ))
 		for item, in cur.fetchall():
 			alias.append(item)
 		alias.sort(key=len, reverse=True)
 		alias_str = "|".join(alias)
+		other_company_name, = other_company_names[random.randint(0, len(other_company_names)-1)]
 
-		cur.execute("SELECT child_event_id FROM root_event_positive0 WHERE root_event_id = ?", (root_event_id, ))
-		for child_event_id, in cur.fetchall():
-			cur.execute("SELECT content FROM events WHERE id = ?", (child_event_id, ))
-			child_content, = cur.fetchone()
-			child_content = re.sub(rf"({alias_str})", other_company_name, child_content)
-			cur.execute("SELECT ifnull(max(id)+1, 0) FROM events_negative1")
+		cur.execute("SELECT content FROM root_children_positive0 WHERE root_id = ? AND company_id = ?", (root_id, company_id))
+		for child_content, in cur.fetchall():
+			new_child_content = re.sub(rf"({alias_str})", other_company_name, child_content, flags=re.IGNORECASE)
+			assert new_child_content != child_content
+			cur.execute("SELECT ifnull(max(id)+1, 0) FROM root_children_negative2")
 			new_event_id, = cur.fetchone()
-			cur.execute("INSERT INTO events_negative1 VALUES(?,?,?)", (new_event_id, company_id, child_content))
-			cur.execute("INSERT INTO root_event_negative1 VALUES(?,?,?)", (root_event_id, new_event_id, company_id))
-		con.commit()
-
-
-def _prep_negative2(con, cur):
-	cur.execute("SELECT DISTINCT root_event_id FROM root_event_positive0")
-	for root_event_id, in cur.fetchall():
-		cur.execute("SELECT company_id FROM events WHERE id = ?", (root_event_id, ))
-		company_id, = cur.fetchone()
-		cur.execute("SELECT id FROM events WHERE company_id != ?", (company_id, ))
-		diff_comp_events = cur.fetchall()
-		num_diff_comp_events = len(diff_comp_events)
-		samples = random.sample(range(0, num_diff_comp_events-1), 5)
-		for randint in samples:
-			diff_event_id, = diff_comp_events[randint]
-			cur.execute("INSERT INTO root_event_negative2 VALUES(?,?,?)", (root_event_id, diff_event_id, company_id))
+			cur.execute("INSERT INTO root_children_negative2 VALUES(?,?,?,?)", (new_event_id, root_id, company_id, new_child_content))
 	con.commit()
+
 
 
 def _prep_negative3(con, cur):
@@ -194,7 +204,7 @@ def _prep_negative3(con, cur):
 def main():
 	with database.connect() as con:
 		cur = con.cursor()
-		_check_alias(con, cur)
+		_prep_negative1(con, cur)
 
 
 if __name__ == "__main__":
