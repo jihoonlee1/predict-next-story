@@ -16,8 +16,8 @@ batch_size = 4
 epochs = 20
 
 
-def train_test_root_ids(cur):
-	cur.execute("SELECT id FROM root_events")
+def train_test_roots(cur):
+	cur.execute("SELECT id, company_id, content FROM roots")
 	root_ids = cur.fetchall()
 	num_roots = len(root_ids)
 	train_idx = round(num_roots * 0.9)
@@ -26,49 +26,31 @@ def train_test_root_ids(cur):
 	return train_root_ids, test_root_ids
 
 
-def prepare_data(cur, root_ids):
+def prepare_data(cur, roots):
 	sent0 = []
 	sent1 = []
 	labels = []
-	for root_id, in root_ids:
-		cur.execute("SELECT content FROM events WHERE id = ?", (root_id, ))
-		root_content, = cur.fetchone()
-		cur.execute("SELECT child_event_id FROM root_event_positive0 WHERE root_event_id = ?", (root_id, ))
-		for child_id, in cur.fetchall():
-			cur.execute("SELECT content FROM events WHERE id = ?", (child_id, ))
-			child_content, = cur.fetchone()
+	for root_id, company_id, root_content in roots:
+		cur.execute("SELECT content FROM root_children_positive0 WHERE root_id = ? and company_id = ?", (root_id, company_id))
+		for child_content, in cur.fetchall():
 			sent0.append(root_content)
 			sent1.append(child_content)
 			labels.append([1, 0])
 
-		cur.execute("SELECT child_event_id FROM root_event_negative0 WHERE root_event_id = ?", (root_id, ))
-		for child_id, in cur.fetchall():
-			cur.execute("SELECT content FROM events WHERE id = ?", (child_id, ))
-			child_content, = cur.fetchone()
+		cur.execute("SELECT content FROM root_children_negative0 WHERE root_id = ? and company_id = ?", (root_id, company_id))
+		for child_content, in cur.fetchall():
 			sent0.append(root_content)
 			sent1.append(child_content)
 			labels.append([0, 1])
 
-		cur.execute("SELECT child_event_id FROM root_event_negative1 WHERE root_event_id = ?", (root_id, ))
-		for child_id, in cur.fetchall():
-			cur.execute("SELECT content FROM events_negative1 WHERE id = ?", (child_id, ))
-			child_content, = cur.fetchone()
+		cur.execute("SELECT content FROM root_children_negative1 WHERE root_id = ? and company_id = ?", (root_id, company_id))
+		for child_content, in cur.fetchall():
 			sent0.append(root_content)
 			sent1.append(child_content)
 			labels.append([0, 1])
 
-		cur.execute("SELECT child_event_id FROM root_event_negative2 WHERE root_event_id = ?", (root_id, ))
-		for child_id, in cur.fetchall():
-			cur.execute("SELECT content FROM events WHERE id = ?", (child_id, ))
-			child_content, = cur.fetchone()
-			sent0.append(root_content)
-			sent1.append(child_content)
-			labels.append([0, 1])
-
-		cur.execute("SELECT child_event_id FROM root_event_negative3 WHERE root_event_id = ?", (root_id, ))
-		for child_id, in cur.fetchall():
-			cur.execute("SELECT content FROM events_negative3 WHERE id = ?", (child_id, ))
-			child_content, = cur.fetchone()
+		cur.execute("SELECT content FROM root_children_negative2 WHERE root_id = ? and company_id = ?", (root_id, company_id))
+		for child_content, in cur.fetchall():
 			sent0.append(root_content)
 			sent1.append(child_content)
 			labels.append([0, 1])
@@ -150,10 +132,9 @@ def test_loop(dataloader, epoch):
 def main():
 	with database.connect() as con:
 		cur = con.cursor()
-		train_ids, test_ids = train_test_root_ids(cur)
-		sent0_train, sent1_train, labels_train = prepare_data(cur, train_ids)
-		sent0_test, sent1_test, labels_test = prepare_data(cur, test_ids)
-		print(len(sent0_train))
+		train_roots, test_roots = train_test_roots(cur)
+		sent0_train, sent1_train, labels_train = prepare_data(cur, train_roots)
+		sent0_test, sent1_test, labels_test = prepare_data(cur, test_roots)
 		encodings_train = tokenizer(sent0_train, sent1_train, return_tensors="pt", max_length=512, truncation=True, padding="max_length")
 		encodings_train["labels"] = torch.tensor(labels_train, dtype=torch.float64)
 		dataset_train = EventDataset(encodings_train)
