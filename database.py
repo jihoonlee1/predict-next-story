@@ -62,14 +62,6 @@ CREATE TABLE IF NOT EXISTS root_children_negative2(
 	company_id INTEGER NOT NULL REFERENCES companies(id),
 	content    TEXT    NOT NULL
 );
-""",
-"""
-CREATE TABLE IF NOT EXISTS root_children_negative3(
-	id         INTEGER NOT NULL PRIMARY KEY,
-	root_id    INTEGER NOT NULL REFERENCES root_events(id),
-	company_id INTEGER NOT NULL REFERENCES companies(id),
-	content    TEXT    NOT NULL
-);
 """
 ]
 
