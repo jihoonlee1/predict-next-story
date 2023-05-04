@@ -1,7 +1,7 @@
 [
 	{
 		"company_id": 2,
-		"alias": ["Saudi Aramco", "Saudi Arabian Oil Co\\."]
+		"alias": ["Saudi Aramco", "Saudi Arabian Oil Co\\.", "Saudi Arabian Oil Company \\(Saudi Aramco\\)"]
 	},
 	{
 		"company_id": 3,
@@ -229,7 +229,7 @@
 	},
 	{
 		"company_id": 350,
-		"alias": ["BRI", "Bank Rakyat Indonesia", "Bank Rakyat Indonesia \\(Persero\\) Tbk"]
+		"alias": ["BRI", "Bank Rakyat Indonesia", "Bank Rakyat Indonesia \\(Persero\\) Tbk", "Bank Rakyat Indonesia \\(BRI\\)"]
 	},
 	{
 		"company_id": 356,
@@ -273,7 +273,7 @@
 	},
 	{
 		"company_id": 494,
-		"alias": ["Evergreen Marine Corp\\. \\(Taiwan\\) Ltd\\."]
+		"alias": ["Evergreen Marine Corp\\. \\(Taiwan\\) Ltd\\.", "Evergreen Marine Corp\\. \\(Taiwan\\)"]
 	},
 	{
 		"company_id": 496,
@@ -353,7 +353,7 @@
 	},
 	{
 		"company_id": 663,
-		"alias": ["Fidelity National Information Services Inc\\. \\(NYSE: FIS\\)", "FIS", "Fidelity National Information Services", "Fidelity National Information Services Inc\\."]
+		"alias": ["Fidelity National Information Services Inc\\. \\(NYSE: FIS\\)", "FIS", "Fidelity National Information Services", "Fidelity National Information Services Inc\\.", "Fidelity National Information \\(FIS\\)"]
 	},
 	{
 		"company_id": 672,
@@ -530,6 +530,10 @@
 	{
 		"company_id": 951,
 		"alias": ["SRCB"]
+	},
+	{
+		"company_id": 961,
+		"alias": ["Gerdau \\(Cosigua\\)"]
 	},
 	{
 		"company_id": 963,
@@ -796,6 +800,10 @@
 		"alias": ["K Line"]
 	},
 	{
+		"company_id": 1467,
+		"alias": ["First Citizens Bank \\(NC\\)"]
+	},
+	{
 		"company_id": 264,
 		"alias": ["DENSO"]
 	},
@@ -914,5 +922,25 @@
 	{
 		"company_id": 1432,
 		"alias": ["Suntory Kyushu Kumamoto Plant", "Suntory", "Suntory Kyushu", "Suntory Kyushu Kumamoto"]
+	},
+	{
+		"company_id": 1519,
+		"alias": ["Wharf \\(Holdings\\)"]
+	},
+	{
+		"company_id": 1600,
+		"alias": ["ZTO Express \\(Cayman\\)"]
+	},
+	{
+		"company_id": 1683,
+		"alias": ["China Resources Beer \\(Holdings\\)"]
+	},
+	{
+		"company_id": 1825,
+		"alias": ["ICON \\(Ireland\\)"]
+	},
+	{
+		"company_id": 1835,
+		"alias": ["Titan \\(India\\)"]
 	}
 ]
