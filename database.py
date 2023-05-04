@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS roots(
 """
 CREATE TABLE IF NOT EXISTS root_children_positive0(
 	id         INTEGER NOT NULL PRIMARY KEY,
-	root_id    INTEGER NOT NULL REFERENCES root_events(id),
+	root_id    INTEGER NOT NULL REFERENCES roots(id),
 	company_id INTEGER NOT NULL REFERENCES companies(id),
 	content    TEXT    NOT NULL
 );
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS root_children_positive0(
 """
 CREATE TABLE IF NOT EXISTS root_children_positive1(
 	id         INTEGER NOT NULL PRIMARY KEY,
-	root_id    INTEGER NOT NULL REFERENCES root_events(id),
+	root_id    INTEGER NOT NULL REFERENCES roots(id),
 	company_id INTEGER NOT NULL REFERENCES companies(id),
 	content    TEXT    NOT NULL
 );
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS root_children_positive1(
 """
 CREATE TABLE IF NOT EXISTS root_children_negative0(
 	id         INTEGER NOT NULL PRIMARY KEY,
-	root_id    INTEGER NOT NULL REFERENCES root_events(id),
+	root_id    INTEGER NOT NULL REFERENCES roots(id),
 	company_id INTEGER NOT NULL REFERENCES companies(id),
 	content    TEXT    NOT NULL
 );
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS root_children_negative0(
 """
 CREATE TABLE IF NOT EXISTS root_children_negative1(
 	id         INTEGER NOT NULL PRIMARY KEY,
-	root_id    INTEGER NOT NULL REFERENCES root_events(id),
+	root_id    INTEGER NOT NULL REFERENCES roots(id),
 	company_id INTEGER NOT NULL REFERENCES companies(id),
 	content    TEXT    NOT NULL
 );
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS root_children_negative1(
 """
 CREATE TABLE IF NOT EXISTS root_children_negative2(
 	id         INTEGER NOT NULL PRIMARY KEY,
-	root_id    INTEGER NOT NULL REFERENCES root_events(id),
+	root_id    INTEGER NOT NULL REFERENCES roots(id),
 	company_id INTEGER NOT NULL REFERENCES companies(id),
 	content    TEXT    NOT NULL
 );
@@ -116,6 +116,7 @@ def main():
 		cur = con.cursor()
 		for st in statements:
 			cur.execute(st)
+		_add_companies(con, cur)
 		_add_alias(con, cur)
 
 
