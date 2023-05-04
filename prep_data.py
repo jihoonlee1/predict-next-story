@@ -96,6 +96,8 @@ def _prep_negative2(con, cur):
 				continue
 			for item in distinct_prop_nouns:
 				random_proper_noun = all_proper_nouns[random.randint(0, num_all_proper_nouns-1)]
+				while re.findall(rf"{alias_str}", random_proper_noun):
+					random_proper_noun = all_proper_nouns[random.randint(0, num_all_proper_nouns-1)]
 				content = re.sub(rf"\[\[{item}\]\]", f"[[{random_proper_noun}]]", content)
 			cur.execute("SELECT ifnull(max(id)+1, 0) FROM root_children_negative2")
 			new_id, = cur.fetchone()
@@ -106,6 +108,6 @@ def _prep_negative2(con, cur):
 if __name__ == "__main__":
 	with database.connect() as con:
 		cur = con.cursor()
-		_remove_unwanted(con, cur)
-		_prep_negative1(con, cur)
+		# _remove_unwanted(con, cur)
+		# _prep_negative1(con, cur)
 		_prep_negative2(con, cur)

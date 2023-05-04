@@ -843,3 +843,675 @@ IBM Cloud Private
 IBM Cloud Migration Factory
 IBM Cloud for VMware Solutions
 IBM Watson Assistant
+Intel
+Intel Core
+Intel Xeon
+Intel Optane
+Intel NUC
+Intel RealSense
+Intel SSD
+Intel Ethernet
+Intel vPro
+Intel McAfee
+Intel Mobileye
+Microsoft
+Microsoft Windows
+Microsoft Office
+Microsoft Surface
+Microsoft Dynamics 365
+Microsoft Dynamics CRM
+Microsoft Azure
+Microsoft Visual Studio
+Microsoft SQL Server
+Microsoft SharePoint
+Microsoft Exchange
+Microsoft Teams
+Microsoft Skype for Business
+Microsoft Power BI
+Microsoft Power Apps
+Microsoft Power Automate
+Microsoft Stream
+Microsoft Intune
+Microsoft System Center
+Microsoft SCCM
+Microsoft SCOM
+Microsoft SCVMM
+Microsoft Virtual Desktop
+Microsoft Endpoint Manager
+Microsoft Defender
+Microsoft Office 365
+Microsoft 365
+Amazon
+Amazon Web Services (AWS)
+Amazon Elastic Compute Cloud (EC2)
+Amazon Simple Storage Service (S3)
+Amazon Lambda
+Amazon Elastic Block Store (EBS)
+Amazon Relational Database Service (RDS)
+Amazon Aurora
+Amazon DynamoDB
+Amazon Redshift
+Amazon Elastic MapReduce (EMR)
+Amazon Glacier
+Amazon CloudFront
+Amazon CloudWatch
+Amazon Route 53
+Amazon Virtual Private Cloud (VPC)
+Amazon Direct Connect
+Amazon WorkSpaces
+Amazon WorkDocs
+Amazon Chime
+Amazon Alexa
+Amazon Fire
+Amazon Kindle
+Amazon Prime
+Amazon Music
+Amazon Video
+Amazon Fresh
+Amazon Go
+Amazon Robotics
+Amazon Marketplace
+Amazon Fulfillment
+Amazon Advertising
+Google
+Google Search
+Google Drive
+Google Docs
+Google Sheets
+Google Slides
+Google Forms
+Google Meet
+Google Hangouts
+Google Calendar
+Google Maps
+Google Earth
+Google Street View
+Google Translate
+Google Assistant
+Google Home
+Google Nest
+Google Pixel
+Google Chrome
+Google Android
+Google Play
+Google AdWords
+Google AdSense
+Google Analytics
+Google Tag Manager
+Google Optimize
+Google Cloud Platform (GCP)
+Google Compute Engine (GCE)
+Google Cloud Storage
+Google Cloud SQL
+Google Cloud Datastore
+Google Cloud Bigtable
+Google Cloud Spanner
+Google Cloud Pub/Sub
+Google Cloud Functions
+Google Cloud Vision
+Google Cloud Translation
+Google Cloud Speech-to-Text
+Google Cloud Text-to-Speech
+Google Cloud Natural Language
+Google Cloud AutoML
+Google Cloud AI Platform
+Google Kubernetes Engine (GKE)
+Google Firebase
+Google G Suite
+Google Workspace
+Facebook
+Facebook Messenger
+Facebook Live
+Facebook Watch
+Facebook Portal
+Facebook Ads
+Facebook Business Manager
+Instagram
+Instagram Stories
+Instagram Reels
+Instagram IGTV
+WhatsApp
+Oculus
+Oculus Rift
+Samsung Galaxy
+Samsung Galaxy Note
+Samsung Galaxy S
+Samsung Galaxy A
+Samsung Galaxy M
+Samsung Galaxy Tab
+Samsung Galaxy Watch
+Samsung Galaxy Buds
+Samsung Gear
+Samsung SmartThings
+Samsung DeX
+Samsung Knox
+Samsung Pay
+Samsung Internet
+Samsung Health
+Samsung TV
+Samsung The Frame
+Samsung The Serif
+Samsung The Sero
+Samsung QLED
+Samsung Odyssey
+Samsung Notebook
+Samsung Chromebook
+Samsung SSD
+Samsung Semiconductor
+Samsung Exynos
+Samsung ISOCELL
+Samsung Harman Kardon
+Samsung AKG
+LG
+LG OLED
+LG NanoCell
+LG Super UHD
+LG UltraGear
+LG Gram
+LG Tone
+LG Tone Free
+LG VELVET
+LG Stylo
+LG K
+LG Q
+LG X
+LG G
+LG Watch
+LG Tone Platinum
+LG TONE Flex
+LG TONE Studio
+LG TONE Ultra
+LG TONE Pro
+LG TONE Triumph
+LG TONE SE
+LG OLED evo
+LG NanoCell evo
+LG Signature
+LG OLED GX
+LG OLED ZX
+LG OLED WX
+LG OLED R
+LG OLED C
+LG ThinQ
+LG InstaView
+LG VRF
+LG PuriCare
+LG CordZero
+LG Gram 17
+LG XBOOM
+LG XBOOM Go
+LG XBOOM AI ThinQ
+LG gram 16
+LG gram 14
+LG gram 2-in-1
+LG UltraFine
+Dell
+Dell Inspiron
+Dell XPS
+Dell Latitude
+Dell Precision
+Dell G
+Dell Alienware
+Dell UltraSharp
+Dell P
+Dell SE
+Dell S
+Dell Vostro
+Dell OptiPlex
+Dell PowerEdge
+Dell Wyse
+Dell EMC
+Dell Technologies
+Dell G5
+Dell G7
+Dell G15
+Dell G17
+Dell XPS 13
+Dell XPS 15
+Dell XPS 17
+Dell Alienware m15
+Dell Alienware m17
+Dell Inspiron 13
+Dell Inspiron 14
+Dell Inspiron 15
+Dell Inspiron 16
+Dell Inspiron 17
+Dell Latitude 14
+Dell Latitude 15
+Barack Obama
+Oprah Winfrey
+Bill Gates
+Beyoncé
+Elon Musk
+Tom Brady
+Taylor Swift
+Jeff Bezos
+Angelina Jolie
+Cristiano Ronaldo
+Kim Kardashian
+Mark Zuckerberg
+Jennifer Lopez
+Michael Jordan
+Emma Watson
+Leonardo DiCaprio
+Ariana Grande
+Lady Gaga
+Warren Buffett
+Ellen DeGeneres
+Prince William
+Kate Middleton
+Meghan Markle
+Prince Harry
+Princess Diana
+Donald Trump
+Joe Biden
+Kamala Harris
+Nelson Mandela
+Martin Luther King Jr.
+Malala Yousafzai
+Bill Clinton
+Hillary Clinton
+Justin Bieber
+Rihanna
+David Beckham
+Serena Williams
+Roger Federer
+Usain Bolt
+Michael Phelps
+Kobe Bryant
+Tiger Woods
+Shakira
+Selena Gomez
+Madonna
+Whitney Houston
+Mariah Carey
+Celine Dion
+Adele
+Ed Sheeran
+Justin Timberlake
+Jay-Z
+Kanye West
+Brad Pitt
+Johnny Depp
+Julia Roberts
+Meryl Streep
+Sandra Bullock
+Angelica Huston
+Emma Stone
+Natalie Portman
+Scarlett Johansson
+Jennifer Aniston
+Ellen Pompeo
+Kim Novak
+Brie Larson
+Anne Hathaway
+Daniel Day-Lewis
+Robert De Niro
+Al Pacino
+Marlon Brando
+James Dean
+Audrey Hepburn
+Marilyn Monroe
+Elizabeth Taylor
+Katharine Hepburn
+Grace Kelly
+Sophia Loren
+Gina Lollobrigida
+Ingrid Bergman
+Greta Garbo
+Vivien Leigh
+Laurence Olivier
+Clark Gable
+Gregory Peck
+Sidney Poitier
+Paul Newman
+Steve McQueen
+Clint Eastwood
+Sean Connery
+Harrison Ford
+Tom Hanks
+Denzel Washington
+Samuel L. Jackson
+Morgan Freeman
+Will Smith
+Jason Momoa
+Dwayne Johnson
+Chris Hemsworth
+Chris Evans
+Robert Downey Jr.
+Hugh Jackman
+Angelina Jolie
+Scarlett Johansson
+Margot Robbie
+Gal Gadot
+Emma Watson
+Dell Precision 5550
+Dell Precision 5750
+Dell Precision 7550
+Dell Precision 7750
+Dell UltraSharp 27
+Dell UltraSharp 32
+Dell P2419H
+Dell P2719H
+Dell P2719HC
+Dell P2720DC
+Dell P3221D
+Dell SE2419H
+Dell SE2719H
+Dell SE2719HR
+Dell S2419H
+Dell S2419HN
+Dell S2719H
+Dell S2719HN
+Dell Vostro 14
+Dell Vostro 15
+Dell OptiPlex 3080
+Dell OptiPlex 5080
+Dell OptiPlex 7080
+Dell PowerEdge R240
+Dell PowerEdge R340
+Dell PowerEdge R440
+Dell PowerEdge R540
+Dell PowerEdge R640
+Dell PowerEdge R740
+Dell PowerEdge R740xd
+Dell PowerEdge R7525
+Dell PowerEdge R840
+Dell PowerEdge R940
+Dell PowerEdge R940xa
+Dell PowerEdge R7525
+Dell EMC PowerStore
+Dell EMC PowerMax
+Dell EMC Unity XT
+Dell Wyse 5070
+Dell Wyse 5470
+Dell Wyse 5470 All-In-One
+Dell Wyse 5470 Extended
+Dell Wyse 5470 Mobile
+Dell Wyse 5470 Rackmount
+Dell Wyse 5470 All-In-One Industrial
+Dell Wyse 3040
+Dell Wyse 5470 Mobile
+Dell Wyse 5470 All-In-One
+Dell Wyse 5470 All-In-One Industrial
+Dell Wyse 5070 Extended
+Dell Wyse 5070 Mobile
+Dell Wyse 5070 Thin Client
+Dell Wyse 5070 Extended Thin Client
+Dell Wyse 5070 Mobile Thin Client
+Dell P2418D
+Dell P2419HC
+Dell P2419HE
+Dell P2720DS
+Dell P3421W
+Dell P4317Q
+Dell S2240L
+Dell S2716DG
+Dell UltraSharp 34
+Dell UltraSharp U2415
+Dell UltraSharp U2718Q
+Dell UltraSharp U3219Q
+Dell UltraSharp U3419W
+Dell UltraSharp UP2516D
+Afghanistan
+Albania
+Algeria
+Andorra
+Angola
+Antigua and Barbuda
+Argentina
+Armenia
+Australia
+Austria
+Azerbaijan
+Bahamas
+Bahrain
+Bangladesh
+Barbados
+Belarus
+Belgium
+Belize
+Benin
+Bhutan
+Bolivia
+Bosnia and Herzegovina
+Botswana
+Brazil
+Brunei
+Bulgaria
+Burkina Faso
+Burundi
+Cabo Verde
+Cambodia
+Cameroon
+Canada
+Central African Republic (CAR)
+Chad
+Chile
+China
+Colombia
+Comoros
+Democratic Republic of the Congo
+Republic of the Congo
+Costa Rica
+Cote d'Ivoire
+Croatia
+Cuba
+Cyprus
+Czech Republic (Czechia)
+Denmark
+Djibouti
+Dominica
+Dominican Republic
+Ecuador
+Egypt
+El Salvador
+Equatorial Guinea
+Eritrea
+Estonia
+Eswatini (formerly Swaziland)
+Ethiopia
+Fiji
+Finland
+France
+Gabon
+Gambia
+Georgia
+Germany
+Ghana
+Greece
+Grenada
+Guatemala
+Guinea
+Guinea-Bissau
+Guyana
+Haiti
+Honduras
+Hungary
+Iceland
+India
+Indonesia
+Iran
+Iraq
+Ireland
+Israel
+Italy
+Jamaica
+Japan
+Jordan
+Kazakhstan
+Kenya
+Kiribati
+Kosovo
+Kuwait
+Kyrgyzstan
+Laos
+Latvia
+Lebanon
+Lesotho
+Liberia
+Libya
+Liechtenstein
+Lithuania
+Luxembourg
+Madagascar
+Malawi
+Malaysia
+Maldives
+Mali
+Malta
+Marshall Islands
+Mauritania
+Mauritius
+Mexico
+Micronesia
+Moldova
+Monaco
+Mongolia
+Montenegro
+Morocco
+Mozambique
+Myanmar (formerly Burma)
+Namibia
+Nauru
+Nepal
+Netherlands
+New Zealand
+Nicaragua
+Niger
+Nigeria
+North Korea
+North Macedonia (formerly Macedonia)
+Norway
+Oman
+Pakistan
+Palau
+Palestine
+Panama
+Papua New Guinea
+Paraguay
+Peru
+Philippines
+Poland
+Portugal
+Qatar
+Romania
+Russia
+Rwanda
+Saint Kitts and Nevis
+Saint Lucia
+Saint Vincent and the Grenadines
+Samoa
+San Marino
+Sao Tome and Principe
+Saudi Arabia
+Senegal
+Serbia
+Seychelles
+Sierra Leone
+Singapore
+Apple iPhone
+Samsung Galaxy smartphone
+Adidas sneakers
+Nike running shoes
+Microsoft Windows operating system
+Sony PlayStation gaming console
+Nintendo Switch gaming console
+Canon EOS camera
+Nikon DLSR camera
+Amazon Echo smart speaker
+Google Nest smart thermostat
+Bose QuietComfort headphones
+Beats by Dre wireless earbuds
+Fitbit fitness tracker
+Garmin GPS watch
+GoPro action camera
+HP Pavilion laptop
+Dell XPS desktop computer
+Lenovo ThinkPad laptop
+ASUS gaming laptop
+Acer Chromebook
+LG OLED TV
+Samsung QLED TV
+Sony BRAVIA TV
+Vizio soundbar
+Sonos smart speaker
+JBL Bluetooth speaker
+Nestle Kit Kat chocolate bar
+Hershey's chocolate chips
+Coca-Cola soft drink
+PepsiCo soft drink
+Kraft Macaroni & Cheese
+Kellogg's Special K cereal
+General Mills Cheerios cereal
+Clorox bleach
+Lysol disinfectant spray
+Tide laundry detergent
+Gain fabric softener
+Pampers diapers
+Huggies baby wipes
+Johnson & Johnson baby shampoo
+Dove soap
+Pantene shampoo
+Herbal Essences conditioner
+Garnier hair dye
+Maybelline mascara
+Covergirl foundation
+L'Oreal Paris lipstick
+Estee Lauder perfume
+Calvin Klein cologne
+Louis Vuitton handbag
+Gucci wallet
+Rolex watch
+Tiffany & Co. diamond necklace
+Cartier engagement ring
+Nike golf clubs
+Callaway golf balls
+Titleist golf gloves
+TaylorMade golf bag
+Spalding basketball
+Wilson tennis racket
+Dunlop squash racket
+Adidas soccer ball
+Puma football cleats
+Under Armour basketball shoes
+New Balance running shorts
+Reebok yoga pants
+Brooks Brothers dress shirt
+Banana Republic suit jacket
+Ralph Lauren polo shirt
+Patagonia fleece jacket
+The North Face backpack
+Columbia hiking boots
+Timberland work boots
+Ray-Ban sunglasses
+Oakley snow goggles
+Burton snowboard
+Salomon ski boots
+Fischer skis
+Yakima bike rack
+Thule roof box
+Michelin tires
+Goodyear windshield wipers
+Mobil 1 motor oil
+Shell gasoline
+ExxonMobil diesel fuel
+Tesla Model S electric car
+Toyota Prius hybrid car
+Chevrolet Silverado pickup truck
+Ford Mustang sports car
+BMW X5 SUV
+Mercedes-Benz E-Class sedan
+Audi A4 luxury car
+Subaru Outback crossover
+Jeep Wrangler off-road vehicle
+Dodge Challenger muscle car
+Porsche 911 sports car
+Ferrari F8 Tributo exotic car
+Lamborghini Aventador supercar
+Bugatti Chiron hypercar
+Airbnb online accommodation booking service
+Booking.com travel booking website
+Expedia travel booking website
+TripAdvisor travel review website
+Uber ride-hailing app
