@@ -7,13 +7,13 @@ from transformers import BertTokenizer, BertForNextSentencePrediction, logging
 
 logging.set_verbosity_error()
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-learning_rate = 0.00003
+learning_rate = 0.0003
 model = BertForNextSentencePrediction.from_pretrained("bert-base-uncased").to(device)
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate)
 loss_fn = torch.nn.BCEWithLogitsLoss()
-batch_size = 8 
-epochs = 20
+batch_size = 4 
+epochs = 10
 
 
 def train_test_roots(cur):
