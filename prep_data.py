@@ -1,8 +1,13 @@
 import database
 import random
 import re
-import nltk
-from nltk import Tree
+
+
+def _all_proper_nouns():
+	with open("proper_nouns.txt", "r") as f:
+		proper_nouns = [item.strip() for item in f.readlines()]
+		proper_nouns = [item for item in proper_nouns if item != ""]
+	return proper_nouns
 
 
 def _remove_unwanted(con, cur):
@@ -26,7 +31,7 @@ def _remove_unwanted(con, cur):
 	con.commit()
 
 
-def _prep_negative2(con, cur):
+def _prep_negative1(con, cur):
 	cur.execute("SELECT id, company_id FROM roots")
 	for root_id, company_id in cur.fetchall():
 		print(root_id)
@@ -46,15 +51,18 @@ def _prep_negative2(con, cur):
 		for content, in positives:
 			other_company_name, = other_companies[random.randint(0, len(other_companies)-1)]
 			content = re.sub(rf"{alias_str}", other_company_name, content)
-			cur.execute("SELECT ifnull(max(id)+1, 0) FROM root_children_negative2")
+			cur.execute("SELECT ifnull(max(id)+1, 0) FROM root_children_negative1")
 			new_id, = cur.fetchone()
-			cur.execute("INSERT INTO root_children_negative2 VALUES(?,?,?,?)", (new_id, root_id, company_id, content))
+			cur.execute("INSERT INTO root_children_negative1 VALUES(?,?,?,?)", (new_id, root_id, company_id, content))
 	con.commit()
 
 
-def _prep_negative3(con, cur):
+def _prep_negative2(con, cur):
+	all_proper_nouns = _all_proper_nouns()
+	num_all_proper_nouns = len(all_proper_nouns)
 	cur.execute("SELECT id, company_id FROM roots")
 	for root_id, company_id in cur.fetchall():
+		print(root_id)
 		cur.execute("SELECT name FROM companies WHERE id = ?", (company_id, ))
 		company_name, = cur.fetchone()
 		company_name = company_name.replace("(", "\\(").replace(")", "\\)").replace(".", "\\.")
@@ -86,15 +94,18 @@ def _prep_negative3(con, cur):
 					distinct_prop_nouns.remove(item)
 			if not distinct_prop_nouns:
 				continue
-			count = 0
 			for item in distinct_prop_nouns:
-				content = re.sub(rf"{item}", f"{count}", content)
-				count += 1
-			print(content)
-		break
+				random_proper_noun = all_proper_nouns[random.randint(0, num_all_proper_nouns-1)]
+				content = re.sub(rf"\[\[{item}\]\]", f"[[{random_proper_noun}]]", content)
+			cur.execute("SELECT ifnull(max(id)+1, 0) FROM root_children_negative2")
+			new_id, = cur.fetchone()
+			cur.execute("INSERT INTO root_children_negative2 VALUES(?,?,?,?)", (new_id, root_id, company_id, content))
+	con.commit()
 
 
 if __name__ == "__main__":
 	with database.connect() as con:
 		cur = con.cursor()
-		_prep_negative3(con, cur)
+		_remove_unwanted(con, cur)
+		_prep_negative1(con, cur)
+		_prep_negative2(con, cur)
