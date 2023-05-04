@@ -40,6 +40,14 @@ CREATE TABLE IF NOT EXISTS root_children_positive0(
 );
 """,
 """
+CREATE TABLE IF NOT EXISTS root_children_positive1(
+	id         INTEGER NOT NULL PRIMARY KEY,
+	root_id    INTEGER NOT NULL REFERENCES root_events(id),
+	company_id INTEGER NOT NULL REFERENCES companies(id),
+	content    TEXT    NOT NULL
+);
+""",
+"""
 CREATE TABLE IF NOT EXISTS root_children_negative0(
 	id         INTEGER NOT NULL PRIMARY KEY,
 	root_id    INTEGER NOT NULL REFERENCES root_events(id),
