@@ -31,26 +31,31 @@ def prepare_data(cur, roots):
 	sent1 = []
 	labels = []
 	for root_id, company_id, root_content in roots:
+		root_content = root_content.replace("[[", "").replace("]]", "")
 		cur.execute("SELECT content FROM root_children_positive0 WHERE root_id = ? and company_id = ?", (root_id, company_id))
 		for child_content, in cur.fetchall():
+			child_content = child_content.replace("[[", "").replace("]]", "")
 			sent0.append(root_content)
 			sent1.append(child_content)
 			labels.append([1, 0])
 
 		cur.execute("SELECT content FROM root_children_negative0 WHERE root_id = ? and company_id = ?", (root_id, company_id))
 		for child_content, in cur.fetchall():
+			child_content = child_content.replace("[[", "").replace("]]", "")
 			sent0.append(root_content)
 			sent1.append(child_content)
 			labels.append([0, 1])
 
 		cur.execute("SELECT content FROM root_children_negative1 WHERE root_id = ? and company_id = ?", (root_id, company_id))
 		for child_content, in cur.fetchall():
+			child_content = child_content.replace("[[", "").replace("]]", "")
 			sent0.append(root_content)
 			sent1.append(child_content)
 			labels.append([0, 1])
 
 		cur.execute("SELECT content FROM root_children_negative2 WHERE root_id = ? and company_id = ?", (root_id, company_id))
 		for child_content, in cur.fetchall():
+			child_content = child_content.replace("[[", "").replace("]]", "")
 			sent0.append(root_content)
 			sent1.append(child_content)
 			labels.append([0, 1])
