@@ -1,11 +1,11 @@
 [
 	{
 		"company_id": 2,
-		"alias": ["Saudi Aramco", "Saudi Arabian Oil Co\\.", "Saudi Arabian Oil Company \\(Saudi Aramco\\)"]
+		"alias": ["Saudi Aramco", "Saudi Arabian Oil Co.", "Saudi Arabian Oil Company (Saudi Aramco)"]
 	},
 	{
 		"company_id": 3,
-		"alias": ["J\\.P\\. Morgan"]
+		"alias": ["J.P. Morgan"]
 	},
 	{
 		"company_id": 13,
@@ -21,7 +21,7 @@
 	},
 	{
 		"company_id": 29,
-		"alias": ["Postal Savings Bank of China \\(PSBC\\)", "PSBC", "Postal Savings Bank of China"]
+		"alias": ["Postal Savings Bank of China (PSBC)", "PSBC", "Postal Savings Bank of China"]
 	},
 	{
 		"company_id": 30,
@@ -37,7 +37,7 @@
 	},
 	{
 		"company_id": 52,
-		"alias": ["NTT Ltd\\.", "NTT", "NTT Corporation"]
+		"alias": ["NTT Ltd.", "NTT", "NTT Corporation"]
 	},
 	{
 		"company_id": 53,
@@ -97,7 +97,7 @@
 	},
 	{
 		"company_id": 131,
-		"alias": ["U\\.S\\. Bancorp"]
+		"alias": ["U.S. Bancorp"]
 	},
 	{
 		"company_id": 137,
@@ -113,7 +113,7 @@
 	},
 	{
 		"company_id": 160,
-		"alias": ["Maersk"]
+		"alias": ["Maersk", "A.P. Moller - Maersk"]
 	},
 	{
 		"company_id": 164,
@@ -157,7 +157,7 @@
 	},
 	{
 		"company_id": 231,
-		"alias": ["NV Gotion", "Gotion Hi-tech Co\\."]
+		"alias": ["NV Gotion", "Gotion Hi-tech Co."]
 	},
 	{
 		"company_id": 233,
@@ -165,7 +165,7 @@
 	},
 	{
 		"company_id": 236,
-		"alias": ["Archer-Daniels-Midland Company \\(ADM\\)", "Archer-Daniels-Midland Company", "ADM"]
+		"alias": ["Archer-Daniels-Midland Company (ADM)", "Archer-Daniels-Midland Company", "ADM"]
 	},
 	{
 		"company_id": 245,
@@ -173,7 +173,7 @@
 	},
 	{
 		"company_id": 250,
-		"alias": ["Power Corporation of Canada \\(TSX: POW\\)", "Power Corporation of Canada", "POW", "Power Corporation"]
+		"alias": ["Power Corporation of Canada (TSX: POW)", "Power Corporation of Canada", "POW", "Power Corporation"]
 	},
 	{
 		"company_id": 251,
@@ -197,11 +197,11 @@
 	},
 	{
 		"company_id": 304,
-		"alias": ["Intercontinental Exchange \\(ICE\\)", "ICE", "Intercontinental Exchange"]
+		"alias": ["Intercontinental Exchange (ICE)", "ICE", "Intercontinental Exchange"]
 	},
 	{
 		"company_id": 305,
-		"alias": ["The TJX Companies, Inc\\. \\(TJX\\)", "TJX"]
+		"alias": ["The TJX Companies, Inc. (TJX)", "TJX"]
 	},
 	{
 		"company_id": 316,
@@ -221,7 +221,7 @@
 	},
 	{
 		"company_id": 339,
-		"alias": ["Marsh McLennan", "Marsh McLennan \\(NYSE: MMC\\)", "MMC"]
+		"alias": ["Marsh McLennan", "Marsh McLennan (NYSE: MMC)", "MMC"]
 	},
 	{
 		"company_id": 348,
@@ -229,7 +229,7 @@
 	},
 	{
 		"company_id": 350,
-		"alias": ["BRI", "Bank Rakyat Indonesia", "Bank Rakyat Indonesia \\(Persero\\) Tbk", "Bank Rakyat Indonesia \\(BRI\\)"]
+		"alias": ["BRI", "Bank Rakyat Indonesia", "Bank Rakyat Indonesia (Persero) Tbk", "Bank Rakyat Indonesia (BRI)"]
 	},
 	{
 		"company_id": 356,
@@ -241,7 +241,7 @@
 	},
 	{
 		"company_id": 360,
-		"alias": ["Kraft Heinz Co\\.", "Kraft Heinz", "Heinz"]
+		"alias": ["Kraft Heinz Co.", "Kraft Heinz", "Heinz"]
 	},
 	{
 		"company_id": 366,
@@ -261,7 +261,7 @@
 	},
 	{
 		"company_id": 415,
-		"alias": ["Greenland Holdings Corp\\.", "Greenland Group Canada"]
+		"alias": ["Greenland Holdings Corp.", "Greenland Group Canada"]
 	},
 	{
 		"company_id": 463,
@@ -273,7 +273,7 @@
 	},
 	{
 		"company_id": 494,
-		"alias": ["Evergreen Marine Corp\\. \\(Taiwan\\) Ltd\\.", "Evergreen Marine Corp\\. \\(Taiwan\\)"]
+		"alias": ["Evergreen Marine Corp. (Taiwan) Ltd.", "Evergreen Marine Corp. (Taiwan)"]
 	},
 	{
 		"company_id": 496,
@@ -293,7 +293,7 @@
 	},
 	{
 		"company_id": 550,
-		"alias": ["Air Products and Chemicals, Inc\\.", "Air Products and Chemicals", "Air Products"]
+		"alias": ["Air Products and Chemicals, Inc.", "Air Products and Chemicals", "Air Products"]
 	},
 	{
 		"company_id": 563,
@@ -305,7 +305,7 @@
 	},
 	{
 		"company_id": 578,
-		"alias": ["Raymond James Ltd\\."]
+		"alias": ["Raymond James Ltd."]
 	},
 	{
 		"company_id": 592,
@@ -313,7 +313,7 @@
 	},
 	{
 		"company_id": 593,
-		"alias": ["Vedanta Ltd", "Vedanta Ltd\\.", "Vedanta"]
+		"alias": ["Vedanta Ltd", "Vedanta Ltd.", "Vedanta"]
 	},
 	{
 		"company_id": 598,
@@ -353,7 +353,7 @@
 	},
 	{
 		"company_id": 663,
-		"alias": ["Fidelity National Information Services Inc\\. \\(NYSE: FIS\\)", "FIS", "Fidelity National Information Services", "Fidelity National Information Services Inc\\.", "Fidelity National Information \\(FIS\\)"]
+		"alias": ["Fidelity National Information Services Inc. (NYSE: FIS)", "FIS", "Fidelity National Information Services", "Fidelity National Information Services Inc.", "Fidelity National Information (FIS)"]
 	},
 	{
 		"company_id": 672,
@@ -417,7 +417,7 @@
 	},
 	{
 		"company_id": 770,
-		"alias": ["Fortis \\(Canada\\)", "Fortis"]
+		"alias": ["Fortis (Canada)", "Fortis"]
 	},
 	{
 		"company_id": 773,
@@ -425,7 +425,7 @@
 	},
 	{
 		"company_id": 801,
-		"alias": ["U\\. S\\. Steel", "Steel"]
+		"alias": ["U. S. Steel", "Steel"]
 	},
 	{
 		"company_id": 808,
@@ -477,11 +477,11 @@
 	},
 	{
 		"company_id": 858,
-		"alias": ["T\\. Rowe Price"]
+		"alias": ["T. Rowe Price"]
 	},
 	{
 		"company_id": 867,
-		"alias": ["Mitsui O\\.S\\.K\\. Lines", "Mitsui O\\.S\\.K\\. Lines, Ltd\\. \\(MOL\\)", "\\(MOL\\)", "MOL"]
+		"alias": ["Mitsui O.S.K. Lines", "Mitsui O.S.K. Lines, Ltd. (MOL)", "(MOL)", "MOL"]
 	},
 	{
 		"company_id": 868,
@@ -497,7 +497,7 @@
 	},
 	{
 		"company_id": 882,
-		"alias": ["En\\+ Group"]
+		"alias": ["En+ Group"]
 	},
 	{
 		"company_id": 898,
@@ -533,7 +533,7 @@
 	},
 	{
 		"company_id": 961,
-		"alias": ["Gerdau \\(Cosigua\\)"]
+		"alias": ["Gerdau (Cosigua)"]
 	},
 	{
 		"company_id": 963,
@@ -657,7 +657,7 @@
 	},
 	{
 		"company_id": 1172,
-		"alias": ["New World \\(video game\\)", "New World"]
+		"alias": ["New World (video game)", "New World"]
 	},
 	{
 		"company_id": 1177,
@@ -681,7 +681,7 @@
 	},
 	{
 		"company_id": 1214,
-		"alias": ["GAIL \\(India\\) Limited", "GAIL \\(India\\)", "GAIL", "Gail"]
+		"alias": ["GAIL (India) Limited", "GAIL (India)", "GAIL", "Gail"]
 	},
 	{
 		"company_id": 1215,
@@ -717,7 +717,7 @@
 	},
 	{
 		"company_id": 1289,
-		"alias": ["SBB", "Samhällsbyggnadsbolaget i Norden AB \\(publ\\) \\(SBB\\)"]
+		"alias": ["SBB", "Samhällsbyggnadsbolaget i Norden AB (publ) (SBB)"]
 	},
 	{
 		"company_id": 1300,
@@ -733,7 +733,7 @@
 	},
 	{
 		"company_id": 1313,
-		"alias": ["China Three Gorges Renewables \\(Group\\) Co., Ltd. \\(CTGR\\)", "China Three Gorges Renewables \\(Group\\)", "\\(CTGR\\)", "CTGR", "China Three Gorges Renewables"]
+		"alias": ["China Three Gorges Renewables (Group) Co., Ltd. (CTGR)", "China Three Gorges Renewables (Group)", "(CTGR)", "CTGR", "China Three Gorges Renewables"]
 	},
 	{
 		"company_id": 1314,
@@ -781,7 +781,7 @@
 	},
 	{
 		"company_id": 1401,
-		"alias": ["Packaging Corporation of America \\(PCA\\)", "Packaging Corporation of America", "PCA"]
+		"alias": ["Packaging Corporation of America (PCA)", "Packaging Corporation of America", "PCA"]
 	},
 	{
 		"company_id": 1412,
@@ -793,7 +793,7 @@
 	},
 	{
 		"company_id": 1423,
-		"alias": ["Wabtec", "WAB", "\\(NYSE: WAB\\)"]
+		"alias": ["Wabtec", "WAB", "(NYSE: WAB)"]
 	},
 	{
 		"company_id": 1424,
@@ -801,7 +801,7 @@
 	},
 	{
 		"company_id": 1467,
-		"alias": ["First Citizens Bank \\(NC\\)"]
+		"alias": ["First Citizens Bank (NC)"]
 	},
 	{
 		"company_id": 264,
@@ -837,7 +837,7 @@
 	},
 	{
 		"company_id": 610,
-		"alias": ["ONEOK", "ONEOK, Inc\\. \\(NYSE: OKE\\)"]
+		"alias": ["ONEOK", "ONEOK, Inc. (NYSE: OKE)"]
 	},
 	{
 		"company_id": 723,
@@ -853,7 +853,7 @@
 	},
 	{
 		"company_id": 873,
-		"alias": ["ASR Nederland N\\.V\\. \\(a\\.s\\.r\\.\\)", "ASR", "ASR Nederland N\\.V\\.", "a\\.s\\.r\\.", "A\\.S\\.R\\."]
+		"alias": ["ASR Nederland N.V. (a.s.r.)", "ASR", "ASR Nederland N.V.", "a.s.r.", "A.S.R."]
 	},
 	{
 		"company_id": 895,
@@ -865,7 +865,7 @@
 	},
 	{
 		"company_id": 1005,
-		"alias": ["E\\.SUN Financial", "E\\.SUN Financial Holding Co\\.\\, Ltd\\. \\(E\\.SUN FHC\\)", "E\\.SUN", "E\\.SUN FHC"]
+		"alias": ["E.SUN Financial", "E.SUN Financial Holding Co., Ltd. (E.SUN FHC)", "E.SUN", "E.SUN FHC"]
 	},
 	{
 		"company_id": 1013,
@@ -877,7 +877,7 @@
 	},
 	{
 		"company_id": 1055,
-		"alias": ["Bank of Chengdu", "BoCD", "Bank of Chengdu \\(BoCD\\)"]
+		"alias": ["Bank of Chengdu", "BoCD", "Bank of Chengdu (BoCD)"]
 	},
 	{
 		"company_id": 1180,
@@ -885,7 +885,7 @@
 	},
 	{
 		"company_id": 1236,
-		"alias": ["PCG", "PETRONAS Chemicals Group Bhd\\. \\(PCG\\)", "PETRONAS", "PETRONAS Chemicals"]
+		"alias": ["PCG", "PETRONAS Chemicals Group Bhd. (PCG)", "PETRONAS", "PETRONAS Chemicals"]
 	},
 	{
 		"company_id": 1246,
@@ -901,7 +901,7 @@
 	},
 	{
 		"company_id": 1295,
-		"alias": ["AMETEK\\, Inc\\. \\(NYSE: AME\\)", "AMETEK", "AME"]
+		"alias": ["AMETEK, Inc. (NYSE: AME)", "AMETEK", "AME"]
 	},
 	{
 		"company_id": 1330,
@@ -925,22 +925,150 @@
 	},
 	{
 		"company_id": 1519,
-		"alias": ["Wharf \\(Holdings\\)"]
+		"alias": ["Wharf (Holdings)"]
 	},
 	{
 		"company_id": 1600,
-		"alias": ["ZTO Express \\(Cayman\\)"]
+		"alias": ["ZTO Express (Cayman)"]
 	},
 	{
 		"company_id": 1683,
-		"alias": ["China Resources Beer \\(Holdings\\)"]
+		"alias": ["China Resources Beer (Holdings)"]
 	},
 	{
 		"company_id": 1825,
-		"alias": ["ICON \\(Ireland\\)"]
+		"alias": ["ICON (Ireland)"]
 	},
 	{
 		"company_id": 1835,
-		"alias": ["Titan \\(India\\)"]
+		"alias": ["Titan (India)"]
+	},
+	{
+		"company_id": 16,
+		"alias": ["Ping An Health", "Ping An Good Doctor"]
+	},
+	{
+		"company_id": 105,
+		"alias": ["SBI"]
+	},
+	{
+		"company_id": 60,
+		"alias": ["LVMH"]
+	},
+	{
+		"company_id": 58,
+		"alias": ["TSMC"]
+	},
+	{
+		"company_id": 92,
+		"alias": ["AB InBev"]
+	},
+	{
+		"company_id": 102,
+		"alias": ["Honda"]
+	},
+	{
+		"company_id": 105,
+		"alias": ["SBI"]
+	},
+	{
+		"company_id": 189,
+		"alias": ["Poly Group"]
+	},
+	{
+		"company_id": 207,
+		"alias": ["CPIC"]
+	},
+	{
+		"company_id": 216,
+		"alias": ["CR Land"]
+	},
+	{
+		"company_id": 245,
+		"alias": ["CCC"]
+	},
+	{
+		"company_id": 271,
+		"alias": ["Merck KGaA, Darmstadt, Germany"]
+	},
+	{
+		"company_id": 272,
+		"alias": ["CAIXABANK"]
+	},
+	{
+		"company_id": 346,
+		"alias": ["FAB"]
+	},
+	{
+		"company_id": 355,
+		"alias": ["Bank of Jiangsu"]
+	},
+	{
+		"company_id": 364,
+		"alias": ["JT"]
+	},
+	{
+		"company_id": 380,
+		"alias": ["POWERCHINA"]
+	},
+	{
+		"company_id": 392,
+		"alias": ["SHKP"]
+	},
+	{
+		"company_id": 399,
+		"alias": ["JCI"]
+	},
+	{
+		"company_id": 403,
+		"alias": ["CN"]
+	},
+	{
+		"company_id": 428,
+		"alias": ["Emerson"]
+	},
+	{
+		"company_id": 450,
+		"alias": ["Naturgy"]
+	},
+	{
+		"company_id": 476,
+		"alias": ["NCI"]
+	},
+	{
+		"company_id": 542,
+		"alias": ["CPKC Railway"]
+	},
+	{
+		"company_id": 544,
+		"alias": ["TEL"]
+	},
+	{
+		"company_id": 550,
+		"alias": ["APD"]
+	},
+	{
+		"company_id": 558,
+		"alias": ["CZB"]
+	},
+	{
+		"company_id": 7,
+		"alias": ["ABC"]
+	},
+	{
+		"company_id": 57,
+		"alias": ["MUFG Bank", "MUFG"]
+	},
+	{
+		"company_id": 71,
+		"alias": ["Roche"]
+	},
+	{
+		"company_id": 152,
+		"alias": ["John Deere"]
+	},
+	{
+		"company_id": 197,
+		"alias": ["Vanke"]
 	}
 ]
