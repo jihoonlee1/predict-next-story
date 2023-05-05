@@ -28,7 +28,7 @@ def _get_alias_str(cur, company_id):
 	return alias_str
 
 
-def _remove_unwanted(con, cur):
+def _clean_triple_quotes(con, cur):
 	cur.execute("SELECT id, content FROM roots")
 	for content_id, content in cur.fetchall():
 		content = re.sub(r"```(text|md)*", "", content)
@@ -51,9 +51,14 @@ def _remove_unwanted(con, cur):
 	con.commit()
 
 
+def _remove_unwanted(con, cur):
+	pass
+
+
 def _check_alias(con, cur):
 	cur.execute("SELECT id, company_id, content FROM root_children_positive0 ORDER BY company_id")
 	for event_id, company_id, content in cur.fetchall():
+		content = content.replace("[[", "").replace("]]", "")
 		alias_str = _get_alias_str(cur, company_id)
 		found = re.findall(rf"{alias_str}", content)
 		if not found:
@@ -122,4 +127,4 @@ def _prep_negative2(con, cur):
 if __name__ == "__main__":
 	with database.connect() as con:
 		cur = con.cursor()
-		_prep_negative2(con, cur)
+		_check_alias(con, cur)

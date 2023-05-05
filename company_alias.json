@@ -1070,5 +1070,37 @@
 	{
 		"company_id": 197,
 		"alias": ["Vanke"]
+	},
+	{
+		"company_id": 234,
+		"alias": ["Sun Life"]
+	},
+	{
+		"company_id": 274,
+		"alias": ["Volvo Trucks", "Volvo"]
+	},
+	{
+		"company_id": 363,
+		"alias": ["HPE", "HP"]
+	},
+	{
+		"company_id": 388,
+		"alias": ["Swiss Life Group", "Swiss Life"]
+	},
+	{
+		"company_id": 389,
+		"alias": ["Bank of Shanghai"]
+	},
+	{
+		"company_id": 415,
+		"alias": ["Greenland Holdings"]
+	},
+	{
+		"company_id": 498,
+		"alias": ["Uniqlo"]
+	},
+	{
+		"company_id": 506,
+		"alias": ["EGB", "Erste"]
 	}
 ]
