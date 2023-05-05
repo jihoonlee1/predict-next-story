@@ -1515,3 +1515,185 @@ Booking.com travel booking website
 Expedia travel booking website
 TripAdvisor travel review website
 Uber ride-hailing app
+United Nations (UN)
+World Health Organization (WHO)
+World Trade Organization (WTO)
+International Monetary Fund (IMF)
+World Bank
+European Union (EU)
+North Atlantic Treaty Organization (NATO)
+International Olympic Committee (IOC)
+Amnesty International
+Greenpeace
+Red Cross
+Doctors Without Borders (Médecins Sans Frontières)
+International Committee of the Red Cross (ICRC)
+International Criminal Court (ICC)
+International Labor Organization (ILO)
+International Atomic Energy Agency (IAEA)
+International Court of Justice (ICJ)
+International Maritime Organization (IMO)
+International Organization for Standardization (ISO)
+International Telecommunication Union (ITU)
+International Union for Conservation of Nature (IUCN)
+International Whaling Commission (IWC)
+Organization for Economic Co-operation and Development (OECD)
+Organization of American States (OAS)
+African Union (AU)
+Arab League
+Association of Southeast Asian Nations (ASEAN)
+Commonwealth of Nations
+Council of Europe
+International Federation of Red Cross and Red Crescent Societies (IFRC)
+International Federation of Association Football (FIFA)
+International Fund for Agricultural Development (IFAD)
+International Renewable Energy Agency (IRENA)
+International Rescue Committee (IRC)
+International Union for the Conservation of Nature and Natural Resources (IUCN)
+International Union of Pure and Applied Chemistry (IUPAC)
+International Union of Pure and Applied Physics (IUPAP)
+Organization for the Prohibition of Chemical Weapons (OPCW)
+Organization of African Unity (OAU)
+Organization of Petroleum Exporting Countries (OPEC)
+United Nations Children's Fund (UNICEF)
+United Nations Development Programme (UNDP)
+United Nations Educational, Scientific and Cultural Organization (UNESCO)
+United Nations Environment Programme (UNEP)
+United Nations High Commissioner for Refugees (UNHCR)
+United Nations Industrial Development Organization (UNIDO)
+United Nations Office for the Coordination of Humanitarian Affairs (OCHA)
+United Nations Population Fund (UNFPA)
+United Nations Relief and Works Agency for Palestine Refugees (UNRWA)
+United Nations University (UNU)
+World Anti-Doping Agency (WADA)
+World Meteorological Organization (WMO)
+World Intellectual Property Organization (WIPO)
+World Food Programme (WFP)
+World Intellectual Property Organization (WIPO)
+World Tourism Organization (UNWTO)
+World Wildlife Fund (WWF)
+Amnesty International USA
+Bill and Melinda Gates Foundation
+Boy Scouts of America
+Church of Scientology
+Doctors Without Borders USA
+Greenpeace USA
+Habitat for Humanity
+Human Rights Watch
+National Aeronautics and Space Administration (NASA)
+National Basketball Association (NBA)
+National Football League (NFL)
+National Geographic Society
+National Rifle Association (NRA)
+National Science Foundation (NSF)
+National Security Agency (NSA)
+New York Times
+Nobel Foundation
+North American Free Trade Agreement (NAFTA)
+Organization for Security and Co-operation in Europe (OSCE)
+Planned Parenthood
+Rotary International
+Save the Children
+Sierra Club
+The Carter Center
+The Nature Conservancy
+The Salvation Army
+United Nations Foundation
+United Way
+World Health Organization (WHO) Americas
+World Wildlife Fund (WWF) USA
+World Vision International
+4-H
+American Cancer Society
+American Civil Liberties Union (ACLU)
+American Heart Association
+American Red Cross
+American Society for the Prevention of Cruelty to Animals (ASPCA)
+Amnesty International UK
+Anti-Defamation League (ADL)
+Ashoka
+Boys & Girls Clubs of America
+CARE International
+Catholic Relief Services
+ChildFund International
+Children International
+Clinton Foundation
+Conservation International
+Council on Foreign Relations (CFR)
+Doctors Without Borders (Médecins Sans Frontières) International
+Electronic Frontier Foundation (EFF)
+Enough Project
+Feed the Children
+Feeding America
+Food and Agriculture Organization of the United Nations (FAO)
+Freedom House
+Friends of the Earth
+Girl Scouts of the USA
+Goodwill Industries International
+Habitat for Humanity International
+Human Rights Campaign
+Human Rights First
+International AIDS Society (IAS)
+International Committee of the Red Cross (ICRC) USA
+International Rescue Committee (IRC) UK
+International Rivers
+International Planned Parenthood Federation (IPPF)
+Jane Goodall Institute
+Junior Achievement
+League of Nations
+March of Dimes
+Médecins Sans Frontières (Doctors Without Borders) UK
+National Audubon Society
+National Geographic Society
+National Organization for Women (NOW)
+National Wildlife Federation
+Nature Conservancy Canada
+Nature Conservancy UK
+Oxfam International
+Peace Corps
+People for the Ethical Treatment of Animals (PETA)
+Planned Parenthood Federation of America
+Project HOPE
+Project Bread
+Public Broadcasting Service (PBS)
+Rainforest Alliance
+Reporters Without Borders
+Save the Children UK
+Sea Shepherd Conservation Society
+Sierra Club Foundation
+Smile Train
+Susan G. Komen for the Cure
+The Carter Center UK
+The Commonwealth Fund
+The Elders
+The Hunger Project
+The ONE Campaign
+The Rockefeller Foundation
+The Rotary Foundation
+The Salvation Army USA
+The United Nations Association of the United States of America (UNA-USA)
+The World Bank Group
+The World Economic Forum
+The World Food Prize
+The World Wide Fund for Nature (WWF) International
+UNICEF UK
+United Nations Association (UK)
+United Nations Development Programme (UNDP) USA
+United Nations Foundation UK
+United Nations Global Compact
+United Nations High Commissioner for Human Rights (OHCHR)
+United Nations Industrial Development Organization (UNIDO) USA
+United Nations Volunteers
+Water.org
+Wildlife Conservation Society
+World Animal Protection
+World Association of Girl Guides and Girl Scouts
+World Economic Forum USA
+World Food Program USA
+World Health Organization (WHO) Europe
+World Health Organization (WHO) Western Pacific
+World Jewish Congress
+World Resources Institute
+World Vision USA
+YMCA
+Amnesty International
