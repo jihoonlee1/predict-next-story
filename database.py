@@ -93,6 +93,9 @@ def _add_companies(con, cur):
 			profits = c["profits"]
 			assets = c["assets"]
 			market_value = c["marketValue"]
+			cur.execute("SELECT 1 FROM companies WHERE name = ?", (name, ))
+			if cur.fetchone() is not None:
+				break
 			cur.execute("SELECT ifnull(max(id)+1, 0) FROM companies")
 			company_id, = cur.fetchone()
 			cur.execute("INSERT INTO companies VALUES(?,?,?,?,?,?,?,?,?)",
@@ -112,7 +115,7 @@ def _add_alias(con, cur):
 
 
 def main():
-	with connect(mode="rwc") as con:
+	with connect(mode="rw") as con:
 		cur = con.cursor()
 		for st in statements:
 			cur.execute(st)
