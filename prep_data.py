@@ -74,8 +74,9 @@ def _prep_negative1(con, cur):
 		cur.execute("SELECT content FROM root_children_positive0 WHERE root_id = ? AND company_id = ?", (root_id, company_id))
 		positives = cur.fetchall()
 		for content, in positives:
-			has_original_company = re.findall(rf"{alias_str}", content)
-			if not has_original_company:
+			content = content.replace("[[", "").replace("]]", "")
+			has_its_company = re.findall(rf"{alias_str}", content)
+			if not has_its_company:
 				continue
 			other_company_name, = other_companies[random.randint(0, len(other_companies)-1)]
 			content = re.sub(rf"{alias_str}", other_company_name, content)
@@ -108,8 +109,8 @@ def _prep_negative2(con, cur):
 					except:
 						continue
 			for item in distinct_prop_nouns:
-				is_company = re.findall(rf"{alias_str}", item)
-				if is_company:
+				match_is_its_company = re.findall(rf"{alias_str}", item)
+				if match_is_its_company:
 					distinct_prop_nouns.remove(item)
 			if not distinct_prop_nouns:
 				continue
@@ -117,6 +118,7 @@ def _prep_negative2(con, cur):
 				random_proper_noun = all_proper_nouns[random.randint(0, num_all_proper_nouns-1)]
 				while re.findall(rf"{alias_str}", random_proper_noun):
 					random_proper_noun = all_proper_nouns[random.randint(0, num_all_proper_nouns-1)]
+				content = content.replace("[[", "").replace("]]", "")
 				content = re.sub(rf"{item}", random_proper_noun, content, flags=re.IGNORECASE)
 			cur.execute("SELECT ifnull(max(id)+1, 0) FROM root_children_negative2")
 			new_id, = cur.fetchone()
@@ -127,4 +129,3 @@ def _prep_negative2(con, cur):
 if __name__ == "__main__":
 	with database.connect() as con:
 		cur = con.cursor()
-		_check_alias(con, cur)
