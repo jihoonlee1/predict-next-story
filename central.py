@@ -6,7 +6,7 @@ import database
 logging.set_verbosity_error()
 device = torch.device("cpu") if torch.cuda.is_available() else torch.device("cpu")
 model = BertForNextSentencePrediction.from_pretrained("bert-base-uncased").to(device)
-checkpoint = torch.load("model_epoch1.pth")
+checkpoint = torch.load("model_epoch2.pth")
 model.load_state_dict(checkpoint["model_state_dict"])
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 
@@ -47,6 +47,7 @@ def main():
 					print("")
 					print(content)
 					print("")
+					print(yes, no)
 					break
 			print("")
 			print("")
