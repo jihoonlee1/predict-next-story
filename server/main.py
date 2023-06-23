@@ -35,7 +35,12 @@ def _post():
 
 
 def main():
-	bottle.run(port=8000, reloader=True, debug=True)
+	import socketserver, wsgiref.simple_server
+	class ThreadingWSGIServer(socketserver.ThreadingMixIn, wsgiref.simple_server.WSGIServer):
+		daemon_threads = True
+	server = wsgiref.simple_server.make_server(
+		"0.0.0.0", 8002, bottle.default_app(), ThreadingWSGIServer)
+	server.serve_forever()
 
 
 if __name__ == "__main__":
