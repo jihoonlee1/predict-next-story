@@ -7,9 +7,9 @@
 	<title>Predict Next Story - Sustainalytics</title>
 </head>
 <body>
-	<section>
+	<header>
 		<h1>Predict Next Story</h1>
-	</section>
+	</header>
 	<section>
 		<h2>Demo</h2>
 		<p>The description is written below. If you would just like to test the model, please give a try. You are testing whether the second sentence is a follow up to the first sentence.</p>
@@ -19,26 +19,26 @@
 				<br/>
 				<input type="text" name="sentence1" id="sentence1" placeholder="Justin gets bitten by a mosquito." required/>
 			</label>
-			<br/>
 			<label for="sentence2">
 				<span>sentence_2: </span>
 				<br/>
 				<input type="text" name="sentence2" id="sentence2" placeholder="Justin is hospitalized after getting bitten by a mosquito." required/>
 			</label>
 			<div>
-				<button>Submit</button>
-				<button type="clear">Clear Text</button>
+				<button type="submit">Submit</button>
+				<button type="reset">Clear Text</button>
 			</div>
 			<div>
 				<p>output:</p>
-				<p>
+				<span>
 					<span>likelihood_to_yes:</span>
 					<span id="yes-next"></span>
-				</p>
-				<p>
-					<span>likelihood_to_no:</span>
+				</span>
+				<br/>
+				<span>
+					<span>likelihood_to_no: </span>
 					<span id="no-next"></span>
-				</p>
+				</span>
 			</div>
 		</form>
 	</section>
@@ -126,7 +126,7 @@
 			<li>If the incident is already been chained into an event, then the incident cannot be chained into a different event.</li>
 		</ul>
 	</section>
-	<footer>Powered By NATE Team @ <a href="https://www.sustainalytics.com/" target="_blank">Morningstar Sustainalytics</a></footer>
+	<footer><span>Powered By NATE Team @ <a href="https://www.sustainalytics.com/" target="_blank">Sustainalytics</a></span></footer>
 	<script src="/static/index.js"></script>
 </body>
 </html>
