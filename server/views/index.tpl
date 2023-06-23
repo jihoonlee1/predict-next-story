@@ -8,7 +8,10 @@
 </head>
 <body>
 	<header>
-		<h1>Predict Next Story</h1>
+		<div>
+			<h1>Predicting Next Story</h1>
+			<img src="/static/sust_logo.svg"/>
+		</div>
 	</header>
 	<section>
 		<h2>Demo</h2>
@@ -93,7 +96,7 @@
 	<section>
 		<h2>Testing on Real Data</h2>
 		<p>Our team is responsible for maintaining <a href="https://github.com/Morningstar/SUST-News-Harvesting-System-QA" target="_blank">harvesting module</a> through LexisNexis. After parsing and running the news through few models, we use our <a href="https://github.com/Morningstar/NATE-CLUSTERING" target="_blank">clustering</a> algorithm to group news articles into bubbles; we call this an <em>incident</em>. The bigger the bubble is, the higher likelihood that the incident is controversal or severe, meaning that more news source talk about this certain incident.</p>
-		<p>I used current clustered data from our NATE database, then ran the model. Here were some of the results:</p>
+		<p>Current clustered data from our NATE database were used through the model. Here were some of the results:</p>
 		<figure>
 			<img src="/static/0.png"/>
 			<figcaption>This event talks about the outbreak of Ebola in Republic of Congo.</figcaption>
@@ -108,7 +111,7 @@
 		</figure>
 		<figure>
 			<img src="/static/3.png"/>
-			<figcaption>About Disney employee getting fired for not getting COVID vaccine and wearing mask due to religious reason.</figcaption>
+			<figcaption>About Disney employee getting fired for not getting COVID vaccine and not wearing mask due to a religious reason.</figcaption>
 		</figure>
 		<figure>
 			<img src="/static/4.png"/>
