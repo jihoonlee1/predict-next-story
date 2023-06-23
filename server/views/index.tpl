@@ -87,7 +87,7 @@
 	</section>
 	<section>
 		<h2>Testing</h2>
-		<p>The rest of 10% of the dataset (3,177) were used for testing. From the test dataset, the best model from out of ten epochs resulted average_loss of <em>0.135</em> and accuracy of <em>0.952</em>.</p>
+		<p>The rest of 10% of the dataset (3,177) were used for testing. From the test dataset, the best model out of ten epochs resulted average_loss of <em>0.135</em> and accuracy of <em>0.952</em>.</p>
 		<p>At this point, I was confident enough to test the model on our real time data.</p>
 	</section>
 	<section>
