@@ -58,7 +58,6 @@
 			<li>For each story above, write news stories about &#60;<strong>company_name</strong>&#62; that are considered as direct follow-ups to the story. Write each story from a different company's perspective.<em>This is considered as hard-positive.</em></li>
 			<li>For each story above, write news stories about &#60;<strong>company_name</strong>&#62; that are irrelevant to the story. <em>This is considered as soft-negative.</em></li>
 		</ul>
-		<p>Since ChatGPT API was a paid service & pricy, I ended up <a href="https://github.com/jihoonlee1/bingchat" target="_blank">reverse-engineering</a> another gpt-4 engine, called <a href="https://www.bing.com/new" target="_blank">Bing Chat</a> from Microsoft.</p>
 		<p>After preparing the data with gpt-4 engine, more custom data were prepared.</p>
 		<ul>
 			<li>For each soft-positive data, I used NER to detect the company within the context, then replacing the company with a different company while keeping all the context the same. <em>This was hard-negative dataset</em>.
